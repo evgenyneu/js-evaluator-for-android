@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 
 public class JsFunctionCall {
+	@SuppressWarnings("unused")
 	public static String paramToString(Object param) {
 		String str = "";
 		if (param instanceof String) {
