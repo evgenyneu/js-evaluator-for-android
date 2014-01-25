@@ -51,8 +51,8 @@ public class JsEvaluator implements CallJavaResultInterface {
 
 	@Override
 	public void jsCallFinished(String value, Integer callIndex) {
-		// TODO Auto-generated method stub
-
+		final JsCallback callback = mResultCallbacks.get(callIndex);
+		callback.onResult(value);
 	}
 
 	// Used in test only to replace webViewWrapper with a mock

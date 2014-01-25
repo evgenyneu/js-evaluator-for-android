@@ -50,4 +50,14 @@ public class JsEvaluatorTests extends AndroidTestCase {
 				"evgeniiJsEvaluator.returnResultToJava(eval('2 + 3; \\'hello\\''), 34);",
 				result);
 	}
+
+	public void testJsCallFinished_runsCallback() {
+		final ArrayList<JsCallback> callbacks = mJsEvaluator
+				.getResultCallbacks();
+		final JsCallbackMock callback = new JsCallbackMock();
+		callbacks.add(callback);
+
+		mJsEvaluator.jsCallFinished("my result", 0);
+		assertEquals("my result", callback.resultValue);
+	}
 }
