@@ -3,6 +3,7 @@ package com.evgenii.jsevaluator;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.os.Handler;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
@@ -27,8 +28,11 @@ public class JsEvaluator implements CallJavaResultInterface {
 
 	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
 
+	private final Handler mHandler;
+
 	public JsEvaluator(Context context) {
 		mContext = context;
+		mHandler = new Handler();
 	}
 
 	public void evaluate(String jsCode, JsCallback resultCallback) {
@@ -50,9 +54,15 @@ public class JsEvaluator implements CallJavaResultInterface {
 	}
 
 	@Override
-	public void jsCallFinished(String value, Integer callIndex) {
+	public void jsCallFinished(final String value, Integer callIndex) {
 		final JsCallback callback = mResultCallbacks.get(callIndex);
-		callback.onResult(value);
+
+		mHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				callback.onResult(value);
+			}
+		});
 	}
 
 	// Used in test only to replace webViewWrapper with a mock
