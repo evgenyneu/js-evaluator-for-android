@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
+import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
@@ -27,7 +28,7 @@ public class JsEvaluator implements CallJavaResultInterface {
 
 	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
 
-	private final HandlerWrapper mHandler;
+	private HandlerWrapperInterface mHandler;
 
 	public JsEvaluator(Context context) {
 		mContext = context;
@@ -62,6 +63,11 @@ public class JsEvaluator implements CallJavaResultInterface {
 				callback.onResult(value);
 			}
 		});
+	}
+
+	// Used in test only to replace mHandler with a mock
+	public void setHandler(HandlerWrapperInterface handlerWrapperInterface) {
+		mHandler = handlerWrapperInterface;
 	}
 
 	// Used in test only to replace webViewWrapper with a mock
