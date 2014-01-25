@@ -3,7 +3,6 @@ package com.evgenii.jsevaluator;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.os.Handler;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
@@ -28,11 +27,11 @@ public class JsEvaluator implements CallJavaResultInterface {
 
 	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
 
-	private final Handler mHandler;
+	private final HandlerWrapper mHandler;
 
 	public JsEvaluator(Context context) {
 		mContext = context;
-		mHandler = new Handler();
+		mHandler = new HandlerWrapper();
 	}
 
 	public void evaluate(String jsCode, JsCallback resultCallback) {
