@@ -49,6 +49,12 @@ public class JsEvaluator implements CallJavaResultInterface {
 		return mWebViewWrapper;
 	}
 
+	@Override
+	public void jsCallFinished(String value, Integer callIndex) {
+		// TODO Auto-generated method stub
+
+	}
+
 	// Used in test only to replace webViewWrapper with a mock
 	public void setWebViewWrapper(WebViewWrapperInterface webViewWrapper) {
 		mWebViewWrapper = webViewWrapper;

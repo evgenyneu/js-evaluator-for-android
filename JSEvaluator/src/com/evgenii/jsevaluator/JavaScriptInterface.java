@@ -32,4 +32,9 @@ public class JavaScriptInterface {
 	public void result(String value, int callIndex) {
 		mJsRunner.jsCallFinished(value, callIndex);
 	}
+
+	@JavascriptInterface
+	public void returnResultToJava(String value, int callIndex) {
+		mCallJavaResultInterface.jsCallFinished(value, callIndex);
+	}
 }
