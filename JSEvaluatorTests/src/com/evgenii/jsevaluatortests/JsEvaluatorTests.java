@@ -3,7 +3,6 @@ package com.evgenii.jsevaluatortests;
 import java.util.ArrayList;
 
 import android.test.AndroidTestCase;
-import android.util.Log;
 
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
@@ -19,7 +18,6 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	}
 
 	public void testEscapeSingleQuotes() {
-		Log.d("ii", JsEvaluator.escapeSingleQuotes("'a'"));
 		assertEquals("\\'a\\'", JsEvaluator.escapeSingleQuotes("'a'"));
 	}
 
@@ -30,7 +28,6 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.evaluate("2 * 3", null);
 
 		assertEquals(1, webViewWrapperMock.mLoadedUrls.size());
-		Log.d("ii", webViewWrapperMock.mLoadedUrls.get(0));
 		assertEquals(
 				"javascript: evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
 				webViewWrapperMock.mLoadedUrls.get(0));
