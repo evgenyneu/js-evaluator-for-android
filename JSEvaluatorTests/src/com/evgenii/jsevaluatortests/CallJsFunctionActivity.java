@@ -15,12 +15,7 @@ public class CallJsFunctionActivity extends Activity {
 	public void onCallFuncitonClicked(View view) {
 		final JsEvaluator jsEvaluator = new JsEvaluator(this);
 		final EditText functionText = (EditText) findViewById(R.id.js_function_edit_text);
-		jsEvaluator.evaluate(functionText.getText().toString(),
-				new JsCallback() {
-					@Override
-					public void onResult(final String resultValue) {
-					}
-				});
+		jsEvaluator.evaluate(functionText.getText().toString());
 
 		final EditText parameterText = (EditText) findViewById(R.id.editTextParameter);
 		jsEvaluator.callFunction(new JsCallback() {
