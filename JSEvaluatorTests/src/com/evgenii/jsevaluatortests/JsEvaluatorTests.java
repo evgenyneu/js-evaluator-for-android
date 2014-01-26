@@ -18,6 +18,29 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator = new JsEvaluator(mContext);
 	}
 
+	public void testCallFunction_shouldEvaluateJs() {
+		final WebViewWrapperMock webViewWrapperMock = new WebViewWrapperMock();
+		mJsEvaluator.setWebViewWrapper(webViewWrapperMock);
+
+		mJsEvaluator.callFunction("myFunction", null, "one", 2);
+
+		assertEquals(1, webViewWrapperMock.mLoadedUrls.size());
+		assertEquals(
+				"javascript: evgeniiJsEvaluator.returnResultToJava(myFunction('one', 2), 0);",
+				webViewWrapperMock.mLoadedUrls.get(0));
+	}
+
+	public void testCallFunction_shouldRegusterResultCallback() {
+		final JsCallbackMock callbackMock = new JsCallbackMock();
+
+		mJsEvaluator.callFunction("myFunction", callbackMock);
+
+		final ArrayList<JsCallback> callbacks = mJsEvaluator
+				.getResultCallbacks();
+		assertEquals(1, callbacks.size());
+		assertEquals(callbackMock, callbacks.get(0));
+	}
+
 	public void testEscapeSingleQuotes() {
 		assertEquals("\\'a\\'", JsEvaluator.escapeSingleQuotes("'a'"));
 	}

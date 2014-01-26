@@ -35,6 +35,11 @@ public class JsEvaluator implements CallJavaResultInterface {
 		mHandler = new HandlerWrapper();
 	}
 
+	public void callFunction(String name, JsCallback resultCallback,
+			Object... args) {
+		mResultCallbacks.add(resultCallback);
+	}
+
 	public void evaluate(String jsCode, JsCallback resultCallback) {
 		String js = JsEvaluator.getJsForEval(jsCode, mResultCallbacks.size());
 		js = String.format("javascript: %s", js);
