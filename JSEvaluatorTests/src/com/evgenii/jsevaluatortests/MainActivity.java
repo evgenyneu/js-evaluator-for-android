@@ -25,4 +25,9 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+	public void onShowCallJsFunctionActivityClicked(View view) {
+		final Intent intent = new Intent(this, CallJsFunctionActivity.class);
+		startActivity(intent);
+	}
+
 }

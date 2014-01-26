@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".CallJsFunctionActivity" >
+
+    <TextView
+        android:id="@+id/textJsFunction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/js_function_edit_text"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:text="@string/js_function_label" />
+    
+    <EditText
+        android:id="@+id/js_function_edit_text"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/textJsFunction"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:text="@string/js_function_edit_text" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewParameterValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/js_function_edit_text"
+        android:layout_below="@+id/js_function_edit_text"
+        android:layout_marginTop="16dp"
+        android:text="@string/js_parameter_label" />
+
+    <EditText
+        android:id="@+id/editTextParameter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewParameterValue"
+        android:ems="10"
+        android:hint="@string/js_parameter_label"
+        android:text="@string/js_parameter_edit_text" />
+    
+    <Button
+        android:id="@+id/buttonCallFunction"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextParameter"
+        android:layout_below="@+id/editTextParameter"
+        android:layout_marginTop="5dp"
+        android:text="@string/call_function_evaluate_button_text"
+        android:onClick="onCallFuncitonClicked" />
+
+    <TextView
+        android:id="@+id/textViewCallFunctionResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonCallFunction"
+        android:layout_below="@+id/buttonCallFunction"
+        android:layout_marginTop="5dp"
+        android:text="" />
+
+</RelativeLayout>

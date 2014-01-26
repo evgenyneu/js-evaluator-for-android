@@ -19,4 +19,14 @@
         android:text="@string/evaluate_js_test"
         android:onClick="onEvaluateJsClicked" />
 
+    <Button
+        android:id="@+id/show_call_js_function_acrivity_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/evaluateJsButton"
+        android:layout_below="@+id/evaluateJsButton"
+        android:layout_marginTop="10dp"
+        android:text="@string/call_function_button"
+        android:onClick="onShowCallJsFunctionActivityClicked" />
+
 </RelativeLayout>

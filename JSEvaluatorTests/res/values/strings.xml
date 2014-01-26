@@ -4,9 +4,16 @@
     <string name="app_name">JsEvaluator Tests</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_evaluate_js_string">EvaluateJsStringActivity</string>
-	<string name="evaluate_js_test">Evaluate Js Test</string>
-	<string name="edit_js_text">Math.sqrt(2 * 8);</string>
-	<string name="evaluate_button_text">Evaluate</string>
-    
+    <string name="title_activity_evaluate_js_string">Evaluate JS string</string>
+    <string name="evaluate_js_test">Evaluate js test</string>
+    <string name="edit_js_text">Math.sqrt(2 * 8);</string>
+    <string name="evaluate_button_text">Evaluate</string>
+    <string name="title_activity_call_js_function">Call JS function</string>
+    <string name="call_function_button">Call js function test</string>
+    <string name="js_function_edit_text">function greet(name) { return \"Hello, \" + name; }</string>
+    <string name="js_function_label">Function code:</string>
+    <string name="js_parameter_label">Parameter value:</string>
+    <string name="js_parameter_edit_text">World</string>
+    <string name="call_function_evaluate_button_text">Call function</string>
+
 </resources>

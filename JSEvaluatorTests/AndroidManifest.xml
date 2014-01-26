@@ -33,6 +33,10 @@
             android:name="com.evgenii.jsevaluatortests.EvaluateJsStringActivity"
             android:label="@string/title_activity_evaluate_js_string" >
         </activity>
+        <activity
+            android:name="com.evgenii.jsevaluatortests.CallJsFunctionActivity"
+            android:label="@string/title_activity_call_js_function" >
+        </activity>
     </application>
 
 </manifest>
