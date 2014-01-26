@@ -8,9 +8,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
+    <EditText
+        android:id="@+id/editJavaScript"
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:text="Math.sqrt(2 * 8);" >
+
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonEvaluate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editJavaScript"
+        android:layout_below="@+id/editJavaScript"
+        android:layout_marginTop="5dp"
+        android:text="Evaluate"
+        android:onClick="onEvaluateClicked" />
+
     <TextView
+        android:id="@+id/textJSResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignLeft="@+id/buttonEvaluate"
+        android:layout_below="@+id/buttonEvaluate"
+        android:layout_marginTop="5dp"
+        android:text="" />
 
 </RelativeLayout>
