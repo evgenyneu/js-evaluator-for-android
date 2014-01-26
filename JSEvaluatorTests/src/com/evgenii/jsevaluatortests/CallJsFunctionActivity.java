@@ -2,7 +2,6 @@ package com.evgenii.jsevaluatortests;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -20,7 +19,6 @@ public class CallJsFunctionActivity extends Activity {
 				new JsCallback() {
 					@Override
 					public void onResult(final String resultValue) {
-						Log.d("ii", "function evaluated");
 					}
 				});
 

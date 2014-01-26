@@ -19,10 +19,11 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	}
 
 	public void testCallFunction_shouldEvaluateJs() {
+		final JsCallbackMock callbackMock = new JsCallbackMock();
 		final WebViewWrapperMock webViewWrapperMock = new WebViewWrapperMock();
 		mJsEvaluator.setWebViewWrapper(webViewWrapperMock);
 
-		mJsEvaluator.callFunction(null, "myFunction", "one", 2);
+		mJsEvaluator.callFunction(callbackMock, "myFunction", "one", 2);
 
 		assertEquals(1, webViewWrapperMock.mLoadedUrls.size());
 		final String actualJs = webViewWrapperMock.mLoadedUrls.get(0);
@@ -49,8 +50,9 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	public void testEvaluate_shouldEvaluateJs() {
 		final WebViewWrapperMock webViewWrapperMock = new WebViewWrapperMock();
 		mJsEvaluator.setWebViewWrapper(webViewWrapperMock);
+		final JsCallbackMock callbackMock = new JsCallbackMock();
 
-		mJsEvaluator.evaluate("2 * 3", null);
+		mJsEvaluator.evaluate("2 * 3", callbackMock);
 
 		assertEquals(1, webViewWrapperMock.mLoadedUrls.size());
 		assertEquals(
@@ -58,7 +60,25 @@ public class JsEvaluatorTests extends AndroidTestCase {
 				webViewWrapperMock.mLoadedUrls.get(0));
 	}
 
-	public void testEvaluate_shouldRegusterResultCallback() {
+	public void testEvaluate_shouldEvaluateWithoutCallback() {
+		final WebViewWrapperMock webViewWrapperMock = new WebViewWrapperMock();
+		mJsEvaluator.setWebViewWrapper(webViewWrapperMock);
+
+		mJsEvaluator.evaluate("2 * 3");
+
+		assertEquals(1, webViewWrapperMock.mLoadedUrls.size());
+		assertEquals(
+				"javascript: evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), -1);",
+				webViewWrapperMock.mLoadedUrls.get(0));
+	}
+
+	public void testEvaluate_shouldNotRegisterResultCallbackWhenCallbackIsNotSupplied() {
+		mJsEvaluator.evaluate("2 * 3");
+
+		assertEquals(0, mJsEvaluator.getResultCallbacks().size());
+	}
+
+	public void testEvaluate_shouldRegisterResultCallback() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
 
 		mJsEvaluator.evaluate("2 * 3", callbackMock);
@@ -74,6 +94,13 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		assertEquals(
 				"evgeniiJsEvaluator.returnResultToJava(eval('2 + 3; \\'hello\\''), 34);",
 				result);
+	}
+
+	public void testJsCallFinished_doesNotRunCallBackWhenIndexIsMinusOne() {
+		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
+		mJsEvaluator.setHandler(handlerWrapperMock);
+
+		mJsEvaluator.jsCallFinished("my result", -1);
 	}
 
 	public void testJsCallFinished_runsCallback() {

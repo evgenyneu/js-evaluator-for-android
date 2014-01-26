@@ -3,7 +3,6 @@ package com.evgenii.jsevaluator;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
@@ -42,11 +41,22 @@ public class JsEvaluator implements CallJavaResultInterface {
 		evaluate(jsCode, resultCallback);
 	}
 
+	public void evaluate(String jsCode) {
+		evaluate(jsCode, null);
+	}
+
 	public void evaluate(String jsCode, JsCallback resultCallback) {
-		String js = JsEvaluator.getJsForEval(jsCode, mResultCallbacks.size());
+		int callbackIndex = mResultCallbacks.size();
+		if (resultCallback == null) {
+			callbackIndex = -1;
+		}
+
+		String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
 		js = String.format("javascript: %s", js);
-		Log.d("ii", js);
-		mResultCallbacks.add(resultCallback);
+
+		if (resultCallback != null) {
+			mResultCallbacks.add(resultCallback);
+		}
 		getWebViewWrapper().loadUrl(js);
 	}
 
@@ -63,6 +73,9 @@ public class JsEvaluator implements CallJavaResultInterface {
 
 	@Override
 	public void jsCallFinished(final String value, Integer callIndex) {
+		if (callIndex == -1)
+			return;
+
 		final JsCallback callback = mResultCallbacks.get(callIndex);
 
 		mHandler.post(new Runnable() {
