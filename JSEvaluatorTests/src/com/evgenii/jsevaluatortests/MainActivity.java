@@ -30,10 +30,20 @@ public class MainActivity extends Activity {
 		jsEvaluator.evaluate(editText.getText().toString(), new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
+				// final TextView jsResultTextView = (TextView)
+				// findViewById(R.id.textJSResult);
+				// jsResultTextView.setText(String.format("Result: %s",
+				// resultValue));
+			}
+		});
+
+		jsEvaluator.callFunction(new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.textJSResult);
 				jsResultTextView.setText(String.format("Result: %s",
 						resultValue));
 			}
-		});
+		}, "greet", "World");
 	}
 }

@@ -35,9 +35,10 @@ public class JsEvaluator implements CallJavaResultInterface {
 		mHandler = new HandlerWrapper();
 	}
 
-	public void callFunction(String name, JsCallback resultCallback,
+	public void callFunction(JsCallback resultCallback, String name,
 			Object... args) {
-		mResultCallbacks.add(resultCallback);
+		final String jsCode = JsFunctionCallFormatter.toString(name, args);
+		evaluate(jsCode, resultCallback);
 	}
 
 	public void evaluate(String jsCode, JsCallback resultCallback) {
