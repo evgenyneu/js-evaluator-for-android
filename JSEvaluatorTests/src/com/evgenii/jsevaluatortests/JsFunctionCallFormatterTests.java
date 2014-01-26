@@ -14,7 +14,7 @@ public class JsFunctionCallFormatterTests extends AndroidTestCase {
 	}
 
 	public void testParamToString_string() {
-		assertEquals("'Boy\'s bike'",
+		assertEquals("'Boy\\'s bike'",
 				JsFunctionCallFormatter.paramToString("Boy's bike"));
 	}
 
@@ -22,7 +22,7 @@ public class JsFunctionCallFormatterTests extends AndroidTestCase {
 		final String js = JsFunctionCallFormatter.toString("drink",
 				"Cow's milk", 5);
 
-		assertEquals("drink('Cow\'s milk', 5)", js);
+		assertEquals("drink('Cow\\'s milk', 5)", js);
 
 	}
 }
