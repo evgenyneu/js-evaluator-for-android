@@ -68,6 +68,14 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		assertEquals(callbackMock, callbacks.get(0));
 	}
 
+	public void testGetFunctionCallJsForEval() {
+		final String result = JsEvaluator.getFunctionCallJsForEval(
+				"drink('Milk')", 34);
+		assertEquals(
+				"(function(){ var jsResult = drink('Milk'); evgeniiJsEvaluator.returnResultToJava(jsResult, 34); })();",
+				result);
+	}
+
 	public void testGetJsForEval() {
 		final String result = JsEvaluator.getJsForEval("2 + 3; 'hello'", 34);
 		assertEquals(

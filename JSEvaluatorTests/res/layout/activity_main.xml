@@ -19,7 +19,7 @@
         android:ems="10"
         android:gravity="top"
         android:inputType="textMultiLine"
-        android:text="Math.sqrt(2 * 8);" >
+        android:text="function greet(name) { return 'Hello, ' + name; }" >
 
     </EditText>
 

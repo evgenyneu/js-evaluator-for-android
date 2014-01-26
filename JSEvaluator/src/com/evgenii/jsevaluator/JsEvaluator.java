@@ -16,6 +16,13 @@ public class JsEvaluator implements CallJavaResultInterface {
 		return str.replace("'", "\\'");
 	}
 
+	public static String getFunctionCallJsForEval(String functionCallJs,
+			int callbackIndex) {
+		return String
+				.format("(function(){ var jsResult = %s; %s.returnResultToJava(jsResult, %s); })();",
+						functionCallJs, JS_NAMESPACE, callbackIndex);
+	}
+
 	public static String getJsForEval(String jsCode, int callbackIndex) {
 		jsCode = escapeSingleQuotes(jsCode);
 		return String.format("%s.returnResultToJava(eval('%s'), %s);",
