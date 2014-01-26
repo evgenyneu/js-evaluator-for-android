@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-    
+
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:targetPackage="com.evgenii.jsevaluatortests" />
@@ -26,7 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <uses-library android:name="android.test.runner" />
+
+        <activity
+            android:name="com.evgenii.jsevaluatortests.EvaluateJsStringActivity"
+            android:label="@string/title_activity_evaluate_js_string" >
+        </activity>
     </application>
 
 </manifest>
