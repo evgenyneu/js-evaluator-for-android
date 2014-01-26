@@ -10,7 +10,7 @@
     
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.evgenii.jsevaluator" />
+        android:targetPackage="com.evgenii.jsevaluatortests" />
 
     <application
         android:allowBackup="true"

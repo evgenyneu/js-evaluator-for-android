@@ -44,6 +44,6 @@ public class MainActivity extends Activity {
 				jsResultTextView.setText(String.format("Result: %s",
 						resultValue));
 			}
-		}, "greet", "\"clever\" approach");
+		}, "greet", "Cow's milk");
 	}
 }
