@@ -23,7 +23,7 @@ public class EvaluateJsActivityTests extends
 	}
 
 	@MediumTest
-	public void testClickMeButton_clickButtonAndExpectInfoText() {
+	public void testEvaluateButton_clickButtonAndShowResult() {
 		final Button evaluateButton = (Button) mActivity
 				.findViewById(R.id.button_evaluate);
 
@@ -35,6 +35,7 @@ public class EvaluateJsActivityTests extends
 		assertEquals("Result: 4", resultTextView.getText());
 	}
 
+	@MediumTest
 	public void testJsTextView_shouldHaveJsText() {
 		final TextView editJsTextView = (TextView) mActivity
 				.findViewById(R.id.edit_java_script);

@@ -36,16 +36,6 @@ public class EvaluateJsStringActivity extends Activity {
 						resultValue));
 			}
 		});
-
-		// jsEvaluator.callFunction(new JsCallback() {
-		// @Override
-		// public void onResult(final String resultValue) {
-		// final TextView jsResultTextView = (TextView)
-		// findViewById(R.id.js_result_text_view);
-		// jsResultTextView.setText(String.format("Result: %s",
-		// resultValue));
-		// }
-		// }, "greet", "\"Cow's\" milk'''\"\\\"");
 	}
 
 }
