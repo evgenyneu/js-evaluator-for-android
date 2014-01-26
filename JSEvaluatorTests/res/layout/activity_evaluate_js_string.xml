@@ -9,7 +9,7 @@
     tools:context=".EvaluateJsStringActivity" >
 
     <EditText
-        android:id="@+id/editJavaScript"
+        android:id="@+id/edit_java_script"
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:layout_alignParentLeft="true"
@@ -24,21 +24,21 @@
     </EditText>
 
     <Button
-        android:id="@+id/buttonEvaluate"
+        android:id="@+id/button_evaluate"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editJavaScript"
-        android:layout_below="@+id/editJavaScript"
+        android:layout_alignLeft="@+id/edit_java_script"
+        android:layout_below="@+id/edit_java_script"
         android:layout_marginTop="5dp"
         android:text="@string/evaluate_button_text"
         android:onClick="onEvaluateClicked" />
 
     <TextView
-        android:id="@+id/textJSResult"
+        android:id="@+id/js_result_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/buttonEvaluate"
-        android:layout_below="@+id/buttonEvaluate"
+        android:layout_alignLeft="@+id/button_evaluate"
+        android:layout_below="@+id/button_evaluate"
         android:layout_marginTop="5dp"
         android:text="" />
 

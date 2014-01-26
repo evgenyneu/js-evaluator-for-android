@@ -27,11 +27,11 @@ public class EvaluateJsStringActivity extends Activity {
 
 	public void onEvaluateClicked(View view) {
 		final JsEvaluator jsEvaluator = new JsEvaluator(this);
-		final EditText editText = (EditText) findViewById(R.id.editJavaScript);
+		final EditText editText = (EditText) findViewById(R.id.edit_java_script);
 		jsEvaluator.evaluate(editText.getText().toString(), new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
-				final TextView jsResultTextView = (TextView) findViewById(R.id.textJSResult);
+				final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_text_view);
 				jsResultTextView.setText(String.format("Result: %s",
 						resultValue));
 			}
@@ -41,7 +41,7 @@ public class EvaluateJsStringActivity extends Activity {
 		// @Override
 		// public void onResult(final String resultValue) {
 		// final TextView jsResultTextView = (TextView)
-		// findViewById(R.id.textJSResult);
+		// findViewById(R.id.js_result_text_view);
 		// jsResultTextView.setText(String.format("Result: %s",
 		// resultValue));
 		// }
