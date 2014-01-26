@@ -17,13 +17,6 @@ public class JsEvaluator implements CallJavaResultInterface {
 		return str.replace("'", "\\'");
 	}
 
-	public static String getFunctionCallJsForEval(String functionCallJs,
-			int callbackIndex) {
-		return String
-				.format("(function(){ var jsResult = %s; %s.returnResultToJava(jsResult, %s); })();",
-						functionCallJs, JS_NAMESPACE, callbackIndex);
-	}
-
 	public static String getJsForEval(String jsCode, int callbackIndex) {
 		jsCode = escapeSingleQuotes(jsCode);
 		return String.format("%s.returnResultToJava(eval('%s'), %s);",
@@ -45,18 +38,14 @@ public class JsEvaluator implements CallJavaResultInterface {
 
 	public void callFunction(JsCallback resultCallback, String name,
 			Object... args) {
-		String jsCode = JsFunctionCallFormatter.toString(name, args);
-		jsCode = JsEvaluator.getFunctionCallJsForEval(jsCode,
-				mResultCallbacks.size());
-		jsCode = String.format("javascript: %s", jsCode);
-		Log.d("ii", jsCode);
-		mResultCallbacks.add(resultCallback);
-		getWebViewWrapper().loadUrl(jsCode);
+		final String jsCode = JsFunctionCallFormatter.toString(name, args);
+		evaluate(jsCode, resultCallback);
 	}
 
 	public void evaluate(String jsCode, JsCallback resultCallback) {
 		String js = JsEvaluator.getJsForEval(jsCode, mResultCallbacks.size());
 		js = String.format("javascript: %s", js);
+		Log.d("ii", js);
 		mResultCallbacks.add(resultCallback);
 		getWebViewWrapper().loadUrl(js);
 	}

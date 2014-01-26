@@ -25,9 +25,10 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.callFunction(null, "myFunction", "one", 2);
 
 		assertEquals(1, webViewWrapperMock.mLoadedUrls.size());
+		final String actualJs = webViewWrapperMock.mLoadedUrls.get(0);
 		assertEquals(
-				"javascript: (function(){ var jsResult = myFunction('one', 2); evgeniiJsEvaluator.returnResultToJava(jsResult, 0); })();",
-				webViewWrapperMock.mLoadedUrls.get(0));
+				"javascript: evgeniiJsEvaluator.returnResultToJava(eval('myFunction(\"one\", 2)'), 0);",
+				actualJs);
 	}
 
 	public void testCallFunction_shouldRegisterResultCallback() {
@@ -66,14 +67,6 @@ public class JsEvaluatorTests extends AndroidTestCase {
 				.getResultCallbacks();
 		assertEquals(1, callbacks.size());
 		assertEquals(callbackMock, callbacks.get(0));
-	}
-
-	public void testGetFunctionCallJsForEval() {
-		final String result = JsEvaluator.getFunctionCallJsForEval(
-				"drink('Milk')", 34);
-		assertEquals(
-				"(function(){ var jsResult = drink('Milk'); evgeniiJsEvaluator.returnResultToJava(jsResult, 34); })();",
-				result);
 	}
 
 	public void testGetJsForEval() {

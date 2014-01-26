@@ -14,15 +14,20 @@ public class JsFunctionCallFormatterTests extends AndroidTestCase {
 	}
 
 	public void testParamToString_string() {
-		assertEquals("'Boy\\'s bike'",
+		assertEquals("\"Boy's bike\"",
 				JsFunctionCallFormatter.paramToString("Boy's bike"));
+	}
+
+	public void testParamToString_stringEscapesDoubleQuotes() {
+		assertEquals("\"\\\\\"clever\\\\\"\"",
+				JsFunctionCallFormatter.paramToString("\"clever\""));
 	}
 
 	public void testToString() {
 		final String js = JsFunctionCallFormatter.toString("drink",
 				"Cow's milk", 5);
 
-		assertEquals("drink('Cow\\'s milk', 5)", js);
+		assertEquals("drink(\"Cow's milk\", 5)", js);
 
 	}
 }
