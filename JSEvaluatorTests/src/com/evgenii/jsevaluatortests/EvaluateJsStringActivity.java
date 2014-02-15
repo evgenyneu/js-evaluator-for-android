@@ -15,6 +15,7 @@ import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class EvaluateJsStringActivity extends Activity {
+	JsEvaluator mJsEvaluator;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -27,6 +28,8 @@ public class EvaluateJsStringActivity extends Activity {
 			// Show the Up button in the action bar.
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
+
+		mJsEvaluator = new JsEvaluator(this);
 	}
 
 	@Override
@@ -37,9 +40,8 @@ public class EvaluateJsStringActivity extends Activity {
 	}
 
 	public void onEvaluateClicked(View view) {
-		final JsEvaluator jsEvaluator = new JsEvaluator(this);
 		final EditText editText = (EditText) findViewById(R.id.edit_java_script);
-		jsEvaluator.evaluate(editText.getText().toString(), new JsCallback() {
+		mJsEvaluator.evaluate(editText.getText().toString(), new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_text_view);

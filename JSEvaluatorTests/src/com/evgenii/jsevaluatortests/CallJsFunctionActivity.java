@@ -15,14 +15,14 @@ import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class CallJsFunctionActivity extends Activity {
+	JsEvaluator mJsEvaluator;
 
 	public void onCallFuncitonClicked(View view) {
-		final JsEvaluator jsEvaluator = new JsEvaluator(this);
 		final EditText functionText = (EditText) findViewById(R.id.js_function_edit_text);
-		jsEvaluator.evaluate(functionText.getText().toString());
+		mJsEvaluator.evaluate(functionText.getText().toString());
 
 		final EditText parameterText = (EditText) findViewById(R.id.editTextParameter);
-		jsEvaluator.callFunction(new JsCallback() {
+		mJsEvaluator.callFunction(new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionResult);
@@ -42,6 +42,8 @@ public class CallJsFunctionActivity extends Activity {
 			// Show the Up button in the action bar.
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
+
+		mJsEvaluator = new JsEvaluator(this);
 	}
 
 	@Override
