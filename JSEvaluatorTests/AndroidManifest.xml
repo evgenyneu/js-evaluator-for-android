@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
@@ -32,10 +32,19 @@
         <activity
             android:name="com.evgenii.jsevaluatortests.EvaluateJsStringActivity"
             android:label="@string/title_activity_evaluate_js_string" >
+            android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity">
+	        <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
+
         <activity
             android:name="com.evgenii.jsevaluatortests.CallJsFunctionActivity"
             android:label="@string/title_activity_call_js_function" >
+	        android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity">
+	        <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
     </application>
 
