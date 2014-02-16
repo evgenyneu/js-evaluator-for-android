@@ -15,5 +15,7 @@
     <string name="js_parameter_label">Parameter value:</string>
     <string name="js_parameter_edit_text">World</string>
     <string name="call_function_evaluate_button_text">Call function</string>
+    <string name="stress_test_button">Run stress test</string>
+    <string name="title_activity_stress_test">Stress test</string>
 
 </resources>

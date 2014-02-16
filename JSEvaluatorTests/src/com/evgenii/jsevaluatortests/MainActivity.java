@@ -30,4 +30,8 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+	public void onShowStressTestActivityClicked(View view) {
+		final Intent intent = new Intent(this, StressTestActivity.class);
+		startActivity(intent);
+	}
 }
