@@ -1,8 +1,6 @@
 package com.evgenii.jsevaluatortests;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -32,16 +30,13 @@ public class CallJsFunctionActivity extends Activity {
 		}, "greet", parameterText.getText().toString());
 	}
 
-	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_call_js_function);
-		// Make sure we're running on Honeycomb or higher to use ActionBar APIs
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			// Show the Up button in the action bar.
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
+
+		// Show the Up button in the action bar.
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mJsEvaluator = new JsEvaluator(this);
 	}
