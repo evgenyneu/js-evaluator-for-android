@@ -15,12 +15,16 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 	public WebViewWrapper(Context context,
 			CallJavaResultInterface callJavaResult) {
 		mWebView = new WebView(context);
-		mWebView.loadData("", "text/html", null);
 		final WebSettings webSettings = mWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		final JavaScriptInterface jsInterface = new JavaScriptInterface(
 				callJavaResult);
 		mWebView.addJavascriptInterface(jsInterface, JsEvaluator.JS_NAMESPACE);
+		hackToMakeItWorkOnAndroid_4_3();
+	}
+
+	private void hackToMakeItWorkOnAndroid_4_3() {
+		mWebView.loadUrl("about:blank");
 	}
 
 	@Override
