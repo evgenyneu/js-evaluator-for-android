@@ -34,4 +34,6 @@ Any number of string, int or double parameters can be supplied.
 
 Run Android application in `JsEvaluatorTests` project for manual testing.
 
-<img src='https://raw.github.com/evgenyneu/ios-imagescroll/master/image_scroll.png' width='556' alt='Using image inside a scroll view with autolayout in iOS 7'>
+<img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_1.png' alt='JSEvaluator library for Android screenshot 1'>
+
+<img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_2.png' alt='JSEvaluator library for Android screenshot 2'>
