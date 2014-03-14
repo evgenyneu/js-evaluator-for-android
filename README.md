@@ -34,5 +34,5 @@ Any number of string, int or double parameters can be supplied.
 
 Run Android application in `JsEvaluatorTests` project for manual testing.
 
-<img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_1.png' width='270' alt='JSEvaluator library for Android screenshot 1'> ashdk as
+<img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_1.png' width='270' alt='JSEvaluator library for Android screenshot 1'> 
 <img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_2.png' width='270' alt='JSEvaluator library for Android screenshot 2'>
