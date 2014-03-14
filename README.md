@@ -29,3 +29,9 @@ Call a JS function:
     }, "functionName", "parameter 1", "parameter 2", 912, 101.3);
 
 Any number of string, int or double parameters can be supplied.
+
+## Tests
+
+Run Android application in `JsEvaluatorTests` project for manual testing.
+
+<img src='https://raw.github.com/evgenyneu/ios-imagescroll/master/image_scroll.png' width='556' alt='Using image inside a scroll view with autolayout in iOS 7'>
