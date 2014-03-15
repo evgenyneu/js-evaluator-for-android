@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:gravity="top"
-        android:inputType="textMultiLine"
+        android:inputType="textMultiLine|textNoSuggestions"
         android:text="@string/js_function_edit_text" >
 
         <requestFocus />

@@ -18,7 +18,7 @@
         android:layout_marginTop="0dp"
         android:ems="10"
         android:gravity="top"
-        android:inputType="textMultiLine"
+        android:inputType="textMultiLine|textNoSuggestions"
         android:text="@string/edit_js_text" >
 
     </EditText>
