@@ -2,7 +2,18 @@
 
 Library for evaluating JavaScript in Android apps. Supports Android version 3 and newer.
 
-## Usage example
+## Setup
+
+To add JSEvaluator to your app in Eclipse:
+
+1. File > Import `JSEvaluator` project.
+1. Open properties for **your** app project.
+1. Select `Libraries` tab in `Java Build Path`.
+1. Click `Add JARs...` button and select `jsevaluator.jar` from `JSEvaluator/bin` directory.
+1. In your project properties click `Order and export` tab.
+1. Tick `jsevaluator.jar`.
+
+## Usage
 
 Create evaluator instance:
 
