@@ -54,5 +54,5 @@ Or run as `Android JUnit Test` for unit testing.
 
 ## Feedback
 
-If you have any issues or need help, let me know - I will be happy to assist you.
+If you have any issues or need help please do not hesitate to create an issue ticket.
 
