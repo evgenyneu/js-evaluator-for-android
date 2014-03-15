@@ -19,7 +19,7 @@ Create evaluator instance:
 
     JsEvaluator jsEvaluator = new JsEvaluator(this);
 
-`this` is a reference to your activity.
+`this` is a reference to your activity. You can do it inside `onCreate` method, for example.
 
 Evaluate JavaScript:
 
@@ -51,4 +51,8 @@ Run as `Android Application` for manual testing.
 <img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_2.png' width='270' alt='JSEvaluator library for Android screenshot 2'>
 
 Or run as `Android JUnit Test` for unit testing.
+
+## Feedback
+
+If you have any issues or need help, let me know - I will be happy to assist you.
 
