@@ -7,9 +7,10 @@ import android.content.Context;
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
+import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
-public class JsEvaluator implements CallJavaResultInterface {
+public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
 
 	public static String escapeSingleQuotes(String str) {
@@ -18,8 +19,13 @@ public class JsEvaluator implements CallJavaResultInterface {
 
 	public static String getJsForEval(String jsCode, int callbackIndex) {
 		jsCode = escapeSingleQuotes(jsCode);
-		return String.format("%s.returnResultToJava(eval('%s'), %s);",
-				JS_NAMESPACE, jsCode, callbackIndex);
+		jsCode = removeSingleLineComments(jsCode);
+		return String.format("%s.returnResultToJava(eval('%s'), %s);", JS_NAMESPACE, jsCode,
+				callbackIndex);
+	}
+
+	public static String removeSingleLineComments(String str) {
+		return str.replaceAll("//.*?\\r?\\n", "");
 	}
 
 	protected WebViewWrapperInterface mWebViewWrapper;
@@ -35,16 +41,18 @@ public class JsEvaluator implements CallJavaResultInterface {
 		mHandler = new HandlerWrapper();
 	}
 
-	public void callFunction(JsCallback resultCallback, String name,
-			Object... args) {
+	@Override
+	public void callFunction(JsCallback resultCallback, String name, Object... args) {
 		final String jsCode = JsFunctionCallFormatter.toString(name, args);
 		evaluate(jsCode, resultCallback);
 	}
 
+	@Override
 	public void evaluate(String jsCode) {
 		evaluate(jsCode, null);
 	}
 
+	@Override
 	public void evaluate(String jsCode, JsCallback resultCallback) {
 		int callbackIndex = mResultCallbacks.size();
 		if (resultCallback == null) {
