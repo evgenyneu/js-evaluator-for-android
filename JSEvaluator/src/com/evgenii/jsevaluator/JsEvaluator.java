@@ -3,7 +3,6 @@ package com.evgenii.jsevaluator;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
@@ -25,13 +24,8 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	public static String getJsForEval(String jsCode, int callbackIndex) {
 		jsCode = escapeSlash(jsCode);
 		jsCode = escapeSingleQuotes(jsCode);
-		jsCode = removeSingleLineComments(jsCode);
 		return String.format("%s.returnResultToJava(eval('%s'), %s);", JS_NAMESPACE, jsCode,
 				callbackIndex);
-	}
-
-	public static String removeSingleLineComments(String str) {
-		return str.replaceAll("//.*?\\r?\\n", "");
 	}
 
 	protected WebViewWrapperInterface mWebViewWrapper;
@@ -67,8 +61,6 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 		String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
 		js = String.format("javascript: %s", js);
-
-		Log.d("ii", js);
 
 		if (resultCallback != null) {
 			mResultCallbacks.add(resultCallback);

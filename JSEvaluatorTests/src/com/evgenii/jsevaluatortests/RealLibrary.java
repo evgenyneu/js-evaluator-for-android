@@ -18,27 +18,14 @@ public class RealLibrary extends Activity {
 	JsEvaluator mJsEvaluator;
 	private Scanner scanner;
 
-	protected void loadAndRunLibrary() {
-		String library_source = null;
+	private String loadJs(String fileName) {
 		try {
-			library_source = ReadFile("real_library/jquery-2.1.0.js");
+			return ReadFile(fileName);
 		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		mJsEvaluator = new JsEvaluator(this);
-		mJsEvaluator.evaluate(library_source);
-
-		final String code = "$('<div><div class=\"ii\">jQuery is working!</div></div>').find('.ii').text()";
-
-		mJsEvaluator.evaluate(code, new JsCallback() {
-			@Override
-			public void onResult(final String resultValue) {
-				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResultView);
-				jsResultTextView.setText(String.format("Result: %s", resultValue));
-			}
-		});
+		return null;
 	}
 
 	@Override
@@ -49,7 +36,9 @@ public class RealLibrary extends Activity {
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		loadAndRunLibrary();
+		mJsEvaluator = new JsEvaluator(this);
+		// testJQuery();
+		testCryptoJs();
 	}
 
 	@Override
@@ -77,5 +66,43 @@ public class RealLibrary extends Activity {
 
 		scanner = new Scanner(inputStream, "UTF-8");
 		return scanner.useDelimiter("\\A").next();
+	}
+
+	protected void testCryptoJs() {
+		final String librarySrouce = loadJs("real_library/aes.js");
+		mJsEvaluator.evaluate(librarySrouce);
+
+		// final String code =
+		// "var encrypted = CryptoJS.AES.encrypt('CryptoJs is working!', 'Secret Passphrase');"
+		// +
+		// "var decrypted = CryptoJS.AES.decrypt(encrypted, 'Secret Passphrase');"
+		// + "decrypted = decrypted.toString(CryptoJS.enc.Utf8);" + "decrypted";
+
+		final String code = "iiTest();";
+
+		mJsEvaluator.evaluate(code, new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResultView);
+				jsResultTextView.setText(String.format("Result: %s", resultValue));
+			}
+		});
+	}
+
+	protected void testJQuery() {
+		final String library_source = null;
+
+		final String librarySrouce = loadJs("real_library/jquery-2.1.0.js");
+		mJsEvaluator.evaluate(librarySrouce);
+
+		final String code = "$('<div><div class=\"ii\">jQuery is working!</div></div>').find('.ii').text()";
+
+		mJsEvaluator.evaluate(code, new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResultView);
+				jsResultTextView.setText(String.format("Result: %s", resultValue));
+			}
+		});
 	}
 }
