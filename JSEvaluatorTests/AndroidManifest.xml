@@ -53,6 +53,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
+        <activity
+            android:name="com.evgenii.jsevaluatortests.RealLibrary"
+            android:label="@string/title_activity_real_library"
+            android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evgenii.jsevaluatortests.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

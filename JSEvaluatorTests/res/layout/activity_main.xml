@@ -38,5 +38,15 @@
         android:layout_marginTop="10dp"
         android:text="@string/stress_test_button"
         android:onClick="onShowStressTestActivityClicked" />
+    
+     <Button
+        android:id="@+id/run_real_library_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/show_stress_test_button"
+        android:layout_below="@+id/show_stress_test_button"
+        android:layout_marginTop="10dp"
+        android:text="@string/run_real_library_button"
+        android:onClick="onShowRunRealLibraryClicked" />
 
 </RelativeLayout>

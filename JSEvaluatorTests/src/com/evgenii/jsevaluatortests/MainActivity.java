@@ -30,8 +30,14 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+	public void onShowRunRealLibraryClicked(View view) {
+		final Intent intent = new Intent(this, RealLibrary.class);
+		startActivity(intent);
+	}
+
 	public void onShowStressTestActivityClicked(View view) {
 		final Intent intent = new Intent(this, StressTestActivity.class);
 		startActivity(intent);
 	}
+
 }
