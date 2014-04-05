@@ -9,13 +9,18 @@
     tools:context="com.evgenii.jsevaluatortests.RealLibrary" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:id="@+id/realLibraryViewLabel"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="102dp"
-        android:layout_marginTop="70dp"
-        android:text="Hello World!" />
+        android:text="@string/run_library_caption" />
+    
+   <TextView
+        android:id="@+id/realLibraryResultView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/realLibraryViewLabel"
+        android:layout_below="@+id/realLibraryViewLabel"
+        android:layout_marginTop="16dp"
+        android:text="" />
 
 </RelativeLayout>

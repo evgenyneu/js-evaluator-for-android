@@ -21,5 +21,6 @@
     <string name="js_stree_test_caption">The purpose of this test is to evaluate two very large (100K) JavaScript functions and then call one.</string>
     <string name="title_activity_real_library">Run Real Library</string>
     <string name="run_real_library_button">Run Real Library</string>
+    <string name="run_library_caption">Loads jQuery library and executes a function.</string>
 
 </resources>
