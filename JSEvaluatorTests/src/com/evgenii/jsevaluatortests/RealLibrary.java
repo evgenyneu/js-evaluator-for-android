@@ -16,6 +16,7 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class RealLibrary extends Activity {
 	JsEvaluator mJsEvaluator;
+	private Scanner scanner;
 
 	protected void loadAndRunLibrary() {
 		String library_source = null;
@@ -29,8 +30,7 @@ public class RealLibrary extends Activity {
 		mJsEvaluator = new JsEvaluator(this);
 		mJsEvaluator.evaluate(library_source);
 
-		// final String code = "$('<div iiatr=\"26\" />').attr('iiatr')";
-		final String code = "jQuery.isNumeric(23)";
+		final String code = "$('<div><div class=\"ii\">jQuery is working!</div></div>').find('.ii').text()";
 
 		mJsEvaluator.evaluate(code, new JsCallback() {
 			@Override
@@ -75,6 +75,7 @@ public class RealLibrary extends Activity {
 		final AssetManager am = getAssets();
 		final InputStream inputStream = am.open(fileName);
 
-		return new Scanner(inputStream, "UTF-8").useDelimiter("\\A").next();
+		scanner = new Scanner(inputStream, "UTF-8");
+		return scanner.useDelimiter("\\A").next();
 	}
 }
