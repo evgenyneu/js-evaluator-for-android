@@ -19,9 +19,25 @@ public class RealLibraryTests extends ActivityInstrumentationTestCase2<RealLibra
 	}
 
 	@MediumTest
-	public void testEvaluate() throws InterruptedException {
+	public void testEvaluateCryptoJs() throws InterruptedException {
 		final TextView resultTextView = (TextView) mActivity
-				.findViewById(R.id.realLibraryResultView);
+				.findViewById(R.id.realLibraryResultCryptoJsView);
+
+		final String expectedResult = "Result: CryptoJs is working!";
+
+		for (int i = 0; i < 100; i++) {
+			Thread.sleep(100);
+			if (resultTextView.getText().equals(expectedResult)) {
+				break;
+			}
+		}
+		assertEquals(expectedResult, resultTextView.getText());
+	}
+
+	@MediumTest
+	public void testEvaluateJQuery() throws InterruptedException {
+		final TextView resultTextView = (TextView) mActivity
+				.findViewById(R.id.realLibraryResultJqueryView);
 
 		final String expectedResult = "Result: jQuery is working!";
 

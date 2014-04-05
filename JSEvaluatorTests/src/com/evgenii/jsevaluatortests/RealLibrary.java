@@ -18,6 +18,17 @@ public class RealLibrary extends Activity {
 	JsEvaluator mJsEvaluator;
 	private Scanner scanner;
 
+	protected void evaluateAndDisplay(String code, final int viewId) {
+
+		mJsEvaluator.evaluate(code, new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+				final TextView jsResultTextView = (TextView) findViewById(viewId);
+				jsResultTextView.setText(String.format("Result: %s", resultValue));
+			}
+		});
+	}
+
 	private String loadJs(String fileName) {
 		try {
 			return ReadFile(fileName);
@@ -37,7 +48,7 @@ public class RealLibrary extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mJsEvaluator = new JsEvaluator(this);
-		// testJQuery();
+		testJQuery();
 		testCryptoJs();
 	}
 
@@ -69,24 +80,14 @@ public class RealLibrary extends Activity {
 	}
 
 	protected void testCryptoJs() {
-		final String librarySrouce = loadJs("real_library/aes.js");
+		final String librarySrouce = loadJs("real_library/cryptojs.js");
 		mJsEvaluator.evaluate(librarySrouce);
 
-		// final String code =
-		// "var encrypted = CryptoJS.AES.encrypt('CryptoJs is working!', 'Secret Passphrase');"
-		// +
-		// "var decrypted = CryptoJS.AES.decrypt(encrypted, 'Secret Passphrase');"
-		// + "decrypted = decrypted.toString(CryptoJS.enc.Utf8);" + "decrypted";
+		final String code = "var encrypted = CryptoJS.AES.encrypt('CryptoJs is working!', 'Secret Passphrase');"
+				+ "var decrypted = CryptoJS.AES.decrypt(encrypted, 'Secret Passphrase');"
+				+ "decrypted.toString(CryptoJS.enc.Utf8);";
 
-		final String code = "iiTest();";
-
-		mJsEvaluator.evaluate(code, new JsCallback() {
-			@Override
-			public void onResult(final String resultValue) {
-				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResultView);
-				jsResultTextView.setText(String.format("Result: %s", resultValue));
-			}
-		});
+		evaluateAndDisplay(code, R.id.realLibraryResultCryptoJsView);
 	}
 
 	protected void testJQuery() {
@@ -97,12 +98,6 @@ public class RealLibrary extends Activity {
 
 		final String code = "$('<div><div class=\"ii\">jQuery is working!</div></div>').find('.ii').text()";
 
-		mJsEvaluator.evaluate(code, new JsCallback() {
-			@Override
-			public void onResult(final String resultValue) {
-				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResultView);
-				jsResultTextView.setText(String.format("Result: %s", resultValue));
-			}
-		});
+		evaluateAndDisplay(code, R.id.realLibraryResultJqueryView);
 	}
 }

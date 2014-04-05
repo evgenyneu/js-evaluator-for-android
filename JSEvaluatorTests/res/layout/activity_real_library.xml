@@ -15,11 +15,21 @@
         android:text="@string/run_library_caption" />
     
    <TextView
-        android:id="@+id/realLibraryResultView"
+        android:id="@+id/realLibraryResultJqueryView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/realLibraryViewLabel"
         android:layout_below="@+id/realLibraryViewLabel"
+        android:layout_marginTop="16dp"
+        android:text="" />
+   
+  
+   <TextView
+        android:id="@+id/realLibraryResultCryptoJsView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/realLibraryResultJqueryView"
+        android:layout_below="@+id/realLibraryResultJqueryView"
         android:layout_marginTop="16dp"
         android:text="" />
 

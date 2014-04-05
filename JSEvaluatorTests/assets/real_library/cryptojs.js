@@ -2108,9 +2108,3 @@ code.google.com/p/crypto-js/wiki/License
      */
     C.AES = BlockCipher._createHelper(AES);
 }());
-
-function iiTest() {
-  var encrypted = CryptoJS.AES.encrypt('CryptoJs is working!', 'Secret Passphrase');
-  var decrypted = CryptoJS.AES.decrypt(encrypted, 'Secret Passphrase');
-  return decrypted.toString(CryptoJS.enc.Utf8);
-}
