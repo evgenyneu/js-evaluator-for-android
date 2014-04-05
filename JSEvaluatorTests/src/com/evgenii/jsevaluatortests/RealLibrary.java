@@ -9,8 +9,10 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.evgenii.jsevaluator.JsEvaluator;
+import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class RealLibrary extends Activity {
 	JsEvaluator mJsEvaluator;
@@ -28,15 +30,15 @@ public class RealLibrary extends Activity {
 		mJsEvaluator.evaluate(library_source);
 
 		// final String code = "$('<div iiatr=\"26\" />').attr('iiatr')";
-		//
-		// mJsEvaluator.evaluate(code, new JsCallback() {
-		// @Override
-		// public void onResult(final String resultValue) {
-		// final TextView jsResultTextView = (TextView)
-		// findViewById(R.id.realLibraryResultView);
-		// jsResultTextView.setText(String.format("Result: %s", resultValue));
-		// }
-		// });
+		final String code = "jQuery.isNumeric(23)";
+
+		mJsEvaluator.evaluate(code, new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResultView);
+				jsResultTextView.setText(String.format("Result: %s", resultValue));
+			}
+		});
 	}
 
 	@Override
