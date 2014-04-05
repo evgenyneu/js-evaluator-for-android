@@ -52,6 +52,10 @@ Run as `Android Application` for manual testing.
 
 Or run as `Android JUnit Test` for unit testing.
 
+## Single line comments
+
+Library will not work if JavaScript code file contains single-line comments. If your code does not evaluate, try to run it though jshint and minifyer.
+
 ## Feedback
 
 If you have any issues or need help please do not hesitate to create an issue ticket.
