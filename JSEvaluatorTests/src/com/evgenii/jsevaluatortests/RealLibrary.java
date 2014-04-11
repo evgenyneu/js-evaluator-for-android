@@ -7,6 +7,7 @@ import java.util.Scanner;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -62,12 +63,11 @@ public class RealLibrary extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		final int id = item.getItemId();
-		if (id == R.id.home)
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
 			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -91,8 +91,6 @@ public class RealLibrary extends Activity {
 	}
 
 	protected void testJQuery() {
-		final String library_source = null;
-
 		final String librarySrouce = loadJs("real_library/jquery-2.1.0.js");
 		mJsEvaluator.evaluate(librarySrouce);
 
