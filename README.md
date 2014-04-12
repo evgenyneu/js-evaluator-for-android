@@ -69,7 +69,7 @@ Run as `Android Application` for manual testing.
 
 Or run as `Android JUnit Test` for unit testing.
 
-## Single line comments
+## Single-line comments
 
 JavaScript with single-line comments won't be evaluated. It happens because the library needs to remove new lines from code before evaluation. If your JavaScript code does not evaluate try to run it through jshint and minifyer.
 
