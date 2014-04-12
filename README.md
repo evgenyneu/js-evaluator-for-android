@@ -48,7 +48,7 @@ Behind the scenes it creats a `WebView` and feeds it your JavaScript code for ev
     mWebView = new WebView(context);
     mWebView.loadUrl("javascript: myObj.returnResult('Hello World');");
     
-The evaluation result is sent back into your Android activity:
+The result of evaluation is sent back into your Android activity:
 
     public class JavaScriptInterface {
     	public void returnResult(String result) {
