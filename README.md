@@ -71,7 +71,7 @@ Or run as `Android JUnit Test` for unit testing.
 
 ## Synchronous loading
 
-JavaScript code loading is performed synchronously. For example, suppose you have two JavaScript libraries `jQuery` and `underscore`. You can load them like this, they will be evaluated synchronously, one after another.
+JavaScript code is loaded synchronously. For example, suppose you have two JavaScript libraries `jQuery` and `underscore`. You can load them like this, they will be evaluated synchronously, one after another.
 
     jsEvaluator.evaluate(jQuery);
     
