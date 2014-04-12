@@ -41,6 +41,23 @@ Call a JS function:
 
 Any number of string, int or double parameters can be supplied.
 
+## How it works
+
+It created a `WebView` behind the scenes and feeds it the JavaScript code for evaluation:
+
+    mWebView = new WebView(context);
+    mWebView.loadUrl("javascript: myObj.returnResult('Hello World');");
+    
+In order to get the result from JavaScript back into Android activity, i
+
+    public class JavaScriptInterface {
+    	public void returnResult(String result) {
+    		// result from JavaScript
+    	}
+    }
+
+    mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
+
 ## Tests
 
 Tests are located in `JsEvaluatorTests` project.
@@ -54,7 +71,7 @@ Or run as `Android JUnit Test` for unit testing.
 
 ## Single line comments
 
-Library will not work if JavaScript code has single-line comments. If your JavaScript code does not evaluate, try to run it though jshint and minifyer.
+JavaScript with single-line comments won't be evaluated. It happens because the library removes new lines from code before evaluation.  If your JavaScript code does not evaluate, try to run it though jshint and minifyer.
 
 ## Feedback
 
