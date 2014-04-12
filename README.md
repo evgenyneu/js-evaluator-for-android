@@ -19,7 +19,7 @@ Create evaluator instance:
 
     JsEvaluator jsEvaluator = new JsEvaluator(this);
 
-`this` is a reference to your activity. You can do it inside `onCreate` method, for example.
+`this` is a reference to your activity.
 
 Evaluate JavaScript:
 
