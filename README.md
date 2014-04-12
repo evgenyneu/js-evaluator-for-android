@@ -69,6 +69,18 @@ Run as `Android Application` for manual testing.
 
 Or run as `Android JUnit Test` for unit testing.
 
+## Synchronous loading, asynchronous result return
+
+JavaScript code loading is performed synchronously. For example, suppose you have two JavaScript libraries `jQuery` and `underscore`. You can load them like this, they will be evaluated synchronously, one after another.
+
+    jsEvaluator.evaluate(jQuery);
+    
+    // jQuery is loaded at this point
+    jsEvaluator.evaluate(underscore);
+    
+
+
+
 ## Single-line comments
 
 JavaScript with single-line comments won't be evaluated. It happens because the library needs to remove new lines from code before evaluation. If your JavaScript code does not evaluate try checking it with [jshint](http://www.jshint.com/) and [minify](http://jscompress.com/).
