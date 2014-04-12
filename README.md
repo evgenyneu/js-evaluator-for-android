@@ -71,7 +71,7 @@ Or run as `Android JUnit Test` for unit testing.
 
 ## Synchronous loading
 
-JavaScript code is loaded synchronously. For example, suppose you wan to load `jQuery` and then use it.
+JavaScript code is loaded synchronously. For example, suppose you want to load jQuery and then use it.
 
     jsEvaluator.evaluate(jQuery);
     
