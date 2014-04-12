@@ -69,17 +69,28 @@ Run as `Android Application` for manual testing.
 
 Or run as `Android JUnit Test` for unit testing.
 
-## Synchronous loading, asynchronous result return
+## Synchronous loading
 
 JavaScript code loading is performed synchronously. For example, suppose you have two JavaScript libraries `jQuery` and `underscore`. You can load them like this, they will be evaluated synchronously, one after another.
 
     jsEvaluator.evaluate(jQuery);
     
-    // jQuery is loaded at this point
-    jsEvaluator.evaluate(underscore);
+    // jQuery is fully loaded at this point
+    // So you can use it right away
+    jsEvaluator.evaluate("$.isNumeric(123)", new JsCallback() { ...
     
+This is handy, because you can load a library and then use it on the next line.
+    
+## Result is returned asynchronously
 
+Unlike loading the result from JavaScript is returned asynchronously.
 
+    jsEvaluator.evaluate("2 * 17", new JsCallback() {
+      @Override
+      public void onResult(final String result) {
+        // Result is returned here asynchronously
+      }
+    });
 
 ## Single-line comments
 
