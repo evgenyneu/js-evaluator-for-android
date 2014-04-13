@@ -5,7 +5,9 @@ public class JsFunctionCallFormatter {
 		String str = "";
 		if (param instanceof String) {
 			str = (String) param;
-			str = str.replace("\"", "\\\\\"");
+			str = str.replace("\\", "\\\\");
+			str = str.replace("\"", "\\\"");
+			str = str.replace("\n", "\\n");
 			str = String.format("\"%s\"", str);
 		} else {
 			try {

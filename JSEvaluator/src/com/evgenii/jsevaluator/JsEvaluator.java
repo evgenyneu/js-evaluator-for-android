@@ -30,6 +30,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		jsCode = escapeSlash(jsCode);
 		jsCode = escapeSingleQuotes(jsCode);
 		jsCode = escapeNewLines(jsCode);
+
 		return String.format("%s.returnResultToJava(eval('%s'), %s);", JS_NAMESPACE, jsCode,
 				callbackIndex);
 	}
