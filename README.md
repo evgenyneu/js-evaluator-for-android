@@ -83,7 +83,7 @@ This is handy, because you can load a library and then use it on the next line.
     
 ## Result is returned asynchronously
 
-Unlike loading the result from JavaScript is returned asynchronously.
+Unlike loading, the result from JavaScript is returned asynchronously.
 
     jsEvaluator.evaluate("2 * 17", new JsCallback() {
       @Override
