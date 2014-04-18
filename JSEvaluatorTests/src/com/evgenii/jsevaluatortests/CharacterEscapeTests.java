@@ -29,7 +29,10 @@ public class CharacterEscapeTests extends ActivityInstrumentationTestCase2<Chara
 				.findViewById(R.id.textViewCharacterEscapeResult);
 
 		TouchUtils.clickView(this, callFunctionButton);
-		assertEquals("Result: Hello, World", resultTextView.getText());
+		assertEquals("multiline:   newline: \n apostrophe: \' quote: \" slashes: /\\/ "
+				+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>? \n#####\n"
+				+ "multiline: \\\n newline: \\n apostrophe: \' quote: \" slashes: \\/\\\\/ "
+				+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>?", resultTextView.getText());
 	}
 
 	public void testPreconditions() {

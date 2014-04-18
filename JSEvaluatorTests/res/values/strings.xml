@@ -25,7 +25,7 @@
     <string name="title_activity_character_escape">Character escape</string>
     <string name="open_cahracter_escape_button">Character escape test</string>
     <string name="character_escape_overview">Test usage of characters like quotes, new lines.</string>
-    <string name="character_escape_js_code">function greet(name) { return \&quot;multiline: \\\n newline: \\n apostrophe: \' quote: \\\&quot; slashes: \\/\\\\/ unicode: 日本 \&quot; + \'characters: !@#$%^&amp;*()-=_+`~&lt;&gt;? \\n#####\\n\' + name; }</string>
+    <string name="character_escape_js_code">function greet(name) { return \&quot;multiline:  \\\n newline: \\n apostrophe: \' quote: \\\&quot; slashes: \\/\\\\/ unicode: 日本 \&quot; + \'characters: !@#$%^&amp;*()-=_+`~&lt;&gt;? \\n#####\\n\' + name; }</string>
     <string name="character_escape_parameter">multiline: \\\n newline: \\n apostrophe: \' quote: \&quot; slashes: \\/\\\\/ unicode: 日本 characters: !@#$%^&amp;*()-=_+`~&lt;&gt;?</string>
     <string name="character_escape_call_function_evaluate_button_text">Run</string>
 
