@@ -69,6 +69,13 @@ Run as `Android Application` for manual testing.
 
 Or run as `Android JUnit Test` for unit testing.
 
+Android versions tested:
+
+* 3.0 (Honeycomb)
+* 4.0 (Ice Cream Sandwich)
+* 4.3 (Jelly Bean)
+* 4.4 (KitKat)
+
 ## Synchronous loading
 
 JavaScript code is loaded synchronously. For example, suppose you want to load jQuery and then use it.
