@@ -43,7 +43,7 @@ Any number of string, int or double parameters can be supplied.
 
 ## How it works
 
-Behind the scenes it creats a `WebView` and feeds it your JavaScript code for evaluation:
+Behind the scenes it creates a `WebView` and feeds it your JavaScript code for evaluation:
 
     mWebView = new WebView(context);
     mWebView.loadUrl("javascript: myObj.returnResult('Hello World');");
