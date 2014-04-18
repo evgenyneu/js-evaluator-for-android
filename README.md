@@ -1,4 +1,4 @@
-# Evaluate JavaScript on Android (library)
+# Evaluate JavaScript in Android app (library)
 
 Library for evaluating JavaScript in Android apps. Supports Android version 3 and newer.
 
