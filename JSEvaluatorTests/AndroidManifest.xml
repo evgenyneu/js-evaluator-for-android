@@ -61,6 +61,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
+        <activity
+            android:name="com.evgenii.jsevaluatortests.CharacterEscape"
+            android:label="@string/title_activity_character_escape"
+            android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evgenii.jsevaluatortests.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

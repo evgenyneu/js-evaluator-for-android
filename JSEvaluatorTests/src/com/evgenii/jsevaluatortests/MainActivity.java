@@ -30,6 +30,11 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+	public void onShowCharacterEscapeClicked(View view) {
+		final Intent intent = new Intent(this, CharacterEscape.class);
+		startActivity(intent);
+	}
+
 	public void onShowRunRealLibraryClicked(View view) {
 		final Intent intent = new Intent(this, RealLibrary.class);
 		startActivity(intent);

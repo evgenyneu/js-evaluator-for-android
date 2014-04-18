@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.evgenii.jsevaluatortests.CharacterEscape"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/textViewCharacterEscapeOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/character_escape_overview" />
+    
+    <TextView
+        android:id="@+id/textCharacterEscapeJsCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewCharacterEscapeOverview"
+        android:layout_below="@+id/textViewCharacterEscapeOverview"
+        android:layout_marginTop="16dp"
+        android:text="@string/js_function_label" />
+    
+    <EditText
+        android:id="@+id/editTextCharacterEscapeJsCode"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_alignLeft="@+id/textCharacterEscapeJsCode"
+        android:layout_below="@+id/textCharacterEscapeJsCode"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:text="@string/character_escape_js_code" >
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:id="@+id/textCharacterEscapeParameter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textCharacterEscapeJsCode"
+        android:layout_below="@+id/editTextCharacterEscapeJsCode"
+        android:layout_marginTop="16dp"
+        android:text="@string/js_parameter_label" />
+    
+    <EditText
+        android:id="@+id/editTextCharacterEscapeParameter"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textCharacterEscapeParameter"
+        android:layout_below="@+id/textCharacterEscapeParameter"
+        android:ems="10"
+        android:inputType="textNoSuggestions"
+        android:text="@string/character_escape_parameter" />
+    
+    <Button
+        android:id="@+id/buttonCharacterEscapeCallFunction"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextCharacterEscapeParameter"
+        android:layout_below="@+id/editTextCharacterEscapeParameter"
+        android:layout_marginTop="10dp"
+        android:text="@string/character_escape_call_function_evaluate_button_text"
+        android:onClick="onCharacterEscapeCallFuncitonClicked" />
+    
+    <TextView
+        android:id="@+id/textViewCharacterEscapeResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonCharacterEscapeCallFunction"
+        android:layout_below="@+id/buttonCharacterEscapeCallFunction"
+        android:layout_marginTop="5dp"
+        android:lines="5"
+        android:maxLines="5"
+        android:text="" />
+    
+</RelativeLayout> 

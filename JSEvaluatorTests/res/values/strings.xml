@@ -22,5 +22,11 @@
     <string name="title_activity_real_library">Run Real Library</string>
     <string name="run_real_library_button">Run Real Library</string>
     <string name="run_library_caption">Loads real libraries (jQuery and CryptoJs) and calls their functions.</string>
+    <string name="title_activity_character_escape">Character escape</string>
+    <string name="open_cahracter_escape_button">Character escape test</string>
+    <string name="character_escape_overview">Test usage of \'edge case\' characters (like quotes, unicode and new lines) in JavaScript code and function argument string.</string>
+    <string name="character_escape_js_code">function greet(name) { return \"multiline: \\\n newline: \\n single quote: \' double quote: \\\" slashes: \\/\\\\/ unicode: 日本 \" + \' chracters:!@#$%^ \' + name; }</string>
+    <string name="character_escape_parameter">World</string>
+    <string name="character_escape_call_function_evaluate_button_text">Run</string>
 
 </resources>
