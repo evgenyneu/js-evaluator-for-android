@@ -23,16 +23,24 @@ public class CallJsFunctionActivityTests extends
 	}
 
 	@MediumTest
-	public void testCallFunctionButton_clickButtonAndShowResult() {
-		final Button callFunctionButton = (Button) mActivity
-				.findViewById(R.id.buttonCallFunction);
+	public void testCallFunctionButton_clickButtonAndShowResult() throws InterruptedException {
+		final Button callFunctionButton = (Button) mActivity.findViewById(R.id.buttonCallFunction);
 
 		final TextView resultTextView = (TextView) mActivity
 				.findViewById(R.id.textViewCallFunctionResult);
 
 		TouchUtils.clickView(this, callFunctionButton);
 		assertTrue(View.VISIBLE == resultTextView.getVisibility());
-		assertEquals("Result: Hello, World", resultTextView.getText());
+
+		final String expectedResult = "Result: Hello, World";
+
+		for (int i = 0; i < 100; i++) {
+			Thread.sleep(100);
+			if (resultTextView.getText().equals(expectedResult)) {
+				break;
+			}
+		}
+		assertEquals(expectedResult, resultTextView.getText());
 	}
 
 	@MediumTest
@@ -40,8 +48,7 @@ public class CallJsFunctionActivityTests extends
 		final TextView jsFunctionTextView = (TextView) mActivity
 				.findViewById(R.id.editTextParameter);
 
-		final String expected = mActivity
-				.getString(R.string.js_parameter_edit_text);
+		final String expected = mActivity.getString(R.string.js_parameter_edit_text);
 		final String actual = jsFunctionTextView.getText().toString();
 		assertEquals(expected, actual);
 	}
@@ -51,8 +58,7 @@ public class CallJsFunctionActivityTests extends
 		final TextView jsFunctionTextView = (TextView) mActivity
 				.findViewById(R.id.js_function_edit_text);
 
-		final String expected = mActivity
-				.getString(R.string.js_function_edit_text);
+		final String expected = mActivity.getString(R.string.js_function_edit_text);
 		final String actual = jsFunctionTextView.getText().toString();
 		assertEquals(expected, actual);
 	}
