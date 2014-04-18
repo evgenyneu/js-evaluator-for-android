@@ -1,4 +1,4 @@
-# Evaluate JavaScript in Android apps (library)
+# Run JavaScript in Android apps (library)
 
 Supports Android version 3.0 (Honeycomb) and newer.
 
