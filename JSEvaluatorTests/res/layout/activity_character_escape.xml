@@ -16,7 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:text="@string/character_escape_overview" />
     
     <TextView
@@ -25,17 +25,17 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewCharacterEscapeOverview"
         android:layout_below="@+id/textViewCharacterEscapeOverview"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="@string/js_function_label" />
     
     <EditText
         android:id="@+id/editTextCharacterEscapeJsCode"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="70dp"
         android:layout_alignLeft="@+id/textCharacterEscapeJsCode"
         android:layout_below="@+id/textCharacterEscapeJsCode"
         android:layout_centerHorizontal="true"
-        android:ems="10"
+        android:ems="4"
         android:gravity="top"
         android:inputType="textMultiLine|textNoSuggestions"
         android:text="@string/character_escape_js_code" >
@@ -48,17 +48,19 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textCharacterEscapeJsCode"
         android:layout_below="@+id/editTextCharacterEscapeJsCode"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="@string/js_parameter_label" />
     
     <EditText
         android:id="@+id/editTextCharacterEscapeParameter"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_alignLeft="@+id/textCharacterEscapeParameter"
         android:layout_below="@+id/textCharacterEscapeParameter"
-        android:ems="10"
-        android:inputType="textNoSuggestions"
+        android:layout_centerHorizontal="true"
+        android:ems="4"
+        android:gravity="top"
+        android:inputType="textMultiLine|textNoSuggestions"
         android:text="@string/character_escape_parameter" />
     
     <Button
@@ -67,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextCharacterEscapeParameter"
         android:layout_below="@+id/editTextCharacterEscapeParameter"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:text="@string/character_escape_call_function_evaluate_button_text"
         android:onClick="onCharacterEscapeCallFuncitonClicked" />
     
@@ -77,9 +79,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonCharacterEscapeCallFunction"
         android:layout_below="@+id/buttonCharacterEscapeCallFunction"
-        android:layout_marginTop="5dp"
-        android:lines="5"
-        android:maxLines="5"
+        android:layout_marginTop="4dp"
+        android:lines="8"
+        android:maxLines="8"
         android:text="" />
     
 </RelativeLayout> 
