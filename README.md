@@ -1,6 +1,6 @@
-# Evaluate JavaScript in Android app (library)
+# Evaluate JavaScript in Android apps (library)
 
-Library for evaluating JavaScript in Android apps. Supports Android version 3 and newer.
+Supports Android version 3.0 (Honeycomb) and newer.
 
 ## Setup
 
