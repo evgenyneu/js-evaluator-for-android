@@ -21,7 +21,7 @@ Create evaluator instance:
 
 `this` is a reference to your activity.
 
-Evaluate JavaScript:
+## Evaluate JavaScript:
 
     jsEvaluator.evaluate("2 * 17", new JsCallback() {
       @Override
@@ -30,7 +30,7 @@ Evaluate JavaScript:
       }
     });
 
-Call a JS function:
+## Call a JavaScript function:
 
     jsEvaluator.callFunction(new JsCallback() {
       @Override
