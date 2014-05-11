@@ -31,7 +31,7 @@
 
         <activity
             android:name="com.evgenii.jsevaluatortests.EvaluateJsStringActivity"
-            android:label="@string/title_activity_evaluate_js_string" >
+            android:label="@string/title_activity_evaluate_js_string" 
             android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -39,7 +39,7 @@
         </activity>
         <activity
             android:name="com.evgenii.jsevaluatortests.CallJsFunctionActivity"
-            android:label="@string/title_activity_call_js_function" >
+            android:label="@string/title_activity_call_js_function" 
 	        android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -47,7 +47,7 @@
         </activity>
         <activity
             android:name="com.evgenii.jsevaluatortests.StressTestActivity"
-            android:label="@string/title_activity_stress_test" >
+            android:label="@string/title_activity_stress_test" 
             android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
