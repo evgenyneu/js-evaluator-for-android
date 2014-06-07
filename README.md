@@ -4,7 +4,7 @@ Supports Android version 3.0 (Honeycomb) and newer.
 
 ## Get JAR file
 
-Get the JAR from [JSEvaluator/bin/jsevaluator.jar](https://github.com/evgenyneu/js-evaluator-for-android/raw/master/JSEvaluator/bin/jsevaluator.jar). You can also build it yourself with Eclipse.
+[Download jsevaluator.jar](https://github.com/evgenyneu/js-evaluator-for-android/raw/master/JSEvaluator/bin/jsevaluator.jar). You can also build it yourself with Eclipse (it will be built into JSEvaluator/bin/jsevaluator.jar).
 
 ## Setup
 
