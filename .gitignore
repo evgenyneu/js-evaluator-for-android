@@ -23,3 +23,6 @@ local.properties
 proguard/
 
 .settings
+
+# include the jar
+!bin/jsevaluator.jar
