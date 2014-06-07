@@ -2,9 +2,9 @@
 
 Supports Android version 3.0 (Honeycomb) and newer.
 
-## Get jar
+## Get JAR file
 
-Get the jar from [JSEvaluator/bin/jsevaluator.jar](https://github.com/evgenyneu/js-evaluator-for-android/raw/master/JSEvaluator/bin/jsevaluator.jar). You can also build it yourself with Eclipse.
+Get the JAR from [JSEvaluator/bin/jsevaluator.jar](https://github.com/evgenyneu/js-evaluator-for-android/raw/master/JSEvaluator/bin/jsevaluator.jar). You can also build it yourself with Eclipse.
 
 ## Setup
 
@@ -13,7 +13,7 @@ To add JSEvaluator to your app in Eclipse:
 1. File > Import `JSEvaluator` project.
 1. Open properties for **your** app project.
 1. Select `Libraries` tab in `Java Build Path`.
-1. Click `Add JARs...` button and select `jsevaluator.jar` from `JSEvaluator/bin` directory.
+1. Click `Add JARs...` button and select `jsevaluator.jar`.
 1. In your project properties click `Order and export` tab.
 1. Tick `jsevaluator.jar`.
 
