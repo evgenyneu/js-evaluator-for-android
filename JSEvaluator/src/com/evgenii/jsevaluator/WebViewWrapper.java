@@ -12,13 +12,15 @@ import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 public class WebViewWrapper implements WebViewWrapperInterface {
 	protected WebView mWebView;
 
-	public WebViewWrapper(Context context,
-			CallJavaResultInterface callJavaResult) {
+	public WebViewWrapper(Context context, CallJavaResultInterface callJavaResult) {
 		mWebView = new WebView(context);
+
+		// web view will not draw anything - turn on optimizations
+		mWebView.setWillNotDraw(true);
+
 		final WebSettings webSettings = mWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
-		final JavaScriptInterface jsInterface = new JavaScriptInterface(
-				callJavaResult);
+		final JavaScriptInterface jsInterface = new JavaScriptInterface(callJavaResult);
 		mWebView.addJavascriptInterface(jsInterface, JsEvaluator.JS_NAMESPACE);
 		hackToMakeItWorkOnAndroid_4_3();
 	}
