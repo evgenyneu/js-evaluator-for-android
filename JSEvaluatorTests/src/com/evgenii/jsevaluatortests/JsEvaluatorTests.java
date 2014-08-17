@@ -41,10 +41,13 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 		mJsEvaluator.callFunction(callbackMock, "myFunction");
 
-		final ArrayList<JsCallback> callbacks = mJsEvaluator
-				.getResultCallbacks();
+		final ArrayList<JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
 		assertEquals(1, callbacks.size());
 		assertEquals(callbackMock, callbacks.get(0));
+	}
+
+	public void testEscapePercent() {
+		assertEquals("12%25", JsEvaluator.escapePercent("12%"));
 	}
 
 	public void testEscapeSingleQuotes() {
@@ -57,8 +60,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.evaluate("2 * 3", callbackMock);
 
 		assertEquals(1, mWebViewWrapperMock.mLoadedUrls.size());
-		assertEquals(
-				"javascript: evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
+		assertEquals("javascript: evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
 				mWebViewWrapperMock.mLoadedUrls.get(0));
 	}
 
@@ -66,8 +68,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.evaluate("2 * 3");
 
 		assertEquals(1, mWebViewWrapperMock.mLoadedUrls.size());
-		assertEquals(
-				"javascript: evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), -1);",
+		assertEquals("javascript: evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), -1);",
 				mWebViewWrapperMock.mLoadedUrls.get(0));
 	}
 
@@ -82,16 +83,14 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 		mJsEvaluator.evaluate("2 * 3", callbackMock);
 
-		final ArrayList<JsCallback> callbacks = mJsEvaluator
-				.getResultCallbacks();
+		final ArrayList<JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
 		assertEquals(1, callbacks.size());
 		assertEquals(callbackMock, callbacks.get(0));
 	}
 
 	public void testGetJsForEval() {
-		final String result = JsEvaluator.getJsForEval("2 + 3; 'hello'", 34);
-		assertEquals(
-				"evgeniiJsEvaluator.returnResultToJava(eval('2 + 3; \\'hello\\''), 34);",
+		final String result = JsEvaluator.getJsForEval("2 + 3%12; 'hello'", 34);
+		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 + 3%2512; \\'hello\\''), 34);",
 				result);
 	}
 
@@ -103,8 +102,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	}
 
 	public void testJsCallFinished_runsCallback() {
-		final ArrayList<JsCallback> callbacks = mJsEvaluator
-				.getResultCallbacks();
+		final ArrayList<JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
 		final JsCallbackMock callback = new JsCallbackMock();
 		callbacks.add(callback);
 

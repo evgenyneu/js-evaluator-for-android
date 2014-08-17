@@ -18,6 +18,10 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		return str.replace("\n", " ");
 	}
 
+	public static String escapePercent(String str) {
+		return str.replace("%", "%25");
+	}
+
 	public static String escapeSingleQuotes(String str) {
 		return str.replace("'", "\\'");
 	}
@@ -30,6 +34,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		jsCode = escapeSlash(jsCode);
 		jsCode = escapeSingleQuotes(jsCode);
 		jsCode = escapeNewLines(jsCode);
+		jsCode = escapePercent(jsCode);
 
 		return String.format("%s.returnResultToJava(eval('%s'), %s);", JS_NAMESPACE, jsCode,
 				callbackIndex);
