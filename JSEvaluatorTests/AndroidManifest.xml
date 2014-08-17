@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.evgenii.jsevaluatortests.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,41 +30,49 @@
         <uses-library android:name="android.test.runner" />
 
         <activity
-            android:name="com.evgenii.jsevaluatortests.EvaluateJsStringActivity"
-            android:label="@string/title_activity_evaluate_js_string" 
-            android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity">
+            android:name=".EvaluateJsStringActivity"
+            android:label="@string/title_activity_evaluate_js_string"
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
         <activity
-            android:name="com.evgenii.jsevaluatortests.CallJsFunctionActivity"
-            android:label="@string/title_activity_call_js_function" 
-	        android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity">
+            android:name=".CallJsFunctionActivity"
+            android:label="@string/title_activity_call_js_function"
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
         <activity
-            android:name="com.evgenii.jsevaluatortests.StressTestActivity"
-            android:label="@string/title_activity_stress_test" 
-            android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity">
+            android:name=".StressTestActivity"
+            android:label="@string/title_activity_stress_test"
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
         <activity
-            android:name="com.evgenii.jsevaluatortests.RealLibrary"
+            android:name=".RealLibrary"
             android:label="@string/title_activity_real_library"
-            android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
         <activity
-            android:name="com.evgenii.jsevaluatortests.CharacterEscape"
+            android:name=".CharacterEscape"
             android:label="@string/title_activity_character_escape"
-            android:parentActivityName="com.evgenii.jsevaluatortests.MainActivity" >
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evgenii.jsevaluatortests.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PercentageActivity"
+            android:label="@string/title_activity_percentage"
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />

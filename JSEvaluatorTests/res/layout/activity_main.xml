@@ -66,6 +66,16 @@
 	      android:layout_marginTop="10dp"
 	      android:text="@string/open_cahracter_escape_button"
 	      android:onClick="onShowCharacterEscapeClicked" />
+	   
+	   <Button
+	      android:id="@+id/open_percent_character_button"
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_alignLeft="@+id/open_character_escape_button"
+	      android:layout_below="@+id/open_character_escape_button"
+	      android:layout_marginTop="10dp"
+	      android:text="@string/open_percent_character_button"
+	      android:onClick="onShowPercentCharacterClicked" />
   
      </RelativeLayout>
  </ScrollView>
