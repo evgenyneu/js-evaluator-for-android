@@ -18,13 +18,13 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 public class RealLibrary extends Activity {
 	JsEvaluator mJsEvaluator;
 	private Scanner scanner;
+	String jsCode;
 
-	protected void evaluateAndDisplay(String code, final int viewId) {
-
-		mJsEvaluator.evaluate(code, new JsCallback() {
+	protected void evaluateAndDisplay() {
+		mJsEvaluator.evaluate(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
-				final TextView jsResultTextView = (TextView) findViewById(viewId);
+				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResult);
 				jsResultTextView.setText(String.format("Result: %s", resultValue));
 			}
 		});
@@ -49,8 +49,11 @@ public class RealLibrary extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mJsEvaluator = new JsEvaluator(this);
+		jsCode = "var jsEvaluatorResult = ''; ";
 		testJQuery();
 		testCryptoJs();
+		jsCode += "jsEvaluatorResult;";
+		evaluateAndDisplay();
 	}
 
 	@Override
@@ -80,22 +83,17 @@ public class RealLibrary extends Activity {
 	}
 
 	protected void testCryptoJs() {
-		final String librarySrouce = loadJs("real_library/cryptojs.js");
-		mJsEvaluator.evaluate(librarySrouce);
-
-		final String code = "var encrypted = CryptoJS.AES.encrypt('CryptoJs is working!', 'Secret Passphrase');"
+		jsCode += loadJs("real_library/cryptojs.js");
+		jsCode += "; ";
+		jsCode += "var encrypted = CryptoJS.AES.encrypt('CryptoJs is working!', 'Secret Passphrase');"
 				+ "var decrypted = CryptoJS.AES.decrypt(encrypted, 'Secret Passphrase');"
-				+ "decrypted.toString(CryptoJS.enc.Utf8);";
+				+ "jsEvaluatorResult += ' ' + decrypted.toString(CryptoJS.enc.Utf8); ";
 
-		evaluateAndDisplay(code, R.id.realLibraryResultCryptoJsView);
 	}
 
 	protected void testJQuery() {
-		final String librarySrouce = loadJs("real_library/jquery-2.1.0.js");
-		mJsEvaluator.evaluate(librarySrouce);
-
-		final String code = "$('<div><div class=\"ii\">jQuery is working!</div></div>').find('.ii').text()";
-
-		evaluateAndDisplay(code, R.id.realLibraryResultJqueryView);
+		jsCode += loadJs("real_library/jquery-2.1.0.js");
+		jsCode += "; ";
+		jsCode += "jsEvaluatorResult += ' ' + $('<div><div class=\"ii\">jQuery is working!</div></div>').find('.ii').text(); ";
 	}
 }

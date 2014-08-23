@@ -13,13 +13,8 @@ import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
 
-	// Needed for Android 4.0
 	public static String escapeNewLines(String str) {
-		return str.replace("\n", " ");
-	}
-
-	public static String escapePercent(String str) {
-		return str.replace("%", "%25");
+		return str.replace("\n", "\\n");
 	}
 
 	public static String escapeSingleQuotes(String str) {
@@ -34,7 +29,6 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		jsCode = escapeSlash(jsCode);
 		jsCode = escapeSingleQuotes(jsCode);
 		jsCode = escapeNewLines(jsCode);
-		jsCode = escapePercent(jsCode);
 
 		return String.format("%s.returnResultToJava(eval('%s'), %s);", JS_NAMESPACE, jsCode,
 				callbackIndex);

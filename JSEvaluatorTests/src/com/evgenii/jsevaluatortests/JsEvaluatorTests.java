@@ -46,10 +46,6 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		assertEquals(callbackMock, callbacks.get(0));
 	}
 
-	public void testEscapePercent() {
-		assertEquals("12%25", JsEvaluator.escapePercent("12%"));
-	}
-
 	public void testEscapeSingleQuotes() {
 		assertEquals("\\'a\\'", JsEvaluator.escapeSingleQuotes("'a'"));
 	}

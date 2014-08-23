@@ -19,7 +19,7 @@ public class WebViewWrapperTest extends ActivityInstrumentationTestCase2<MainAct
 		mActivity = getActivity();
 	}
 
-	public void testLoadUrl() {
+	public void testLoadJavaScript() {
 		final Instrumentation mInstrumentation = getInstrumentation();
 		mActivity.runOnUiThread(new Runnable() {
 			@Override

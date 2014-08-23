@@ -38,8 +38,8 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 		try {
 			javascript = "<script>" + javascript + "</script>";
 			data = javascript.getBytes("UTF-8");
-			final String base64 = Base64.encodeToString(data, Base64.URL_SAFE);
-			mWebView.loadData(base64, "text/html", "base64");
+			final String base64 = Base64.encodeToString(data, Base64.DEFAULT);
+			mWebView.loadUrl("data:text/html;charset=utf-8;base64," + base64);
 		} catch (final UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
