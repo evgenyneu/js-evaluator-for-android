@@ -77,7 +77,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		if (resultCallback != null) {
 			mResultCallbacks.add(resultCallback);
 		}
-		getWebViewWrapper().loadUrl(js);
+		getWebViewWrapper().loadJavaScript(js);
 	}
 
 	public ArrayList<JsCallback> getResultCallbacks() {

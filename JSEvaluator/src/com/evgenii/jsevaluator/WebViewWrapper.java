@@ -1,7 +1,10 @@
 package com.evgenii.jsevaluator;
 
+import java.io.UnsupportedEncodingException;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Base64;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -30,7 +33,15 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 	}
 
 	@Override
-	public void loadUrl(String url) {
-		mWebView.loadUrl(url);
+	public void loadJavaScript(String javascript) {
+		byte[] data;
+		try {
+			javascript = "<script>" + javascript + "</script>";
+			data = javascript.getBytes("UTF-8");
+			final String base64 = Base64.encodeToString(data, Base64.URL_SAFE);
+			mWebView.loadData(base64, "text/html", "base64");
+		} catch (final UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -29,10 +29,9 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 		mJsEvaluator.callFunction(callbackMock, "myFunction", "one", 2);
 
-		assertEquals(1, mWebViewWrapperMock.mLoadedUrls.size());
-		final String actualJs = mWebViewWrapperMock.mLoadedUrls.get(0);
-		assertEquals(
-				"javascript: evgeniiJsEvaluator.returnResultToJava(eval('myFunction(\"one\", 2)'), 0);",
+		assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
+		final String actualJs = mWebViewWrapperMock.mLoadedJavaScript.get(0);
+		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('myFunction(\"one\", 2)'), 0);",
 				actualJs);
 	}
 
@@ -59,17 +58,17 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 		mJsEvaluator.evaluate("2 * 3", callbackMock);
 
-		assertEquals(1, mWebViewWrapperMock.mLoadedUrls.size());
-		assertEquals("javascript: evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
-				mWebViewWrapperMock.mLoadedUrls.get(0));
+		assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
+		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
+				mWebViewWrapperMock.mLoadedJavaScript.get(0));
 	}
 
 	public void testEvaluate_shouldEvaluateWithoutCallback() {
 		mJsEvaluator.evaluate("2 * 3");
 
-		assertEquals(1, mWebViewWrapperMock.mLoadedUrls.size());
-		assertEquals("javascript: evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), -1);",
-				mWebViewWrapperMock.mLoadedUrls.get(0));
+		assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
+		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), -1);",
+				mWebViewWrapperMock.mLoadedJavaScript.get(0));
 	}
 
 	public void testEvaluate_shouldNotRegisterResultCallbackWhenCallbackIsNotSupplied() {

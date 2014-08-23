@@ -5,8 +5,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.evgenii.jsevaluator.WebViewWrapper;
 
-public class WebViewWrapperTest extends
-		ActivityInstrumentationTestCase2<MainActivity> {
+public class WebViewWrapperTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
 	private MainActivity mActivity;
 
@@ -25,9 +24,8 @@ public class WebViewWrapperTest extends
 		mActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				final WebViewWrapper wrapper = new WebViewWrapper(mActivity,
-						null);
-				wrapper.loadUrl("javascript: 12");
+				final WebViewWrapper wrapper = new WebViewWrapper(mActivity, null);
+				wrapper.loadJavaScript("2 + 3");
 			}
 		});
 
