@@ -17,15 +17,14 @@ public class CallJsFunctionActivity extends Activity {
 
 	public void onCallFuncitonClicked(View view) {
 		final EditText functionText = (EditText) findViewById(R.id.js_function_edit_text);
-		mJsEvaluator.evaluate(functionText.getText().toString());
+		final String jsCode = functionText.getText().toString();
 
 		final EditText parameterText = (EditText) findViewById(R.id.editTextParameter);
-		mJsEvaluator.callFunction(new JsCallback() {
+		mJsEvaluator.callFunction(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionResult);
-				jsResultTextView.setText(String.format("Result: %s",
-						resultValue));
+				jsResultTextView.setText(String.format("Result: %s", resultValue));
 			}
 		}, "greet", parameterText.getText().toString());
 	}

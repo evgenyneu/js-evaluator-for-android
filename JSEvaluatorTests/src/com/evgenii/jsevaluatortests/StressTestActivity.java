@@ -49,15 +49,14 @@ public class StressTestActivity extends Activity {
 
 		mJsEvaluator = new JsEvaluator(this);
 
-		mJsEvaluator.evaluate(addOneJs());
-		mJsEvaluator.evaluate(addTwoJs());
+		String jsCode = addOneJs();
+		jsCode += addTwoJs();
 
-		mJsEvaluator.callFunction(new JsCallback() {
+		mJsEvaluator.callFunction(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.js_stress_result_text_view);
-				jsResultTextView.setText(String.format("Result: %s",
-						resultValue));
+				jsResultTextView.setText(String.format("Result: %s", resultValue));
 			}
 		}, "addTwo", 10);
 	}

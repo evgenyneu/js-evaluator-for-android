@@ -18,10 +18,10 @@ public class CharacterEscape extends Activity {
 
 	public void onCharacterEscapeCallFuncitonClicked(View view) {
 		final EditText functionText = (EditText) findViewById(R.id.editTextCharacterEscapeJsCode);
-		mJsEvaluator.evaluate(functionText.getText().toString());
+		final String jsCode = functionText.getText().toString();
 
 		final EditText parameterText = (EditText) findViewById(R.id.editTextCharacterEscapeParameter);
-		mJsEvaluator.callFunction(new JsCallback() {
+		mJsEvaluator.callFunction(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCharacterEscapeResult);

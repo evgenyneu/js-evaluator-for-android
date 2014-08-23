@@ -27,18 +27,19 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	public void testCallFunction_shouldEvaluateJs() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
 
-		mJsEvaluator.callFunction(callbackMock, "myFunction", "one", 2);
+		mJsEvaluator.callFunction("1 + 2", callbackMock, "myFunction", "one", 2);
 
 		assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
 		final String actualJs = mWebViewWrapperMock.mLoadedJavaScript.get(0);
-		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('myFunction(\"one\", 2)'), 0);",
+		assertEquals(
+				"evgeniiJsEvaluator.returnResultToJava(eval('1 + 2; myFunction(\"one\", 2)'), 0);",
 				actualJs);
 	}
 
 	public void testCallFunction_shouldRegisterResultCallback() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
 
-		mJsEvaluator.callFunction(callbackMock, "myFunction");
+		mJsEvaluator.callFunction("1 + 2", callbackMock, "myFunction");
 
 		final ArrayList<JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
 		assertEquals(1, callbacks.size());

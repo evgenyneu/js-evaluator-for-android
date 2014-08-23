@@ -54,8 +54,8 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	}
 
 	@Override
-	public void callFunction(JsCallback resultCallback, String name, Object... args) {
-		final String jsCode = JsFunctionCallFormatter.toString(name, args);
+	public void callFunction(String jsCode, JsCallback resultCallback, String name, Object... args) {
+		jsCode += "; " + JsFunctionCallFormatter.toString(name, args);
 		evaluate(jsCode, resultCallback);
 	}
 
