@@ -25,7 +25,7 @@ public class RealLibrary extends Activity {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResult);
-				jsResultTextView.setText(String.format("Result: %s", resultValue));
+				jsResultTextView.setText(String.format("Result:%s", resultValue));
 			}
 		});
 	}

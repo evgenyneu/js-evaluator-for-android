@@ -26,7 +26,7 @@ public class RealLibraryTests extends ActivityInstrumentationTestCase2<RealLibra
 	public void testTestRealLibraries() throws InterruptedException {
 		final TextView resultTextView = (TextView) mActivity.findViewById(R.id.realLibraryResult);
 
-		final String expectedResult = "Result: CryptoJs is working!";
+		final String expectedResult = "Result: jQuery is working! CryptoJs is working!";
 
 		for (int i = 0; i < 100; i++) {
 			Thread.sleep(100);
