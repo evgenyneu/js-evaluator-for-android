@@ -32,7 +32,7 @@ public class CharacterEscapeTests extends ActivityInstrumentationTestCase2<Chara
 		assertEquals(
 				"multiline:  newline: \n apostrophe: \' quote: \" slashes: /\\/ closing tag: </script> "
 						+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>? \n#####\n"
-						+ "multiline: \n newline: \\n apostrophe: \' quote: \" slashes: /\\/ closing tag: </script> "
+						+ "multiline: \n newline: \\n apostrophe: \' quote: \" slashes: \\/\\\\/ closing tag: </script> "
 						+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>?", resultTextView.getText());
 	}
 
