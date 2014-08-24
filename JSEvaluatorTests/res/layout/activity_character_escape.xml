@@ -28,11 +28,19 @@
         android:onClick="onCharacterEscapeCallFuncitonClicked" />
     
     <TextView
+        android:id="@+id/textViewCharacterEscapeResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonCharacterEscapeCallFunction"
+        android:layout_alignLeft="@+id/buttonCharacterEscapeCallFunction"
+        android:text="TextView" />
+    
+    <TextView
         android:id="@+id/textCharacterEscapeJsCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/buttonCharacterEscapeCallFunction"
-        android:layout_below="@+id/buttonCharacterEscapeCallFunction"
+        android:layout_alignLeft="@+id/textViewCharacterEscapeResult"
+        android:layout_below="@+id/textViewCharacterEscapeResult"
         android:layout_marginTop="10dp"
         android:text="@string/js_function_label" />
     
@@ -63,7 +71,7 @@
         android:text="@string/character_escape_parameter" />
     
     <TextView
-        android:id="@+id/textViewCharacterEscapeResult"
+        android:id="@+id/sdfsd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editTextCharacterEscapeParameter"
