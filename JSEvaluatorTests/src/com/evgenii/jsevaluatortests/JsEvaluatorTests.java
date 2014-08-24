@@ -85,9 +85,8 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	}
 
 	public void testGetJsForEval() {
-		final String result = JsEvaluator.getJsForEval("2 + 3%12; 'hello'", 34);
-		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 + 3%2512; \\'hello\\''), 34);",
-				result);
+		final String result = JsEvaluator.getJsForEval("'hello'", 34);
+		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('\\'hello\\''), 34);", result);
 	}
 
 	public void testJsCallFinished_doesNotRunCallBackWhenIndexIsMinusOne() {

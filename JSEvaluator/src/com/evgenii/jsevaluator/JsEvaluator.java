@@ -65,8 +65,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 			callbackIndex = -1;
 		}
 
-		String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
-		js = String.format("javascript: %s", js);
+		final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
 
 		if (resultCallback != null) {
 			mResultCallbacks.add(resultCallback);
