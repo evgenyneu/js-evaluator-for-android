@@ -6,7 +6,6 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.evgenii.jsevaluator.JsEvaluator;
@@ -17,10 +16,10 @@ public class CharacterEscape extends Activity {
 	JsEvaluator mJsEvaluator;
 
 	public void onCharacterEscapeCallFuncitonClicked(View view) {
-		final EditText functionText = (EditText) findViewById(R.id.editTextCharacterEscapeJsCode);
+		final TextView functionText = (TextView) findViewById(R.id.editTextCharacterEscapeJsCode);
 		final String jsCode = functionText.getText().toString();
 
-		final EditText parameterText = (EditText) findViewById(R.id.editTextCharacterEscapeParameter);
+		final TextView parameterText = (TextView) findViewById(R.id.editTextCharacterEscapeParameter);
 		mJsEvaluator.callFunction(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
