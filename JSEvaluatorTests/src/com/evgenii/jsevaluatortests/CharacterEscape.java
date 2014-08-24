@@ -24,7 +24,7 @@ public class CharacterEscape extends Activity {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCharacterEscapeResult);
-				jsResultTextView.setText(String.format("%s", resultValue));
+				jsResultTextView.setText(String.format("Result: %s", resultValue));
 			}
 		}, "greet", parameterText.getText().toString());
 	}

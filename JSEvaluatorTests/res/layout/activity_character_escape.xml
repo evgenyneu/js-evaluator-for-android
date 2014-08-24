@@ -70,13 +70,4 @@
         android:layout_below="@+id/textCharacterEscapeParameter"
         android:text="@string/character_escape_parameter" />
     
-    <TextView
-        android:id="@+id/sdfsd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextCharacterEscapeParameter"
-        android:layout_below="@+id/editTextCharacterEscapeParameter"
-        android:layout_marginTop="4dp"
-        android:text="" />
-
 </RelativeLayout> 

@@ -30,7 +30,7 @@ public class CharacterEscapeTests extends ActivityInstrumentationTestCase2<Chara
 
 		TouchUtils.clickView(this, callFunctionButton);
 		assertEquals(
-				"multiline:  newline: \n apostrophe: \' quote: \" slashes: /\\/ closing tag: </script> "
+				"Result: multiline:  newline: \n apostrophe: \' quote: \" slashes: /\\/ closing tag: </script> "
 						+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>? \n#####\n"
 						+ "multiline: \n newline: \\n apostrophe: \' quote: \" slashes: \\/\\\\/ closing tag: </script> "
 						+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>?", resultTextView.getText());
