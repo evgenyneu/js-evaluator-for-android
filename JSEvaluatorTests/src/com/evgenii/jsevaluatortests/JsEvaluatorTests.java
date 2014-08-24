@@ -46,6 +46,11 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		assertEquals(callbackMock, callbacks.get(0));
 	}
 
+	public void testEscapeSclosingScript() {
+		assertEquals("<\\/script><\\/ScRipt>",
+				JsEvaluator.escapeClosingScript("</script></ScRipt>"));
+	}
+
 	public void testEscapeSingleQuotes() {
 		assertEquals("\\'a\\'", JsEvaluator.escapeSingleQuotes("'a'"));
 	}
