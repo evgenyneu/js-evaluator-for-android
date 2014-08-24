@@ -18,12 +18,21 @@
         android:layout_marginTop="4dp"
         android:text="@string/character_escape_overview" />
     
+    <Button
+        android:id="@+id/buttonCharacterEscapeCallFunction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCharacterEscapeOverview"
+        android:layout_alignLeft="@+id/textViewCharacterEscapeOverview"
+        android:text="@string/character_escape_call_function_evaluate_button_text"
+        android:onClick="onCharacterEscapeCallFuncitonClicked" />
+    
     <TextView
         android:id="@+id/textCharacterEscapeJsCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewCharacterEscapeOverview"
-        android:layout_below="@+id/textViewCharacterEscapeOverview"
+        android:layout_alignLeft="@+id/buttonCharacterEscapeCallFunction"
+        android:layout_below="@+id/buttonCharacterEscapeCallFunction"
         android:layout_marginTop="10dp"
         android:text="@string/js_function_label" />
     
@@ -53,23 +62,13 @@
         android:layout_below="@+id/textCharacterEscapeParameter"
         android:text="@string/character_escape_parameter" />
     
-    <Button
-        android:id="@+id/buttonCharacterEscapeCallFunction"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editTextCharacterEscapeParameter"
-        android:layout_below="@+id/editTextCharacterEscapeParameter"
-        android:layout_marginTop="4dp"
-        android:text="@string/character_escape_call_function_evaluate_button_text"
-        android:onClick="onCharacterEscapeCallFuncitonClicked" />
-    
     <TextView
         android:id="@+id/textViewCharacterEscapeResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/buttonCharacterEscapeCallFunction"
-        android:layout_below="@+id/buttonCharacterEscapeCallFunction"
+        android:layout_alignLeft="@+id/editTextCharacterEscapeParameter"
+        android:layout_below="@+id/editTextCharacterEscapeParameter"
         android:layout_marginTop="4dp"
         android:text="" />
-    
+
 </RelativeLayout> 
