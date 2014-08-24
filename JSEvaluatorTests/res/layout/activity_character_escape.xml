@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewCharacterEscapeOverview"
         android:layout_below="@+id/textViewCharacterEscapeOverview"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         android:text="@string/js_function_label" />
     
     <TextView
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textCharacterEscapeJsCode"
         android:layout_below="@+id/editTextCharacterEscapeJsCode"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         android:text="@string/js_parameter_label" />
     
     <TextView
