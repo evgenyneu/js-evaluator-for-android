@@ -1,12 +1,20 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"	
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:paddingBottom="@dimen/activity_vertical_margin"
 	android:paddingLeft="@dimen/activity_horizontal_margin"
 	android:paddingRight="@dimen/activity_horizontal_margin"
 	android:paddingTop="@dimen/activity_vertical_margin"
-	tools:context="com.evgenii.jsevaluatortests.CharacterEscape">
+	tools:context="com.evgenii.jsevaluatortests.CharacterEscape" >
+
+<RelativeLayout 
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:paddingBottom="0dp"
+	android:paddingLeft="0dp"
+	android:paddingRight="0dp"
+	android:paddingTop="0dp">
 
     <TextView
         android:id="@+id/textViewCharacterEscapeOverview"
@@ -22,6 +30,7 @@
         android:id="@+id/buttonCharacterEscapeCallFunction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_below="@+id/textViewCharacterEscapeOverview"
         android:layout_alignLeft="@+id/textViewCharacterEscapeOverview"
         android:text="@string/character_escape_call_function_evaluate_button_text"
@@ -31,9 +40,10 @@
         android:id="@+id/textViewCharacterEscapeResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_below="@+id/buttonCharacterEscapeCallFunction"
         android:layout_alignLeft="@+id/buttonCharacterEscapeCallFunction"
-        android:text="TextView" />
+        android:text="" />
     
     <TextView
         android:id="@+id/textCharacterEscapeJsCode"
@@ -41,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textViewCharacterEscapeResult"
         android:layout_below="@+id/textViewCharacterEscapeResult"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="@string/js_function_label" />
     
     <TextView
@@ -59,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textCharacterEscapeJsCode"
         android:layout_below="@+id/editTextCharacterEscapeJsCode"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="@string/js_parameter_label" />
     
     <TextView
@@ -71,3 +81,4 @@
         android:text="@string/character_escape_parameter" />
     
 </RelativeLayout> 
+ </ScrollView>
