@@ -72,8 +72,10 @@ Tests are located in `JsEvaluatorTests` project.
 
 Run as `Android Application` for manual testing.
 
-<img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_2.png' width='270' alt='JSEvaluator library for Android screenshot 2'> &nbsp;
 <img src='https://raw.githubusercontent.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_1_2014_08_30.png' width='270' alt='JSEvaluator library for Android screenshot 1'>
+
+<img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_2.png' width='270' alt='JSEvaluator library for Android screenshot 2'>
+
 
 Or run as `Android JUnit Test` for unit testing.
 
