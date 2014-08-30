@@ -26,11 +26,6 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 		webSettings.setDefaultTextEncodingName("utf-8");
 		final JavaScriptInterface jsInterface = new JavaScriptInterface(callJavaResult);
 		mWebView.addJavascriptInterface(jsInterface, JsEvaluator.JS_NAMESPACE);
-		hackToMakeItWorkOnAndroid_4_3();
-	}
-
-	private void hackToMakeItWorkOnAndroid_4_3() {
-		mWebView.loadUrl("about:blank");
 	}
 
 	@Override
