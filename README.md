@@ -93,10 +93,11 @@ Android versions tested:
 
 The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
 
+    // somewhere in UI thread ...
     jsEvaluator.evaluate("2 * 17", new JsCallback() {
       @Override
       public void onResult(final String result) {
-        // Result is returned here asynchronously
+        // Result is returned here asynchronously in UI thread
       }
     });
 
