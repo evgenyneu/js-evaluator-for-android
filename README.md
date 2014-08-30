@@ -89,7 +89,7 @@ Android versions tested:
 * 4.4.2 (KitKat)
 * 5.0 (Lavender Pudding) ;)
     
-## Result is returned asynchronously
+## Result is returned asynchronously in UI thread
 
 The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
 
