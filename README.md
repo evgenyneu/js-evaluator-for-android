@@ -49,14 +49,14 @@ Any number of string, int or double parameters can be supplied.
 
 ## How it works
 
-Behind the scenes it creates a `WebView` and feeds it your JavaScript code for evaluation:
+Behind the scenes it creates a `WebView` and feeds it JavaScript code for evaluation:
 
     mWebView = new WebView(context);
     String javascript = "<script>myObj.returnResult('Hello World')</script>";
     String base64 = Base64.encodeToString(data, Base64.DEFAULT);
     mWebView.loadUrl("data:text/html;charset=utf-8;base64," + base64);
     
-The result of evaluation is sent back into your Android activity:
+The result of evaluation is sent back into Android activity:
 
     public class JavaScriptInterface {
     	public void returnResult(String result) {
