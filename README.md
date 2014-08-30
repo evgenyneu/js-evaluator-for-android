@@ -36,12 +36,14 @@ Create evaluator instance:
 
 ## Call a JavaScript function
 
-    jsEvaluator.callFunction(new JsCallback() {
+    jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
+      new JsCallback() {
+
       @Override
       public void onResult(final String result) {
         // get result here
       }
-    }, "functionName", "parameter 1", "parameter 2", 912, 101.3);
+    }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 
 Any number of string, int or double parameters can be supplied.
 
