@@ -1,6 +1,6 @@
 # Run JavaScript in Android apps (library)
 
-Supports Android version 3.0 (Honeycomb) and newer.
+Evaluates JavaScript and gets results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 3.0 (Honeycomb) and newer.
 
 ## Get JAR file
 
@@ -52,7 +52,9 @@ Any number of string, int or double parameters can be supplied.
 Behind the scenes it creates a `WebView` and feeds it your JavaScript code for evaluation:
 
     mWebView = new WebView(context);
-    mWebView.loadUrl("javascript: myObj.returnResult('Hello World');");
+    String javascript = "<script>myObj.returnResult('Hello World')</script>";
+    String base64 = Base64.encodeToString(data, Base64.DEFAULT);
+    mWebView.loadUrl("data:text/html;charset=utf-8;base64," + base64);
     
 The result of evaluation is sent back into your Android activity:
 
@@ -84,22 +86,10 @@ Android versions tested:
 * 4.3 (Jelly Bean)
 * 4.4.2 (KitKat)
 * 5.0 (Lavender Pudding) ;)
-
-## Synchronous loading
-
-JavaScript code is loaded synchronously. For example, suppose you want to load jQuery and then use it.
-
-    jsEvaluator.evaluate(jQuery);
-    
-    // jQuery is fully loaded at this point
-    // So you can use it right away
-    jsEvaluator.evaluate("$.isNumeric(123)", new JsCallback() { ...
-    
-This is handy, because you can load a library and then use it on the next line.
     
 ## Result is returned asynchronously
 
-Unlike loading, the result from JavaScript is returned asynchronously.
+The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
 
     jsEvaluator.evaluate("2 * 17", new JsCallback() {
       @Override
@@ -108,11 +98,16 @@ Unlike loading, the result from JavaScript is returned asynchronously.
       }
     });
 
-## Single-line comments
+## JavaScript is evaluated in new context
 
-JavaScript with single-line comments won't be evaluated. It happens because the library needs to remove new lines from code before evaluation. If your JavaScript code does not evaluate try checking it with [jshint](http://www.jshint.com/) and [minify](http://jscompress.com/).
+Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation.
+Please concatenate all your JavaScript to one string to evaluate it at one go.
 
-Test application runs a jQuery library as an example.
+For example, consider if you need to load jQuery libary and then use it:
+
+    String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
+    jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
+    
 
 ## Feedback
 
