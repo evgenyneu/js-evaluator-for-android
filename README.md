@@ -89,7 +89,7 @@ Android versions tested:
     
 ## Result is returned asynchronously
 
-The result from JavaScript is returned asynchronously in the UI thread.
+The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
 
     jsEvaluator.evaluate("2 * 17", new JsCallback() {
       @Override
