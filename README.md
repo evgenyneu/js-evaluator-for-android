@@ -106,7 +106,7 @@ The result from JavaScript is returned asynchronously in the UI thread. It is re
 Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation.
 Please concatenate all your JavaScript to one string to evaluate it in one go.
 
-For example, consider if you need to load jQuery libary and then use it:
+For example, if you need to load jQuery libary and then use it:
 
     String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
     jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
