@@ -103,7 +103,7 @@ The result from JavaScript is returned asynchronously in the UI thread. It is re
 ## JavaScript is evaluated in new context
 
 Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation.
-Please concatenate all your JavaScript to one string to evaluate it at one go.
+Please concatenate all your JavaScript to one string to evaluate it in one go.
 
 For example, consider if you need to load jQuery libary and then use it:
 
