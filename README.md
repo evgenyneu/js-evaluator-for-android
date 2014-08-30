@@ -1,6 +1,6 @@
 # Run JavaScript in Android apps (library)
 
-Evaluate JavaScript and get results of evaluation. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 3.0 (Honeycomb) and newer.
+Evaluates JavaScript and gets results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 3.0 (Honeycomb) and newer.
 
 ## Get JAR file
 
