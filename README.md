@@ -87,8 +87,8 @@ Android versions tested:
 * 4.2.2 (Jelly Bean)
 * 4.3 (Jelly Bean)
 * 4.4.2 (KitKat)
-* 5.0 (Lavender Pudding) ;)
-    
+* 5.0 (Lollipop)
+
 ## Result is returned asynchronously
 
 The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
