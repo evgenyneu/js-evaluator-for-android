@@ -24,21 +24,18 @@ public class EvaluateJsActivityTests extends
 
 	@MediumTest
 	public void testEvaluateButton_clickButtonAndShowResult() {
-		final Button evaluateButton = (Button) mActivity
-				.findViewById(R.id.button_evaluate);
+		final Button evaluateButton = (Button) mActivity.findViewById(R.id.button_evaluate);
 
-		final TextView resultTextView = (TextView) mActivity
-				.findViewById(R.id.js_result_text_view);
+		final TextView resultTextView = (TextView) mActivity.findViewById(R.id.js_result_text_view);
 
 		TouchUtils.clickView(this, evaluateButton);
 		assertTrue(View.VISIBLE == resultTextView.getVisibility());
-		assertEquals("Result: 4", resultTextView.getText());
+		assertEquals("Result: 4", resultTextView.getText().toString());
 	}
 
 	@MediumTest
 	public void testJsTextView_shouldHaveJsText() {
-		final TextView editJsTextView = (TextView) mActivity
-				.findViewById(R.id.edit_java_script);
+		final TextView editJsTextView = (TextView) mActivity.findViewById(R.id.edit_java_script);
 
 		final String expected = mActivity.getString(R.string.edit_js_text);
 		final String actual = editJsTextView.getText().toString();

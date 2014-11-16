@@ -30,7 +30,7 @@ public class PercentageActivityTest extends ActivityInstrumentationTestCase2<Per
 
 		TouchUtils.clickView(this, evaluateButton);
 		assertTrue(View.VISIBLE == resultTextView.getVisibility());
-		assertEquals("Result: 5%7E 12.5% growth", resultTextView.getText());
+		assertEquals("Result: 5%7E 12.5% growth", resultTextView.getText().toString());
 	}
 
 	@MediumTest

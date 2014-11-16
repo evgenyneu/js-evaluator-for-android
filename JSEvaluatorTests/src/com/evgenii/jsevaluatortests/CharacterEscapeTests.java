@@ -33,7 +33,8 @@ public class CharacterEscapeTests extends ActivityInstrumentationTestCase2<Chara
 				"Result: \nmultiline:  newline: \n apostrophe: \' quote: \" slashes: /\\/ closing tag: </script> "
 						+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>? \n#####\n"
 						+ "multiline: \n newline: \\n apostrophe: \' quote: \" slashes: \\/\\\\/ closing tag: </script> "
-						+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>?", resultTextView.getText());
+						+ "unicode: 日本 characters: !@#$%^&*()-=_+`~<>?", resultTextView.getText()
+						.toString());
 	}
 
 	public void testPreconditions() {

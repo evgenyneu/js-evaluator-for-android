@@ -36,11 +36,11 @@ public class CallJsFunctionActivityTests extends
 
 		for (int i = 0; i < 100; i++) {
 			Thread.sleep(100);
-			if (resultTextView.getText().equals(expectedResult)) {
+			if (resultTextView.getText().toString().equals(expectedResult)) {
 				break;
 			}
 		}
-		assertEquals(expectedResult, resultTextView.getText());
+		assertEquals(expectedResult, resultTextView.getText().toString());
 	}
 
 	@MediumTest

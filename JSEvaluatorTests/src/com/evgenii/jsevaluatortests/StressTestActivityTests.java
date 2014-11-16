@@ -5,8 +5,7 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.view.View;
 import android.widget.TextView;
 
-public class StressTestActivityTests extends
-		ActivityInstrumentationTestCase2<StressTestActivity> {
+public class StressTestActivityTests extends ActivityInstrumentationTestCase2<StressTestActivity> {
 
 	private StressTestActivity mActivity;
 
@@ -31,10 +30,10 @@ public class StressTestActivityTests extends
 
 		for (int i = 0; i < 100; i++) {
 			Thread.sleep(100);
-			if (resultTextView.getText().equals(expectedResult)) {
+			if (resultTextView.getText().toString().equals(expectedResult)) {
 				break;
 			}
 		}
-		assertEquals(expectedResult, resultTextView.getText());
+		assertEquals(expectedResult, resultTextView.getText().toString());
 	}
 }
