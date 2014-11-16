@@ -55,7 +55,7 @@ Behind the scenes it creates a `WebView` and feeds it JavaScript code for evalua
     String javascript = "<script>myObj.returnResult('Hello World')</script>";
     String base64 = Base64.encodeToString(data, Base64.DEFAULT);
     mWebView.loadUrl("data:text/html;charset=utf-8;base64," + base64);
-    
+
 The result of evaluation is sent back into Android activity:
 
     public class JavaScriptInterface {
@@ -93,23 +93,24 @@ Android versions tested:
 
 The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
 
+    // somewhere in UI thread ...
     jsEvaluator.evaluate("2 * 17", new JsCallback() {
       @Override
       public void onResult(final String result) {
-        // Result is returned here asynchronously
+        // Result is returned here asynchronously in UI thread
       }
     });
 
 ## JavaScript is evaluated in new context
 
 Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation.
-Please concatenate all your JavaScript to one string to evaluate it at one go.
+Please concatenate all your JavaScript to one string and evaluate it in one go.
 
-For example, consider if you need to load jQuery libary and then use it:
+For example, if you need to load jQuery libary and then use it:
 
     String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
     jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
-    
+
 
 ## Feedback
 
