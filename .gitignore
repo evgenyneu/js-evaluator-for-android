@@ -26,3 +26,6 @@ proguard/
 
 # include the jar
 !bin/jsevaluator.jar
+
+*.iml
+.idea/
