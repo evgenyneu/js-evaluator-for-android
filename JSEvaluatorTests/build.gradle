@@ -20,6 +20,7 @@ android {
 		main.manifest.srcFile 'AndroidManifest.xml'
 		main.java.srcDirs = ['src']
 		main.res.srcDirs = ['res']
+        main.assets.srcDirs = ['assets']
 	}
 }
 
