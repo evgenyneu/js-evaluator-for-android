@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -18,6 +20,9 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 
     protected final HandlerWrapperInterface mMainThreadHandler;
 
+    public WebViewWrapper(final Context context, final CallJavaResultInterface callJavaResult){
+        this(context,callJavaResult, new HandlerWrapper(new Handler(Looper.getMainLooper())));
+    }
 	public WebViewWrapper(final Context context, final CallJavaResultInterface callJavaResult, HandlerWrapperInterface mainThreadHandler) {
         mMainThreadHandler = mainThreadHandler;
         mainThreadHandler.post(new Runnable() {
