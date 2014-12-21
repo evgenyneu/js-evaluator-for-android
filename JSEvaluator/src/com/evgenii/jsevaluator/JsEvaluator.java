@@ -5,6 +5,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
@@ -49,18 +51,22 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	private HandlerWrapperInterface mCallbackHandler;
 
-    private HandlerWrapperInterface mHandler;
+	private final HandlerWrapperInterface mMainThreadHandler;
 
 	public JsEvaluator(Context context) {
-		mContext = context;
-		mCallbackHandler = new HandlerWrapper();
+		this(context,new HandlerWrapper());
 	}
 
-    public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler, HandlerWrapperInterface handler) {
-        mContext = context;
-        mCallbackHandler = callbackHandler;
-        mCallbackHandler = handler;
-    }
+	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler) {
+		this(context, callbackHandler, new MainThreadHandlerWrapper());
+	}
+
+	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler, HandlerWrapperInterface mainThreadHandler) {
+		mContext = context;
+		mCallbackHandler = callbackHandler;
+		mMainThreadHandler = mainThreadHandler;
+	}
+
 
 	@Override
 	public void callFunction(String jsCode, JsCallback resultCallback, String name, Object... args) {
@@ -188,7 +194,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	public WebViewWrapperInterface getWebViewWrapper() {
 		if (mWebViewWrapper == null) {
-			mWebViewWrapper = new WebViewWrapper(mContext, this);
+			mWebViewWrapper = new WebViewWrapper(mContext, this, mMainThreadHandler);
 		}
 		return mWebViewWrapper;
 	}
@@ -201,11 +207,11 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		final JsCallback callback = mResultCallbacks.get(callIndex);
 
 		mCallbackHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                callback.onResult(value);
-            }
-        });
+			@Override
+			public void run() {
+				callback.onResult(value);
+			}
+		});
 	}
 
 	// Used in test only to replace mCallbackHandler with a mock
@@ -216,5 +222,14 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	// Used in test only to replace webViewWrapper with a mock
 	public void setWebViewWrapper(WebViewWrapperInterface webViewWrapper) {
 		mWebViewWrapper = webViewWrapper;
+	}
+
+	private static class MainThreadHandlerWrapper implements HandlerWrapperInterface {
+
+		Handler mHandler = new Handler(Looper.getMainLooper());
+		@Override
+		public void post(Runnable r) {
+			mHandler.post(r);
+		}
 	}
 }

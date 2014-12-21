@@ -8,8 +8,11 @@ public class HandlerWrapper implements HandlerWrapperInterface {
 	private final Handler mHandler;
 
 	public HandlerWrapper() {
-		mHandler = new Handler();
+		this(new Handler());
 	}
+    public HandlerWrapper(Handler handlerToWrap) {
+        mHandler = handlerToWrap;
+    }
 
 	@Override
 	public void post(Runnable r) {

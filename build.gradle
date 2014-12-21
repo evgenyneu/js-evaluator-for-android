@@ -1,38 +1,14 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:+'
-    }
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:+'
+	}
 }
 
 allprojects {
-    repositories {
-        jcenter()
-    }
-}
-
-apply plugin: 'com.android.library'
-
-android {
-    compileSdkVersion 21
-    buildToolsVersion "21.0.2"
-
-    defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 21
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
-    }
-    sourceSets {
-        main.manifest.srcFile 'JSEvaluator/AndroidManifest.xml'
-        main.java.srcDirs = ['JSEvaluator/src']
-        main.res.srcDirs = ['JSEvaluator/res']
-    }
+	repositories {
+		jcenter()
+	}
 }
