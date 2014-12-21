@@ -24,7 +24,7 @@ public class WebViewWrapperTest extends ActivityInstrumentationTestCase2<MainAct
 		mActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				final WebViewWrapper wrapper = new WebViewWrapper(mActivity, null);
+				final WebViewWrapper wrapper = new WebViewWrapper(mActivity, null, mainThreadHandler);
 				wrapper.loadJavaScript("2 + 3");
 			}
 		});
