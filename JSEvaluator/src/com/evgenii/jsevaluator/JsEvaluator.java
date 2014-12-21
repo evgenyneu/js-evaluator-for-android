@@ -49,23 +49,23 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	private HandlerWrapperInterface mCallbackHandler;
 
-    private final HandlerWrapperInterface mMainThreadHandler;
+	private final HandlerWrapperInterface mMainThreadHandler;
 
 	public JsEvaluator(Context context) {
 		this(context,new HandlerWrapper());
 	}
 
-    public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler) {
-        this(context, callbackHandler, new MainThreadHandlerWrapper());
-    }
+	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler) {
+		this(context, callbackHandler, new MainThreadHandlerWrapper());
+	}
 
-    public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler, HandlerWrapperInterface mainThreadHandler) {
-        mContext = context;
-        mCallbackHandler = callbackHandler;
-        mMainThreadHandler = mainThreadHandler;
-    }
+	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler, HandlerWrapperInterface mainThreadHandler) {
+		mContext = context;
+		mCallbackHandler = callbackHandler;
+		mMainThreadHandler = mainThreadHandler;
+	}
 
-    @Override
+	@Override
 	public void callFunction(String jsCode, JsCallback resultCallback, String name, Object... args) {
 		jsCode += "; " + JsFunctionCallFormatter.toString(name, args);
 		evaluate(jsCode, resultCallback);
@@ -110,11 +110,11 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		final JsCallback callback = mResultCallbacks.get(callIndex);
 
 		mCallbackHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                callback.onResult(value);
-            }
-        });
+			@Override
+			public void run() {
+				callback.onResult(value);
+			}
+		});
 	}
 
 	// Used in test only to replace mCallbackHandler with a mock
@@ -127,12 +127,12 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		mWebViewWrapper = webViewWrapper;
 	}
 
-    private static class MainThreadHandlerWrapper implements HandlerWrapperInterface {
+	private static class MainThreadHandlerWrapper implements HandlerWrapperInterface {
 
-        Handler mHandler = new Handler(Looper.getMainLooper());
-        @Override
-        public void post(Runnable r) {
-            mHandler.post(r);
-        }
-    }
+		Handler mHandler = new Handler(Looper.getMainLooper());
+		@Override
+		public void post(Runnable r) {
+			mHandler.post(r);
+		}
+	}
 }
