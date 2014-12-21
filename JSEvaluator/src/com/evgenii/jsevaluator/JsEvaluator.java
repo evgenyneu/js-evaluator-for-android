@@ -1,6 +1,8 @@
 package com.evgenii.jsevaluator;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 import android.content.Context;
 
@@ -45,18 +47,119 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
 
-	private HandlerWrapperInterface mHandler;
+	private HandlerWrapperInterface mCallbackHandler;
+
+    private HandlerWrapperInterface mHandler;
 
 	public JsEvaluator(Context context) {
 		mContext = context;
-		mHandler = new HandlerWrapper();
+		mCallbackHandler = new HandlerWrapper();
 	}
+
+    public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler, HandlerWrapperInterface handler) {
+        mContext = context;
+        mCallbackHandler = callbackHandler;
+        mCallbackHandler = handler;
+    }
 
 	@Override
 	public void callFunction(String jsCode, JsCallback resultCallback, String name, Object... args) {
 		jsCode += "; " + JsFunctionCallFormatter.toString(name, args);
 		evaluate(jsCode, resultCallback);
 	}
+
+    private static class BlockingRunnable implements Runnable {
+
+        private final Object mMutex;
+        private final String mJavaScriptCode;
+        private final String[] mResult;
+
+        private BlockingRunnable(Object mMutex, String jsCode, String[] result) {
+            this.mMutex = mMutex;
+            this.mJavaScriptCode = jsCode;
+            this.mResult = result;
+        }
+
+        @Override
+        public void run() {
+
+        }
+    }
+
+    private static class BlockingJsCallBack implements JsCallback {
+
+        private final Object mMutex;
+        private final String[] mResult;
+
+        private BlockingJsCallBack(Object mutex, String[] result) {
+            mMutex = mutex;
+            mResult = result;
+        }
+
+        @Override
+        public void onResult(String value) {
+            synchronized (mMutex) {
+                mResult[0] = value;
+                mMutex.notifyAll();
+            }
+        }
+    }
+
+    private interface JsTask {
+        void run(JsCallback callback);
+    }
+
+    private class JsCallFunctionTask implements JsTask {
+
+        private final String mCode;
+        private final String mFunctionName;
+        private final Object[] mArgs;
+
+        private JsCallFunctionTask(String code, String mFunctionName, Object[] args) {
+            mCode = code;
+            this.mFunctionName = mFunctionName;
+            mArgs = args;
+        }
+
+        @Override
+        public void run(JsCallback callback) {
+            callFunction(mCode, callback, mFunctionName, mArgs);
+        }
+    }
+
+    private class JsCallable  extends FutureTask<String> {
+
+        private JsCallable(final JsTask jsTask) {
+            super(new Callable<String>(){
+
+                @Override
+                public String call() throws Exception {
+                    final Object mtx = new Object();
+                    final String[] result = new String[]{null};
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            jsTask.run(new BlockingJsCallBack(mtx, result));
+                        }
+                    });
+
+                    synchronized (mtx) {
+                        while (result[0] == null)
+                            mtx.wait();
+                    }
+
+                    return result[0];
+                }
+            });
+        }
+    }
+
+
+    public FutureTask<String> callFunctionFutureTask(final String jsCode, final String name, final int timeout, final Object... args) {
+        JsCallable futureTask = new JsCallable(new JsCallFunctionTask(jsCode, name, args));
+        return futureTask;
+    }
 
 	@Override
 	public void evaluate(String jsCode) {
@@ -75,6 +178,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		if (resultCallback != null) {
 			mResultCallbacks.add(resultCallback);
 		}
+
 		getWebViewWrapper().loadJavaScript(js);
 	}
 
@@ -96,17 +200,17 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 		final JsCallback callback = mResultCallbacks.get(callIndex);
 
-		mHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				callback.onResult(value);
-			}
-		});
+		mCallbackHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onResult(value);
+            }
+        });
 	}
 
-	// Used in test only to replace mHandler with a mock
-	public void setHandler(HandlerWrapperInterface handlerWrapperInterface) {
-		mHandler = handlerWrapperInterface;
+	// Used in test only to replace mCallbackHandler with a mock
+	public void setCallbackHandler(HandlerWrapperInterface handlerWrapperInterface) {
+		mCallbackHandler = handlerWrapperInterface;
 	}
 
 	// Used in test only to replace webViewWrapper with a mock

@@ -96,7 +96,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 	public void testJsCallFinished_doesNotRunCallBackWhenIndexIsMinusOne() {
 		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
-		mJsEvaluator.setHandler(handlerWrapperMock);
+		mJsEvaluator.setCallbackHandler(handlerWrapperMock);
 
 		mJsEvaluator.jsCallFinished("my result", -1);
 	}
@@ -107,7 +107,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		callbacks.add(callback);
 
 		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
-		mJsEvaluator.setHandler(handlerWrapperMock);
+		mJsEvaluator.setCallbackHandler(handlerWrapperMock);
 
 		mJsEvaluator.jsCallFinished("my result", 0);
 		assertEquals("my result", callback.resultValue);
