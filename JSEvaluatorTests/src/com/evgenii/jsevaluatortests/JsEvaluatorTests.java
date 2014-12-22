@@ -1,10 +1,13 @@
 package com.evgenii.jsevaluatortests;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 import android.test.AndroidTestCase;
 
 import com.evgenii.jsevaluator.JsEvaluator;
+import com.evgenii.jsevaluator.JsEvaluatorFuture;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluatortests.mocks.HandlerWrapperMock;
 import com.evgenii.jsevaluatortests.mocks.JsCallbackMock;
@@ -112,4 +115,5 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.jsCallFinished("my result", 0);
 		assertEquals("my result", callback.resultValue);
 	}
+
 }

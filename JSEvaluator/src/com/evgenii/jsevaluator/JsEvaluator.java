@@ -1,11 +1,8 @@
 package com.evgenii.jsevaluator;
 
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
-
 import android.content.Context;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
@@ -14,8 +11,29 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
+import java.util.ArrayList;
+
 public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
+	protected final Context mContext;
+	protected final HandlerWrapperInterface mMainThreadHandler;
+	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
+	protected WebViewWrapperInterface mWebViewWrapper;
+	protected HandlerWrapperInterface mCallbackHandler;
+
+	public JsEvaluator(Context context) {
+		this(context, new NewThreadHandlerWrapper());
+	}
+
+	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler) {
+		this(context, callbackHandler, new HandlerWrapper(Looper.getMainLooper()));
+	}
+
+	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler, HandlerWrapperInterface mainThreadHandler) {
+		mMainThreadHandler = mainThreadHandler;
+		mContext = context;
+		mCallbackHandler = callbackHandler;
+	}
 
 	public static String escapeClosingScript(String str) {
 		return str.replace("</", "<\\/");
@@ -43,129 +61,11 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 				callbackIndex);
 	}
 
-	protected WebViewWrapperInterface mWebViewWrapper;
-
-	private final Context mContext;
-
-	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
-
-	private HandlerWrapperInterface mCallbackHandler;
-
-	private final HandlerWrapperInterface mMainThreadHandler;
-
-	public JsEvaluator(Context context) {
-		this(context,new HandlerWrapper());
-	}
-
-	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler) {
-		this(context, callbackHandler, new MainThreadHandlerWrapper());
-	}
-
-	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler, HandlerWrapperInterface mainThreadHandler) {
-		mContext = context;
-		mCallbackHandler = callbackHandler;
-		mMainThreadHandler = mainThreadHandler;
-	}
-
-
 	@Override
 	public void callFunction(String jsCode, JsCallback resultCallback, String name, Object... args) {
 		jsCode += "; " + JsFunctionCallFormatter.toString(name, args);
 		evaluate(jsCode, resultCallback);
 	}
-
-    private static class BlockingRunnable implements Runnable {
-
-        private final Object mMutex;
-        private final String mJavaScriptCode;
-        private final String[] mResult;
-
-        private BlockingRunnable(Object mMutex, String jsCode, String[] result) {
-            this.mMutex = mMutex;
-            this.mJavaScriptCode = jsCode;
-            this.mResult = result;
-        }
-
-        @Override
-        public void run() {
-
-        }
-    }
-
-    private static class BlockingJsCallBack implements JsCallback {
-
-        private final Object mMutex;
-        private final String[] mResult;
-
-        private BlockingJsCallBack(Object mutex, String[] result) {
-            mMutex = mutex;
-            mResult = result;
-        }
-
-        @Override
-        public void onResult(String value) {
-            synchronized (mMutex) {
-                mResult[0] = value;
-                mMutex.notifyAll();
-            }
-        }
-    }
-
-    private interface JsTask {
-        void run(JsCallback callback);
-    }
-
-    private class JsCallFunctionTask implements JsTask {
-
-        private final String mCode;
-        private final String mFunctionName;
-        private final Object[] mArgs;
-
-        private JsCallFunctionTask(String code, String mFunctionName, Object[] args) {
-            mCode = code;
-            this.mFunctionName = mFunctionName;
-            mArgs = args;
-        }
-
-        @Override
-        public void run(JsCallback callback) {
-            callFunction(mCode, callback, mFunctionName, mArgs);
-        }
-    }
-
-    private class JsCallable  extends FutureTask<String> {
-
-        private JsCallable(final JsTask jsTask) {
-            super(new Callable<String>(){
-
-                @Override
-                public String call() throws Exception {
-                    final Object mtx = new Object();
-                    final String[] result = new String[]{null};
-
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            jsTask.run(new BlockingJsCallBack(mtx, result));
-                        }
-                    });
-
-                    synchronized (mtx) {
-                        while (result[0] == null)
-                            mtx.wait();
-                    }
-
-                    return result[0];
-                }
-            });
-        }
-    }
-
-
-    public FutureTask<String> callFunctionFutureTask(final String jsCode, final String name, final int timeout, final Object... args) {
-        JsCallable futureTask = new JsCallable(new JsCallFunctionTask(jsCode, name, args));
-        return futureTask;
-    }
 
 	@Override
 	public void evaluate(String jsCode) {
@@ -224,12 +124,36 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		mWebViewWrapper = webViewWrapper;
 	}
 
-	private static class MainThreadHandlerWrapper implements HandlerWrapperInterface {
+	/**
+	 * Creates a new thread to run posted tasks
+	 *
+	 * Uses {@link com.evgenii.jsevaluator.HandlerWrapper} internally
+	 */
+	private static class NewThreadHandlerWrapper implements HandlerWrapperInterface{
 
-		Handler mHandler = new Handler(Looper.getMainLooper());
+		private final HandlerThread mHandlerThread;
+		private final HandlerWrapper mHandlerWrapper;
+		private static int sThreadCount = 0;
+		NewThreadHandlerWrapper(){
+			this("newthread_" + sThreadCount ++);
+
+		}
+		NewThreadHandlerWrapper(final String threadName){
+			mHandlerThread = new HandlerThread(threadName);
+			mHandlerThread.start();
+			mHandlerWrapper = new HandlerWrapper(mHandlerThread.getLooper());
+
+		}
+
 		@Override
 		public void post(Runnable r) {
-			mHandler.post(r);
+			mHandlerWrapper.post(r);
 		}
+
+		@Override
+		public void runOnHandlerThread(Runnable r) {
+			mHandlerWrapper.runOnHandlerThread(r);
+		}
+
 	}
 }

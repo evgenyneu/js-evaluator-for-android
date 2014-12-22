@@ -35,18 +35,18 @@ public class WebViewWrapperTest extends ActivityInstrumentationTestCase2<MainAct
 
 	}
 
-    public void testLoadJavaScript_DifferentThread() throws InterruptedException {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final WebViewWrapper wrapper = new WebViewWrapper(mActivity, null);
-                wrapper.loadJavaScript("2 + 3");
-            }
-        });
-        t.start();
-        t.join();
+	public void testLoadJavaScript_DifferentThread() throws InterruptedException {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				final WebViewWrapper wrapper = new WebViewWrapper(mActivity, null);
+				wrapper.loadJavaScript("2 + 3");
+			}
+		});
+		t.start();
+		t.join();
 
-    }
+	}
 
 
 }
