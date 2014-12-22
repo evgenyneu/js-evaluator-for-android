@@ -7,4 +7,9 @@ public class HandlerWrapperMock implements HandlerWrapperInterface {
 	public void post(Runnable runnable) {
 		runnable.run();
 	}
+
+	@Override
+	public void runOnHandlerThread(Runnable r) {
+		post(r);
+	}
 }

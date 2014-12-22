@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+	compileSdkVersion 21
+	buildToolsVersion "21.0.2"
+
+	defaultConfig {
+		applicationId "com.evgenii.jsevaluator.test"
+		minSdkVersion 11
+		targetSdkVersion 21
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+		}
+	}
+	sourceSets {
+		main.manifest.srcFile 'AndroidManifest.xml'
+		main.java.srcDirs = ['src']
+		main.res.srcDirs = ['res']
+        main.assets.srcDirs = ['assets']
+	}
+}
+
+dependencies{
+	compile project(':JSEvaluator')
+	compile "com.android.support:support-v4:+"
+}

@@ -1,8 +1,9 @@
 package com.evgenii.jsevaluator;
 
-import java.util.ArrayList;
-
 import android.content.Context;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
@@ -10,8 +11,29 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
+import java.util.ArrayList;
+
 public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
+	protected final Context mContext;
+	protected final HandlerWrapperInterface mMainThreadHandler;
+	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
+	protected WebViewWrapperInterface mWebViewWrapper;
+	protected HandlerWrapperInterface mCallbackHandler;
+
+	public JsEvaluator(Context context) {
+		this(context, new NewThreadHandlerWrapper());
+	}
+
+	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler) {
+		this(context, callbackHandler, new HandlerWrapper(Looper.getMainLooper()));
+	}
+
+	public JsEvaluator(Context context, HandlerWrapperInterface callbackHandler, HandlerWrapperInterface mainThreadHandler) {
+		mMainThreadHandler = mainThreadHandler;
+		mContext = context;
+		mCallbackHandler = callbackHandler;
+	}
 
 	public static String escapeClosingScript(String str) {
 		return str.replace("</", "<\\/");
@@ -39,19 +61,6 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 				callbackIndex);
 	}
 
-	protected WebViewWrapperInterface mWebViewWrapper;
-
-	private final Context mContext;
-
-	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
-
-	private HandlerWrapperInterface mHandler;
-
-	public JsEvaluator(Context context) {
-		mContext = context;
-		mHandler = new HandlerWrapper();
-	}
-
 	@Override
 	public void callFunction(String jsCode, JsCallback resultCallback, String name, Object... args) {
 		jsCode += "; " + JsFunctionCallFormatter.toString(name, args);
@@ -75,6 +84,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		if (resultCallback != null) {
 			mResultCallbacks.add(resultCallback);
 		}
+
 		getWebViewWrapper().loadJavaScript(js);
 	}
 
@@ -84,7 +94,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	public WebViewWrapperInterface getWebViewWrapper() {
 		if (mWebViewWrapper == null) {
-			mWebViewWrapper = new WebViewWrapper(mContext, this);
+			mWebViewWrapper = new WebViewWrapper(mContext, this, mMainThreadHandler);
 		}
 		return mWebViewWrapper;
 	}
@@ -96,7 +106,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 		final JsCallback callback = mResultCallbacks.get(callIndex);
 
-		mHandler.post(new Runnable() {
+		mCallbackHandler.post(new Runnable() {
 			@Override
 			public void run() {
 				callback.onResult(value);
@@ -104,13 +114,46 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		});
 	}
 
-	// Used in test only to replace mHandler with a mock
-	public void setHandler(HandlerWrapperInterface handlerWrapperInterface) {
-		mHandler = handlerWrapperInterface;
+	// Used in test only to replace mCallbackHandler with a mock
+	public void setCallbackHandler(HandlerWrapperInterface handlerWrapperInterface) {
+		mCallbackHandler = handlerWrapperInterface;
 	}
 
 	// Used in test only to replace webViewWrapper with a mock
 	public void setWebViewWrapper(WebViewWrapperInterface webViewWrapper) {
 		mWebViewWrapper = webViewWrapper;
+	}
+
+	/**
+	 * Creates a new thread to run posted tasks
+	 *
+	 * Uses {@link com.evgenii.jsevaluator.HandlerWrapper} internally
+	 */
+	private static class NewThreadHandlerWrapper implements HandlerWrapperInterface{
+
+		private final HandlerThread mHandlerThread;
+		private final HandlerWrapper mHandlerWrapper;
+		private static int sThreadCount = 0;
+		NewThreadHandlerWrapper(){
+			this("newthread_" + sThreadCount ++);
+
+		}
+		NewThreadHandlerWrapper(final String threadName){
+			mHandlerThread = new HandlerThread(threadName);
+			mHandlerThread.start();
+			mHandlerWrapper = new HandlerWrapper(mHandlerThread.getLooper());
+
+		}
+
+		@Override
+		public void post(Runnable r) {
+			mHandlerWrapper.post(r);
+		}
+
+		@Override
+		public void runOnHandlerThread(Runnable r) {
+			mHandlerWrapper.runOnHandlerThread(r);
+		}
+
 	}
 }

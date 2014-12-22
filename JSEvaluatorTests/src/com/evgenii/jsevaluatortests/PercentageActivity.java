@@ -2,6 +2,7 @@ package com.evgenii.jsevaluatortests;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.evgenii.jsevaluator.HandlerWrapper;
 import com.evgenii.jsevaluator.JsEvaluator;
+import com.evgenii.jsevaluator.JsEvaluatorFuture;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 public class PercentageActivity extends Activity {
@@ -23,7 +26,7 @@ public class PercentageActivity extends Activity {
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		mJsEvaluator = new JsEvaluator(this);
+		mJsEvaluator = new JsEvaluator(this, new HandlerWrapper(Looper.getMainLooper()));
 	}
 
 	@Override
