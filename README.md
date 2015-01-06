@@ -30,7 +30,7 @@ Create evaluator instance:
     jsEvaluator.evaluate("2 * 17", new JsCallback() {
       @Override
       public void onResult(final String result) {
-        // get result here (optional)
+        // get result here
       }
     });
 
