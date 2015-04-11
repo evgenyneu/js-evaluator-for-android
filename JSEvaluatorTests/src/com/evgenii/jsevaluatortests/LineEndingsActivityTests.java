@@ -27,7 +27,7 @@ public class LineEndingsActivityTests extends ActivityInstrumentationTestCase2<L
 		final TextView resultTextView = (TextView) mActivity
 				.findViewById(R.id.lineEndingsViewResult);
 
-		final String expectedResult = "Result: line endings parsed!";
+		final String expectedResult = "Result: success!";
 
 		for (int i = 0; i < 100; i++) {
 			Thread.sleep(100);

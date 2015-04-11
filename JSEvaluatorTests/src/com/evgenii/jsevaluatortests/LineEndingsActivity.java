@@ -17,6 +17,21 @@ public class LineEndingsActivity extends Activity {
 	private Scanner scanner;
 	String jsCode;
 
+	protected void evaluate() {
+		mJsEvaluator.evaluate("1;\r\n2;", new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.lineEndingsViewResult);
+				String resultStr = "failed";
+				if (resultValue.equals("2")) {
+					resultStr = "success!";
+				}
+
+				jsResultTextView.setText(String.format("Result: %s", resultStr));
+			}
+		});
+	}
+
 	protected void evaluateAndDisplay() {
 		mJsEvaluator.evaluate(jsCode, new JsCallback() {
 			@Override
@@ -46,6 +61,8 @@ public class LineEndingsActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		mJsEvaluator = new JsEvaluator(this);
+
+		evaluate();
 	}
 
 	protected String ReadFile(String fileName) throws IOException {
