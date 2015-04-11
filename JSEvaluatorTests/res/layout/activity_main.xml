@@ -76,6 +76,16 @@
 	      android:layout_marginTop="10dp"
 	      android:text="@string/open_percent_character_button"
 	      android:onClick="onShowPercentCharacterClicked" />
+	   
+	   <Button
+	      android:id="@+id/open_line_endings"
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:layout_alignLeft="@+id/open_percent_character_button"
+	      android:layout_below="@+id/open_percent_character_button"
+	      android:layout_marginTop="10dp"
+	      android:text="@string/open_line_endings"
+	      android:onClick="onShowLineEndingsClicked" />
   
      </RelativeLayout>
  </ScrollView>

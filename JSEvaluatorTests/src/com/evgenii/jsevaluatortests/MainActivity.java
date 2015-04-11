@@ -35,6 +35,11 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+	public void onShowLineEndingsClicked(View view) {
+		final Intent intent = new Intent(this, LineEndingsActivity.class);
+		startActivity(intent);
+	}
+
 	public void onShowPercentCharacterClicked(View view) {
 		final Intent intent = new Intent(this, PercentageActivity.class);
 		startActivity(intent);
