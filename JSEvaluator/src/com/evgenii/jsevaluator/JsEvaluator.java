@@ -13,6 +13,10 @@ import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
 
+	public static String escapeCarriageReturn(String str) {
+		return str.replace("\r", "\\r");
+	}
+
 	public static String escapeClosingScript(String str) {
 		return str.replace("</", "<\\/");
 	}
@@ -34,6 +38,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		jsCode = escapeSingleQuotes(jsCode);
 		jsCode = escapeClosingScript(jsCode);
 		jsCode = escapeNewLines(jsCode);
+		jsCode = escapeCarriageReturn(jsCode);
 
 		return String.format("%s.returnResultToJava(eval('%s'), %s);", JS_NAMESPACE, jsCode,
 				callbackIndex);

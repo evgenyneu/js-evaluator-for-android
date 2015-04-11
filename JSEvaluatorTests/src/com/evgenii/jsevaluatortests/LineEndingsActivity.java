@@ -18,12 +18,13 @@ public class LineEndingsActivity extends Activity {
 	String jsCode;
 
 	protected void evaluate() {
-		mJsEvaluator.evaluate("1;\r\n2;", new JsCallback() {
+		// Use CR, LF characters and their combinations
+		mJsEvaluator.evaluate("1;\r\n2;\n3;\r4;\n\r5;", new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.lineEndingsViewResult);
 				String resultStr = "failed";
-				if (resultValue.equals("2")) {
+				if (resultValue.equals("5")) {
 					resultStr = "success!";
 				}
 
