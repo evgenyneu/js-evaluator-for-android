@@ -77,6 +77,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
+        <activity
+            android:name=".LineEndingsActivity"
+            android:label="@string/title_activity_line_endings"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.evgenii.jsevaluatortests.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
