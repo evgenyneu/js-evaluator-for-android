@@ -83,11 +83,9 @@ Android versions tested:
 
 * 3.0 (Honeycomb)
 * 4.0.3 (Ice Cream Sandwich)
-* 4.1.2 (Jelly Bean)
-* 4.2.2 (Jelly Bean)
-* 4.3 (Jelly Bean)
+* 4.1.2, 4.2.2, 4.3 (Jelly Bean)
 * 4.4.2 (KitKat)
-* 5.0 (Lollipop)
+* 5.0, 5.1 (Lollipop)
 
 ## Result is returned asynchronously
 
