@@ -33,6 +33,8 @@
     <string name="title_activity_percentage" formatted="false">% character test</string>
     <string name="percetage_test_caption">The test ensures the percent character is properly handled both when it\'s used as an operator and when it occurs in a string. This test ensures the percent character is treated as it is and not as a percent encoding sytax (i.e. %7E should not mean \'~\').</string>
     <string name="percetage_js_code" formatted="false">5%12 + \'%7E 12.5% growth\'</string>
-    <string name="percetage_code_word">JS Code to valuate:</string>    
+    <string name="percetage_code_word">JS Code to valuate:</string>
+    <string name="line_endings_caption">Evalute JavaScript file containing both Windows (CR+LF) and Linux (LF) line endings:</string>
+    <string name="title_activity_line_endings">Line endings test</string>
 </resources>
 
