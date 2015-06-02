@@ -26,6 +26,8 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 		webSettings.setDefaultTextEncodingName("utf-8");
 		final JavaScriptInterface jsInterface = new JavaScriptInterface(callJavaResult);
 		mWebView.addJavascriptInterface(jsInterface, JsEvaluator.JS_NAMESPACE);
+		if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN)
+			mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 	}
 
 	@Override
