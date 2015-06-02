@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.util.Base64;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -26,7 +27,7 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 		webSettings.setDefaultTextEncodingName("utf-8");
 		final JavaScriptInterface jsInterface = new JavaScriptInterface(callJavaResult);
 		mWebView.addJavascriptInterface(jsInterface, JsEvaluator.JS_NAMESPACE);
-		if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN)
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
 			mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 	}
 
