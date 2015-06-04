@@ -1,7 +1,5 @@
 package com.evgenii.jsevaluator;
 
-import java.io.UnsupportedEncodingException;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Base64;
@@ -11,11 +9,14 @@ import android.webkit.WebView;
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
+import java.io.UnsupportedEncodingException;
+
 @SuppressLint("SetJavaScriptEnabled")
 public class WebViewWrapper implements WebViewWrapperInterface {
 	protected WebView mWebView;
 
-	public WebViewWrapper(Context context, CallJavaResultInterface callJavaResult) {
+	@SuppressLint("AddJavascriptInterface")
+    public WebViewWrapper(Context context, CallJavaResultInterface callJavaResult) {
 		mWebView = new WebView(context);
 
 		// web view will not draw anything - turn on optimizations
