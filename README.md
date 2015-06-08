@@ -12,6 +12,9 @@ Download [jsevaluator-1.0.aar](https://github.com/evgenyneu/js-evaluator-for-and
 
 ## Setup
 
+
+### In Android Studio 
+
 To add JSEvaluator to your app in Android Studio:
 
 1. Copy the jsevaluator-1.0.aar to your **app/libs** folder..
@@ -23,6 +26,16 @@ flatDir{
     dirs 'libs'
 }
 ```
+
+### In Eclipse
+
+1. Unzip the `jsevaluator-1.0.aar` and get the *.jar from it.
+1. File > Import `JSEvaluator` project.
+1. Open properties for **your** app project.
+1. Select `Libraries` tab in `Java Build Path`.
+1. Click `Add JARs...` button and select `jsevaluator.jar`.
+1. In your project properties click `Order and export` tab.
+1. Tick `jsevaluator.jar`.
 
 ## Usage
 
