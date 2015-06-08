@@ -2,7 +2,7 @@
 
 Evaluates JavaScript and gets results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 4.0 (Ice Cream Sandwich) and newer.
 
-## Get AAR file
+## Get the build file
 
 Download [jsevaluator-1.0.aar](https://github.com/evgenyneu/js-evaluator-for-android/blob/master/jsevaluator/build/outputs/aar/jsevaluator-1.0.aar?raw=true). You can also build it yourself with this command:
 
@@ -30,7 +30,6 @@ flatDir{
 ### In Eclipse
 
 1. Unzip the `jsevaluator-1.0.aar` and get the classes.jar from it. You may want to rename it to jsevaluator.jar.
-1. File > Import `JSEvaluator` project.
 1. Open properties for **your** app project.
 1. Select `Libraries` tab in `Java Build Path`.
 1. Click `Add JARs...` button and select the .jar file.
