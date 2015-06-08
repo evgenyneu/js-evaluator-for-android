@@ -1,8 +1,8 @@
-# Run JavaScript in Android apps (library)
+# JsEvaluator library for running JavaScript in Android apps
 
 ![JitPack](https://img.shields.io/github/tag/evgenyneu/js-evaluator-for-android.svg?label=JitPack)
 
-JsEvaluator runs JavaScript in an Android app and gets results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 4.0 (Ice Cream Sandwich) and newer.
+JsEvaluator may help you run JavaScript in an Android app and get the results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 4.0 (Ice Cream Sandwich) and newer.
 
 
 ## Setup
@@ -15,8 +15,8 @@ There are two ways your can add JsEvaluator to your project:
 ### 1. Remove Maven repository
 
 Read Gradle/Maven setup instructions on JsEvaluator [jitpack.io page](https://jitpack.io/#evgenyneu/js-evaluator-for-android/).
-	
-	
+
+
 ### 2. Setup from local .aar file
 
 Download [jsevaluator-1.0.aar](https://github.com/evgenyneu/js-evaluator-for-android/blob/master/jsevaluator/build/outputs/aar/jsevaluator-1.0.aar?raw=true). You can also build it yourself into *jsevaluator/build/outputs/aar/* directory in Android Studio with this command:
@@ -25,9 +25,9 @@ Download [jsevaluator-1.0.aar](https://github.com/evgenyneu/js-evaluator-for-and
 ./gradlew :jsevaluator:aR
 ```
 
-#### Add aar file to Android Studio project 
+#### Add aar file to Android Studio project
 
-To add JSEvaluator to your app in Android Studio:
+To add JsEvaluator to your app in Android Studio:
 
 1. Copy the `jsevaluator-1.0.aar` to your **app/libs** folder..
 1. Add `compile(name:'jsevaluator-1.0', ext:'aar')` to **dependencies** block of your **module** build.gradle file.
@@ -103,9 +103,9 @@ Tests are located in `JsEvaluatorTests` project.
 
 Run as `Android Application` for manual testing.
 
-<img src='https://raw.githubusercontent.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_1_2014_08_30.png' width='270' alt='JSEvaluator library for Android screenshot 1'>
+<img src='https://raw.githubusercontent.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_1_2014_08_30.png' width='270' alt='JsEvaluator library for Android screenshot 1'>
 
-<img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_2.png' width='270' alt='JSEvaluator library for Android screenshot 2'>
+<img src='https://raw.github.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_2.png' width='270' alt='JsEvaluator library for Android screenshot 2'>
 
 
 Or run as `Android JUnit Test` for unit testing.
