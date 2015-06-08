@@ -101,7 +101,6 @@ Or run as `Android JUnit Test` for unit testing.
 
 Android versions tested:
 
-* 3.0 (Honeycomb)
 * 4.0.3 (Ice Cream Sandwich)
 * 4.1.2, 4.2.2, 4.3 (Jelly Bean)
 * 4.4.2 (KitKat)
