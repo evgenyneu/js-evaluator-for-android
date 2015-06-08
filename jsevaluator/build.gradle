@@ -9,7 +9,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
-        version="1.0.1"
+        version="1.0"
         archivesBaseName = "jsevaluator"
     }
     buildTypes {

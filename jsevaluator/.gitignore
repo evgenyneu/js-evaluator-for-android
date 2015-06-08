@@ -1,1 +1,8 @@
-/build
+# Exclude everything from build directory except the files in build/outputs/aar/
+
+build/*
+!build/outputs/
+
+build/outputs/*
+!build/outputs/aar/
+
