@@ -2,9 +2,9 @@
 
 Evaluates JavaScript and gets results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 3.0 (Honeycomb) and newer.
 
-## Get JAR file
+## Get AAR file
 
-[Download jsevaluator.jar](https://github.com/evgenyneu/js-evaluator-for-android/raw/master/JSEvaluator/bin/jsevaluator.jar). You can also build it yourself with Eclipse. It will be built into JSEvaluator/bin/jsevaluator.jar.
+[Download jsevaluator.jar](https://github.com/evgenyneu/js-evaluator-for-android/blob/master/jsevaluator/build/outputs/aar/jsevaluator-1.0.aar). You can also build it yourself with this command: `./gradlew :jsevaluator:aR`.
 
 ## Setup
 
