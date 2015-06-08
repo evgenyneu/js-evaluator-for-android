@@ -99,9 +99,7 @@ The result of evaluation is sent back into Android activity:
 
 ## Tests
 
-Tests are located in `JsEvaluatorTests` project.
-
-Run as `Android Application` for manual testing.
+Tests are located in `app` module of this project. The app can be run for manual testing as well.
 
 <img src='https://raw.githubusercontent.com/evgenyneu/js-evaluator-for-android/master/js_evaluator_screenshot_1_2014_08_30.png' width='270' alt='JsEvaluator library for Android screenshot 1'>
 
