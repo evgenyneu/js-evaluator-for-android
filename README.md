@@ -19,7 +19,7 @@ Read Gradle/Maven setup instructions on JsEvaluator [jitpack.io page](https://ji
 	
 ### 2. Setup from local .aar file
 
-Download [jsevaluator-1.0.aar](https://github.com/evgenyneu/js-evaluator-for-android/blob/master/jsevaluator/build/outputs/aar/jsevaluator-1.0.aar?raw=true). You can also build it yourself with this command:
+Download [jsevaluator-1.0.aar](https://github.com/evgenyneu/js-evaluator-for-android/blob/master/jsevaluator/build/outputs/aar/jsevaluator-1.0.aar?raw=true). You can also build it yourself in Android Studio with this command:
 
 ```
 ./gradlew :jsevaluator:aR
