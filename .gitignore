@@ -4,3 +4,4 @@
 /.idea/libraries
 .DS_Store
 /build
+!jsevaluator/build/outputs/aar/jsevaluator-1.0.1.aar
