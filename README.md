@@ -5,11 +5,14 @@ Evaluates JavaScript and gets results. This is an alternative to `evaluateJavasc
 
 ## Setup
 
-There are two ways your can add JSEvaluator to your project: 1) from a remote Maven repositorty and 2) from a local .aar or .jar file.
+There are two ways your can add JsEvaluator to your project:
+
+1. From a remote Maven repositorty.
+1. From a local .aar or .jar file.
 
 ### 1. Remove Maven repository
 
-Read Gradle/Maven setup instructions [jitpack.io page](https://jitpack.io/#evgenyneu/js-evaluator-for-android/)
+Read Gradle/Maven setup instructions on JsEvaluator [jitpack.io page](https://jitpack.io/#evgenyneu/js-evaluator-for-android/).
 	
 	
 ### 2. Setup from local .aar file
