@@ -29,13 +29,13 @@ flatDir{
 
 ### In Eclipse
 
-1. Unzip the `jsevaluator-1.0.aar` and get the *.jar from it.
+1. Unzip the `jsevaluator-1.0.aar` and get the classes.jar from it. You may want to rename it to jsevaluator.jar.
 1. File > Import `JSEvaluator` project.
 1. Open properties for **your** app project.
 1. Select `Libraries` tab in `Java Build Path`.
-1. Click `Add JARs...` button and select `jsevaluator.jar`.
+1. Click `Add JARs...` button and select the .jar file.
 1. In your project properties click `Order and export` tab.
-1. Tick `jsevaluator.jar`.
+1. Tick the .jar file.
 
 ## Usage
 
