@@ -12,7 +12,7 @@ There are two ways your can add JsEvaluator to your project:
 1. From a remote Maven repositorty.
 1. From a local .aar or .jar file.
 
-### 1. Remove Maven repository
+### 1. Setup from Maven repository
 
 Read Gradle/Maven setup instructions on JsEvaluator [jitpack.io page](https://jitpack.io/#evgenyneu/js-evaluator-for-android/).
 
