@@ -4,7 +4,11 @@ Evaluates JavaScript and gets results. This is an alternative to `evaluateJavasc
 
 ## Get AAR file
 
-[Download jsevaluator.jar](https://github.com/evgenyneu/js-evaluator-for-android/blob/master/jsevaluator/build/outputs/aar/jsevaluator-1.0.aar). You can also build it yourself with this command: `./gradlew :jsevaluator:aR`.
+[Download jsevaluator-1.0.aar](https://github.com/evgenyneu/js-evaluator-for-android/blob/master/jsevaluator/build/outputs/aar/jsevaluator-1.0.aar?raw=true). You can also build it yourself with this command:
+
+```
+./gradlew :jsevaluator:aR
+```
 
 ## Setup
 
