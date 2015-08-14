@@ -17,10 +17,15 @@
     <option name="CLEAR_LOGCAT" value="false" />
     <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
     <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-    <option name="SELECTED_MATRIX_CONFIGURATION_ID" value="-1" />
-    <option name="SELECTED_CLOUD_PROJECT_ID" value="Please select a project..." />
-    <option name="IS_VALID_CLOUD_SELECTION" value="false" />
-    <option name="INVALID_CLOUD_SELECTION_ERROR" value="Matrix configuration not specified" />
+    <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+    <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+    <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+    <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+    <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+    <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+    <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+    <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+    <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
     <method />
   </configuration>
 </component>
