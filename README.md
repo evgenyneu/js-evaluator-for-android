@@ -16,7 +16,7 @@ There are two ways your can add JsEvaluator to your project:
 
 See Gradle/Maven [setup instructions](https://jitpack.io/#evgenyneu/js-evaluator-for-android/v1.0.2) on JsEvaluator jitpack.io page.
 
-* Add `maven { url "https://jitpack.io" }` into **allprojects/repositories** section of your **project** build.gradle file. For example
+* Add `maven { url "https://jitpack.io" }` into **allprojects/repositories** section of your **project** build.gradle file. For example:
 
 ```gradle
 allprojects {
@@ -27,7 +27,7 @@ allprojects {
 }
 ```
 
-* Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.2'` into **dependencies** section of your **module** build.gradle file.
+* Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.2'` into **dependencies** section of your **module** build.gradle file. For exampe:
 
 ```gradle
 dependencies {
