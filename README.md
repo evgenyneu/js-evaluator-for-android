@@ -134,7 +134,7 @@ Android versions tested:
 * 4.1.2, 4.2.2, 4.3 (Jelly Bean)
 * 4.4.2 (KitKat)
 * 5.0, 5.1 (Lollipop)
-* 5.2 Android M preview (Muffin) 😉
+* 6.0 Android (Marshmallow)
 
 ## Result is returned asynchronously
 
