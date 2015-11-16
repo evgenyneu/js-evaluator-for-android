@@ -17,7 +17,8 @@
     <option name="NETWORK_LATENCY" value="none" />
     <option name="CLEAR_LOGCAT" value="false" />
     <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-    <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+    <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+    <option name="FORCE_STOP_RUNNING_APP" value="true" />
     <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
     <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
     <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
