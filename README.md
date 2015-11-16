@@ -30,7 +30,6 @@ allprojects {
 ```gradle
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.2'
 }
 ```
