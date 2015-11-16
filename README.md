@@ -72,29 +72,35 @@ flatDir{
 
 Create evaluator instance:
 
-    JsEvaluator jsEvaluator = new JsEvaluator(this);
+```Java
+JsEvaluator jsEvaluator = new JsEvaluator(this);
+```
 
 `this` is a reference to your activity.
 
 ## Evaluate JavaScript
 
-    jsEvaluator.evaluate("2 * 17", new JsCallback() {
-      @Override
-      public void onResult(final String result) {
-        // get result here
-      }
-    });
+```Java
+jsEvaluator.evaluate("2 * 17", new JsCallback() {
+  @Override
+  public void onResult(final String result) {
+    // get result here
+  }
+});
+```
 
 ## Call a JavaScript function
 
-    jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
-      new JsCallback() {
+```Java
+jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
+  new JsCallback() {
 
-      @Override
-      public void onResult(final String result) {
-        // get result here
-      }
-    }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
+  @Override
+  public void onResult(final String result) {
+    // get result here
+  }
+}, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
+```
 
 Any number of string, int or double parameters can be supplied.
 
@@ -102,20 +108,24 @@ Any number of string, int or double parameters can be supplied.
 
 Behind the scenes it creates a `WebView` and feeds it JavaScript code for evaluation:
 
-    mWebView = new WebView(context);
-    String javascript = "<script>myObj.returnResult('Hello World')</script>";
-    String base64 = Base64.encodeToString(data, Base64.DEFAULT);
-    mWebView.loadUrl("data:text/html;charset=utf-8;base64," + base64);
+```Java
+mWebView = new WebView(context);
+String javascript = "<script>myObj.returnResult('Hello World')</script>";
+String base64 = Base64.encodeToString(data, Base64.DEFAULT);
+mWebView.loadUrl("data:text/html;charset=utf-8;base64," + base64);
+```
 
 The result of evaluation is sent back into Android activity:
 
-    public class JavaScriptInterface {
-    	public void returnResult(String result) {
-    		// result from JavaScript
-    	}
-    }
+```Java
+public class JavaScriptInterface {
+	public void returnResult(String result) {
+		// result from JavaScript
+	}
+}
 
-    mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
+mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
+```
 
 ## Tests
 
