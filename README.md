@@ -150,13 +150,15 @@ Android versions tested:
 
 The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
 
-    // somewhere in UI thread ...
-    jsEvaluator.evaluate("2 * 17", new JsCallback() {
-      @Override
-      public void onResult(final String result) {
-        // Result is returned here asynchronously in UI thread
-      }
-    });
+```Java
+// somewhere in UI thread ...
+jsEvaluator.evaluate("2 * 17", new JsCallback() {
+  @Override
+  public void onResult(final String result) {
+    // Result is returned here asynchronously in UI thread
+  }
+});
+```
 
 ## JavaScript is evaluated in new context
 
@@ -165,11 +167,13 @@ Please concatenate all your JavaScript to one string and evaluate it in one go.
 
 For example, if you need to load jQuery libary and then use it:
 
-    String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
-    jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
+```Java
+String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
+jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
+```
 
 
-## Feedback
+## Feedback is welcome
 
 If you have any issues or need help please do not hesitate to create an issue ticket.
 
