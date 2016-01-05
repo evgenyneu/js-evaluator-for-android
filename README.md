@@ -25,7 +25,7 @@ allprojects {
 }
 ```
 
-2) Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.2'` into **dependencies** section of your **module** build.gradle file. For example:
+2) Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.3'` into **dependencies** section of your **module** build.gradle file. For example:
 
 ```gradle
 dependencies {
