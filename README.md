@@ -31,11 +31,11 @@ allprojects {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // Keep you existing dependencies here
-    compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.2'
+    compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.3'
 }
 ```
 
-For less information, see Gradle/Maven [setup instructions](https://jitpack.io/#evgenyneu/js-evaluator-for-android/v1.0.2) on JsEvaluator jitpack.io page.
+For less information, see Gradle/Maven [setup instructions](https://jitpack.io/#evgenyneu/js-evaluator-for-android/v1.0.3) on JsEvaluator jitpack.io page.
 
 ### 2. Setup from local .aar file
 
