@@ -80,7 +80,7 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 
 ## Evaluate JavaScript
 
-#### Repond in UI thread
+#### Respond in UI thread
 
 ```Java
 jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
@@ -92,9 +92,23 @@ jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
 });
 ```
 
+#### Respond in background thread
+
+```Java
+jsEvaluator.evaluateAndRespondInBackground("2 * 17", new JsCallback() {
+  @Override
+  public void onResult(final String result) {
+    // Result of JavaScript evaluation is returned here.
+    // It is NOT safe to interact with UI here.
+  }
+});
+```
+
 ## Call a JavaScript function
 
-#### Repond in UI thread
+The library includes a helper method that allows to call JavaScript function. Any number of string, int or double parameters can be supplied.
+
+#### Respond in UI thread
 
 ```Java
 jsEvaluator.evaluateAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
@@ -108,7 +122,19 @@ jsEvaluator.evaluateAndRespondInUiThread("function myFunction(a, b, c, a) { retu
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```
 
-Any number of string, int or double parameters can be supplied.
+#### Respond in background thread
+
+```Java
+jsEvaluator.evaluateAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
+  new JsCallback() {
+
+  @Override
+  public void onResult(final String result) {
+    // Result of JavaScript function is returned here here.
+    // It is NOT safe to interact with UI here.
+  }
+}, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
+```
 
 ## How it works
 
