@@ -110,10 +110,10 @@ jsEvaluator.evaluateAndRespondInBackgroundThread("2 * 17", new JsCallback() {
 String result = jsEvaluator.evaluateBlockUIThread("2 * 17", 1_000);
 ```
 
-The function will wait for result from JavaScript evaluation. In receives two arguments.
+The function will wait for result from JavaScript evaluation. It receives two arguments.
 
-1. The first argument is the JavaScript code for evaluation.
-1. The second argument is wait time *in milliseconds*. The function will return `null` if it fails to evaluate JavaScript within the given time period.
+1. JavaScript code for evaluation.
+1. Wait time *in milliseconds*. The function will return `null` if it fails to evaluate JavaScript within the given time period.
 
 **Warning:** UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user. If JavaScript evaluation takes more than a few seconds the "application not responding" dialog will be presented to the user.
 
