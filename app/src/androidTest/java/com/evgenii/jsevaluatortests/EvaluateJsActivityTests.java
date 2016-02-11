@@ -23,14 +23,24 @@ public class EvaluateJsActivityTests extends
 	}
 
 	@MediumTest
-	public void testEvaluateButton_clickButtonAndShowResult() {
+	public void testEvaluateButton_clickButtonAndShowResult() throws InterruptedException {
 		final Button evaluateButton = (Button) mActivity.findViewById(R.id.button_evaluate);
 
-		final TextView resultTextView = (TextView) mActivity.findViewById(R.id.js_result_text_view);
-
 		TouchUtils.clickView(this, evaluateButton);
-		assertTrue(View.VISIBLE == resultTextView.getVisibility());
-		assertEquals("Result: 4", resultTextView.getText().toString());
+
+		// UI thread result
+		// --------------
+
+        final TextView resultUiThreadTextView = (TextView) mActivity.findViewById(R.id.js_result_ui_thread_text_view);
+        assertTrue(View.VISIBLE == resultUiThreadTextView.getVisibility());
+		assertEquals("UI thread result: 4", resultUiThreadTextView.getText().toString());
+
+		// Background thread result
+		// --------------
+
+        final TextView resultBackgroundThreadTextView = (TextView) mActivity.findViewById(R.id.js_result_background_thread_text_view);
+        assertTrue(View.VISIBLE == resultBackgroundThreadTextView.getVisibility());
+		assertEquals("Background thread result: 4", resultBackgroundThreadTextView.getText().toString());
 	}
 
 	@MediumTest

@@ -72,12 +72,11 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
      * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the UI thread.
      */
     public void evaluateAndRespondInUiThread(String jsCode, JsCallback resultCallback) {
-        int callbackIndex = mResultCallbacks.size();
-        if (resultCallback == null) { callbackIndex = -1; }
-        final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
-        JsCallbackData callbackData = new JsCallbackData(resultCallback, true);
-        if (resultCallback != null) { mResultCallbacks.add(callbackData); }
-        getWebViewWrapper().loadJavaScript(js);
+        evaluate(
+                jsCode,
+                resultCallback,
+                true // execute callback in UI thread
+        );
     }
 
     @Override
@@ -88,7 +87,20 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
      * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the background thread.
      */
     public void evaluateAndRespondInBackgroundThread(String jsCode, JsCallback resultCallback) {
+        evaluate(
+                jsCode,
+                resultCallback,
+                false // execute callback in background thread
+        );
+    }
 
+    private void evaluate(String jsCode, JsCallback resultCallback, Boolean executeCallbackInUiThread) {
+        int callbackIndex = mResultCallbacks.size();
+        if (resultCallback == null) { callbackIndex = -1; }
+        final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
+        JsCallbackData callbackData = new JsCallbackData(resultCallback, executeCallbackInUiThread);
+        if (resultCallback != null) { mResultCallbacks.add(callbackData); }
+        getWebViewWrapper().loadJavaScript(js);
     }
 
 	@Override
@@ -124,6 +136,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		final JsCallbackData callbackData = mResultCallbacks.get(callIndex);
 
         if (callbackData.callInUiThread) {
+            // Execute in UI thread
             mUiThreadHandler.post(new Runnable() {
                 @Override
                 public void run() {

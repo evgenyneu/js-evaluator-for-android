@@ -27,7 +27,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
     // Evaluate JS in UI thread
     // ----------------------
 
-    public void testEvaluate_shouldEvaluateJs() {
+    public void testEvaluate_shouldEvaluateJsInUiThread() {
         final JsCallbackMock callbackMock = new JsCallbackMock();
 
         mJsEvaluator.evaluateAndRespondInUiThread("2 * 3", callbackMock);
@@ -37,7 +37,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
                 mWebViewWrapperMock.mLoadedJavaScript.get(0));
     }
 
-    public void testEvaluate_shouldRegisterResultCallback() {
+    public void testEvaluate_shouldRegisterResultCallbackInUiThread() {
         final JsCallbackMock callbackMock = new JsCallbackMock();
 
         mJsEvaluator.evaluateAndRespondInUiThread("2 * 3", callbackMock);
@@ -46,6 +46,31 @@ public class JsEvaluatorTests extends AndroidTestCase {
         assertEquals(1, callbacks.size());
 		JsCallbackData callback = callbacks.get(0);
 		assertTrue(callback.callInUiThread);
+        assertEquals(callbackMock, callback.callback);
+    }
+
+    // Evaluate JS in background thread
+    // ----------------------
+
+    public void testEvaluate_shouldEvaluateJsInBackgroundThread() {
+        final JsCallbackMock callbackMock = new JsCallbackMock();
+
+        mJsEvaluator.evaluateAndRespondInBackgroundThread("2 * 3", callbackMock);
+
+        assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
+        assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
+                mWebViewWrapperMock.mLoadedJavaScript.get(0));
+    }
+
+    public void testEvaluate_shouldRegisterResultCallbackForBackgroundThread() {
+        final JsCallbackMock callbackMock = new JsCallbackMock();
+
+        mJsEvaluator.evaluateAndRespondInBackgroundThread("2 * 3", callbackMock);
+
+        final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
+        assertEquals(1, callbacks.size());
+        JsCallbackData callback = callbacks.get(0);
+        assertFalse(callback.callInUiThread);
         assertEquals(callbackMock, callback.callback);
     }
 
