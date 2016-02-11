@@ -199,7 +199,7 @@ mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
 
 ## JavaScript is evaluated in new context
 
-Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation. It means, for example, that one can not load a large JavaScript library and then use it in subsequent calls. Please concatenate all your JavaScript to one string and evaluate it in one go.
+Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation. It means, for example, that one can not load a large JavaScript library and then use it in subsequent calls. Please concatenate all your JavaScript into a string and evaluate it in one go.
 
 For example, if you need to load jQuery libary and then use it:
 
