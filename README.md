@@ -83,6 +83,7 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 #### Respond in UI thread
 
 ```Java
+// Call only from UI thread
 jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
@@ -95,6 +96,7 @@ jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
 #### Respond in background thread
 
 ```Java
+// Call only from UI thread
 jsEvaluator.evaluateAndRespondInBackgroundThread("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
@@ -107,6 +109,7 @@ jsEvaluator.evaluateAndRespondInBackgroundThread("2 * 17", new JsCallback() {
 #### Block UI thread and wait for result
 
 ```Java
+// Call only from UI thread
 String result = jsEvaluator.evaluateBlockUIThread("2 * 17", 1_000);
 ```
 
@@ -125,6 +128,7 @@ The following methods can be used to call a JavaScript function and pass any num
 #### Respond in UI thread
 
 ```Java
+// Call only from UI thread
 jsEvaluator.callFunctionAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
   new JsCallback() {
 
@@ -139,6 +143,7 @@ jsEvaluator.callFunctionAndRespondInUiThread("function myFunction(a, b, c, a) { 
 #### Respond in background thread
 
 ```Java
+// Call only from UI thread
 jsEvaluator.callFunctionAndRespondInBackgroundThread("function myFunction(a, b, c, a) { return 'result'; }",
   new JsCallback() {
 
