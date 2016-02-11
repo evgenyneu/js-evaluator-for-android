@@ -108,10 +108,15 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.jsCallFinished("my result", -1);
 	}
 
-	public void testJsCallFinished_runsCallback() {
+	public void testJsCallFinished_runsCallbackInUiThread() {
 		final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
 		final JsCallbackMock callback = new JsCallbackMock();
-        JsCallbackData callbackData = new JsCallbackData(callback, true);
+
+        JsCallbackData callbackData = new JsCallbackData(
+                callback,
+                true // in UI thread
+        );
+
 		callbacks.add(callbackData);
 
 		final UiThreadHandlerWrapperMock uiThreadHandlerWrapperMock = new UiThreadHandlerWrapperMock();
@@ -121,4 +126,23 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		assertEquals("my result", callback.resultValue);
         assertTrue(uiThreadHandlerWrapperMock.didRunMock);
 	}
+
+    public void testJsCallFinished_runsCallbackInBackroundThread() {
+        final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
+        final JsCallbackMock callback = new JsCallbackMock();
+
+        JsCallbackData callbackData = new JsCallbackData(
+            callback,
+            false // in background thread
+        );
+
+        callbacks.add(callbackData);
+
+        final UiThreadHandlerWrapperMock uiThreadHandlerWrapperMock = new UiThreadHandlerWrapperMock();
+        mJsEvaluator.setUiThreadHandler(uiThreadHandlerWrapperMock);
+
+        mJsEvaluator.jsCallFinished("my result", 0);
+        assertEquals("my result", callback.resultValue);
+        assertFalse(uiThreadHandlerWrapperMock.didRunMock);
+    }
 }

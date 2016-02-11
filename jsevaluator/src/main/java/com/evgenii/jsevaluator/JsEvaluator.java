@@ -123,12 +123,17 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 		final JsCallbackData callbackData = mResultCallbacks.get(callIndex);
 
-		mUiThreadHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                callbackData.callback.onResult(value);
-            }
-        });
+        if (callbackData.callInUiThread) {
+            mUiThreadHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    callbackData.callback.onResult(value);
+                }
+            });
+        } else {
+            // Execute in current (background) thread
+            callbackData.callback.onResult(value);
+        }
 	}
 
 	// Used in test only to replace mUiThreadHandler with a mock
