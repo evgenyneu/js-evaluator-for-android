@@ -83,15 +83,9 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	@Override
 	public void evaluate(String jsCode, JsCallback resultCallback) {
 		int callbackIndex = mResultCallbacks.size();
-		if (resultCallback == null) {
-			callbackIndex = -1;
-		}
-
+		if (resultCallback == null) { callbackIndex = -1; }
 		final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
-
-		if (resultCallback != null) {
-			mResultCallbacks.add(resultCallback);
-		}
+		if (resultCallback != null) { mResultCallbacks.add(resultCallback); }
 		getWebViewWrapper().loadJavaScript(js);
 	}
 
