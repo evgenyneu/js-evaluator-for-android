@@ -74,6 +74,21 @@ public class JsEvaluatorTests extends AndroidTestCase {
         assertEquals(callbackMock, callback.callback);
     }
 
+    // Block UI thread and evaluate
+    // ----------------------
+
+    public void testBlockUiThreadAndEvaluate() {
+        final JsCallbackMock callbackMock = new JsCallbackMock();
+
+        String result = mJsEvaluator.blockUIThreadAndEvaluate(5_000, "2 * 3");
+
+        check result of evaluation here
+
+        assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
+        assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
+                mWebViewWrapperMock.mLoadedJavaScript.get(0));
+    }
+
     // Call function on UI thread
     // ----------------------
 

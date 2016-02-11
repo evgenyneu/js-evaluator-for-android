@@ -1,6 +1,8 @@
 package com.evgenii.jsevaluator;
 
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
 
@@ -92,6 +94,32 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
                 resultCallback,
                 false // execute callback on background thread
         );
+    }
+
+    /**
+     * Evaluates JavaScript code and returns the result. UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user.
+     *
+     * @param  waitTimeoutMilliseconds Wait time in milliseconds. The function will return null if it fails to evaluate JavaScript within the given time period.
+     * @param  jsCode           JavaScript code to evaluate.
+     * @return result of JavaScript evaluation. The function will return null if it fails to evaluate JavaScript within the given time period.
+     */
+    public String blockUIThreadAndEvaluate(long waitTimeoutMilliseconds, String jsCode) {
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        final JsResultContainer jsResultContainer = new JsResultContainer();
+
+        evaluateAndRespondOnBackgroundThread(jsCode, new JsCallback() {
+            @Override
+            public void onResult(final String result) {
+                jsResultContainer.result = result;
+                countDownLatch.countDown();
+            }
+        });
+
+        try {
+            countDownLatch.await(waitTimeoutMilliseconds, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) { }
+
+        return jsResultContainer.result;
     }
 
     private void evaluate(String jsCode, JsCallback resultCallback, Boolean executeCallbackInUiThread) {
