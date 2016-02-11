@@ -52,7 +52,7 @@ public class StressTestActivity extends Activity {
 		String jsCode = addOneJs();
 		jsCode += addTwoJs();
 
-		mJsEvaluator.callFunction(jsCode, new JsCallback() {
+		mJsEvaluator.callFunctionAndRespondInUiThread(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.js_stress_result_text_view);

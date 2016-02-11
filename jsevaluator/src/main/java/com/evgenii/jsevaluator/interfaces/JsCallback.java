@@ -5,5 +5,10 @@ package com.evgenii.jsevaluator.interfaces;
  */
 
 public interface JsCallback {
+    /**
+     * Called by JsEvaluator to pass the result of JavaScript evaluation.
+     *
+     * @param  value result of JavaScript evaluation.
+     */
 	public abstract void onResult(String value);
 }

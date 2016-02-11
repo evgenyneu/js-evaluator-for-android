@@ -6,3 +6,4 @@ package com.evgenii.jsevaluator.interfaces;
 public interface CallJavaResultInterface {
 	public void jsCallFinished(String value, Integer callIndex);
 }
+

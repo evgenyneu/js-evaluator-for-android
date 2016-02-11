@@ -10,6 +10,10 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
+/**
+ * Evaluates JavaScript.
+ */
+
 public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
 
@@ -58,8 +62,16 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	}
 
 	@Override
-	public void callFunction(String jsCode, JsCallback resultCallback, String name, Object... args) {
-		jsCode += "; " + JsFunctionCallFormatter.toString(name, args);
+	/**
+	 * Calls a JavaScript function and pass arguments to it.
+	 *
+	 * @param  jsCode           JavaScript code to evaluate.
+	 * @param  resultCallback   callback to receive the result form JavaScript function.
+	 * @param  functionName     name of the JavaScript function to be called.
+	 * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
+	 */
+	public void callFunctionAndRespondInUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args) {
+		jsCode += "; " + JsFunctionCallFormatter.toString(functionName, args);
 		evaluate(jsCode, resultCallback);
 	}
 
