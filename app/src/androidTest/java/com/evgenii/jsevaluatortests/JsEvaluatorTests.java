@@ -6,8 +6,7 @@ import android.test.AndroidTestCase;
 
 import com.evgenii.jsevaluator.JsCallbackData;
 import com.evgenii.jsevaluator.JsEvaluator;
-import com.evgenii.jsevaluator.interfaces.JsCallback;
-import com.evgenii.jsevaluatortests.mocks.HandlerWrapperMock;
+import com.evgenii.jsevaluatortests.mocks.UiThreadHandlerWrapperMock;
 import com.evgenii.jsevaluatortests.mocks.JsCallbackMock;
 import com.evgenii.jsevaluatortests.mocks.WebViewWrapperMock;
 
@@ -103,8 +102,8 @@ public class JsEvaluatorTests extends AndroidTestCase {
     // ----------------------
 
 	public void testJsCallFinished_doesNotRunCallBackWhenIndexIsMinusOne() {
-		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
-		mJsEvaluator.setHandler(handlerWrapperMock);
+		final UiThreadHandlerWrapperMock uiThreadHandlerWrapperMock = new UiThreadHandlerWrapperMock();
+		mJsEvaluator.setUiThreadHandler(uiThreadHandlerWrapperMock);
 
 		mJsEvaluator.jsCallFinished("my result", -1);
 	}
@@ -115,10 +114,11 @@ public class JsEvaluatorTests extends AndroidTestCase {
         JsCallbackData callbackData = new JsCallbackData(callback, true);
 		callbacks.add(callbackData);
 
-		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
-		mJsEvaluator.setHandler(handlerWrapperMock);
+		final UiThreadHandlerWrapperMock uiThreadHandlerWrapperMock = new UiThreadHandlerWrapperMock();
+		mJsEvaluator.setUiThreadHandler(uiThreadHandlerWrapperMock);
 
 		mJsEvaluator.jsCallFinished("my result", 0);
 		assertEquals("my result", callback.resultValue);
+        assertTrue(uiThreadHandlerWrapperMock.didRunMock);
 	}
 }

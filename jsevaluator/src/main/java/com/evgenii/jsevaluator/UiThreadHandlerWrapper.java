@@ -4,10 +4,10 @@ import android.os.Handler;
 
 import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
 
-public class HandlerWrapper implements HandlerWrapperInterface {
+public class UiThreadHandlerWrapper implements HandlerWrapperInterface {
 	private final Handler mHandler;
 
-	public HandlerWrapper() {
+	public UiThreadHandlerWrapper() {
 		mHandler = new Handler();
 	}
 

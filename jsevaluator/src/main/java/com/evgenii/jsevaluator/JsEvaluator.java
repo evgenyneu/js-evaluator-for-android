@@ -54,11 +54,14 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	private final ArrayList<JsCallbackData> mResultCallbacks = new ArrayList<JsCallbackData>();
 
-	private HandlerWrapperInterface mHandler;
+    /**
+     * A handler used for passing JavaScript result to the UI thread.
+     */
+	private HandlerWrapperInterface mUiThreadHandler;
 
 	public JsEvaluator(Context context) {
 		mContext = context;
-		mHandler = new HandlerWrapper();
+		mUiThreadHandler = new UiThreadHandlerWrapper();
 	}
 
     @Override
@@ -120,17 +123,17 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 		final JsCallbackData callbackData = mResultCallbacks.get(callIndex);
 
-		mHandler.post(new Runnable() {
-			@Override
-			public void run() {
+		mUiThreadHandler.post(new Runnable() {
+            @Override
+            public void run() {
                 callbackData.callback.onResult(value);
-			}
-		});
+            }
+        });
 	}
 
-	// Used in test only to replace mHandler with a mock
-	public void setHandler(HandlerWrapperInterface handlerWrapperInterface) {
-		mHandler = handlerWrapperInterface;
+	// Used in test only to replace mUiThreadHandler with a mock
+	public void setUiThreadHandler(HandlerWrapperInterface handlerWrapperInterface) {
+		mUiThreadHandler = handlerWrapperInterface;
 	}
 
 	// Used in test only to replace webViewWrapper with a mock
