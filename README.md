@@ -106,7 +106,7 @@ jsEvaluator.evaluateAndRespondInBackground("2 * 17", new JsCallback() {
 
 ## Call a JavaScript function
 
-The following methods allow to call JavaScript function and pass any number of string, int or double parameters.
+The following methods can be used to call JavaScript function and pass any number of string, int or double parameters.
 
 #### Respond in UI thread
 
