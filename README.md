@@ -103,7 +103,7 @@ jsEvaluator.evaluateAndRespondInBackgroundThread("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
     // Result of JavaScript evaluation is returned here in background thread.
-    // Avoid accessing the Android UI toolkit here.
+    // Avoid accessing UI here.
   }
 });
 ```
@@ -152,7 +152,7 @@ jsEvaluator.callFunctionAndRespondInBackgroundThread("function myFunction(a, b, 
   @Override
   public void onResult(final String result) {
     // Result of JavaScript function is returned here in background thread.
-    // Avoid accessing the Android UI toolkit here.
+    // Avoid accessing UI here.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```
