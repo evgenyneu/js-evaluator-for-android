@@ -112,7 +112,7 @@ jsEvaluator.evaluateAndRespondInBackgroundThread("2 * 17", new JsCallback() {
 
 ```Java
 // Call only from UI thread
-String result = jsEvaluator.evaluateBlockUIThread(1_000, "2 * 17");
+String result = jsEvaluator.blockUIThreadAndEvaluate(1_000, "2 * 17");
 ```
 
 The function will wait for result from JavaScript evaluation. It receives two arguments.
@@ -161,7 +161,7 @@ jsEvaluator.callFunctionAndRespondInBackgroundThread("function myFunction(a, b, 
 
 ```Java
 // Call only from UI thread
-String result = jsEvaluator.callFunctionBlockUIThread(1_000, "function myFunction(a, b, c, a) { return 'result'; }",
+String result = jsEvaluator.blockUIThreadAndCallFunction(1_000, "function myFunction(a, b, c, a) { return 'result'; }",
   "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```
 
