@@ -80,24 +80,30 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 
 ## Evaluate JavaScript
 
+### Repond in UI thread
+
 ```Java
-jsEvaluator.evaluate("2 * 17", new JsCallback() {
+jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
-    // get result here
+    // Result of JavaScript evaluation is returned here.
+    // It is safe to update your UI here.
   }
 });
 ```
 
 ## Call a JavaScript function
 
+### Repond in UI thread
+
 ```Java
-jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
+jsEvaluator.evaluateAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
   new JsCallback() {
 
   @Override
   public void onResult(final String result) {
-    // get result here
+    // Result of JavaScript function is returned here here.
+    // It is safe to update your UI here.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```
