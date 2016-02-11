@@ -1,19 +1,25 @@
 package com.evgenii.jsevaluator.interfaces;
 
 /**
- * Interface for the JsEvaluator libary.
+ * Interface for the JsEvaluator library.
  */
 
 public interface JsEvaluatorInterface {
     /**
-     * Calls a JavaScript function and pass arguments to it.
+     * Evaluates JavaScript code. Result of evaluation is passed in the UI thread.
      *
      * @param  jsCode           JavaScript code to evaluate.
-     * @param  resultCallback   callback to receive the result form JavaScript function.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the UI thread.
+     */
+    public void evaluateAndRespondInUiThread(String jsCode, JsCallback resultCallback);
+
+    /**
+     * Calls a JavaScript function and pass arguments to it. Result of evaluation is passed in the UI thread.
+     *
+     * @param  jsCode           JavaScript code to evaluate.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the UI thread.
      * @param  functionName     name of the JavaScript function to be called.
      * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
      */
 	public void callFunctionAndRespondInUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args);
-
-	public void evaluate(String jsCode, JsCallback resultCallback);
 }

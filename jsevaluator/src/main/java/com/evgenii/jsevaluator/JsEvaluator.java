@@ -61,27 +61,33 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		mHandler = new HandlerWrapper();
 	}
 
-	@Override
-	/**
-	 * Calls a JavaScript function and pass arguments to it.
-	 *
-	 * @param  jsCode           JavaScript code to evaluate.
-	 * @param  resultCallback   callback to receive the result form JavaScript function.
-	 * @param  functionName     name of the JavaScript function to be called.
-	 * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
-	 */
-	public void callFunctionAndRespondInUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args) {
-		jsCode += "; " + JsFunctionCallFormatter.toString(functionName, args);
-		evaluate(jsCode, resultCallback);
-	}
+    @Override
+    /**
+     * Evaluates JavaScript code. Result of evaluation is passed in the UI thread.
+     *
+     * @param  jsCode           JavaScript code to evaluate.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the UI thread.
+     */
+    public void evaluateAndRespondInUiThread(String jsCode, JsCallback resultCallback) {
+        int callbackIndex = mResultCallbacks.size();
+        if (resultCallback == null) { callbackIndex = -1; }
+        final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
+        if (resultCallback != null) { mResultCallbacks.add(resultCallback); }
+        getWebViewWrapper().loadJavaScript(js);
+    }
 
 	@Override
-	public void evaluate(String jsCode, JsCallback resultCallback) {
-		int callbackIndex = mResultCallbacks.size();
-		if (resultCallback == null) { callbackIndex = -1; }
-		final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
-		if (resultCallback != null) { mResultCallbacks.add(resultCallback); }
-		getWebViewWrapper().loadJavaScript(js);
+    /**
+     * Calls a JavaScript function and pass arguments to it. Result of evaluation is passed in the UI thread.
+     *
+     * @param  jsCode           JavaScript code to evaluate.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the UI thread.
+     * @param  functionName     name of the JavaScript function to be called.
+     * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
+     */
+	public void callFunctionAndRespondInUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args) {
+		jsCode += "; " + JsFunctionCallFormatter.toString(functionName, args);
+        evaluateAndRespondInUiThread(jsCode, resultCallback);
 	}
 
 	public ArrayList<JsCallback> getResultCallbacks() {
