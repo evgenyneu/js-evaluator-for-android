@@ -157,6 +157,23 @@ jsEvaluator.callFunctionAndRespondInBackgroundThread("function myFunction(a, b, 
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```
 
+#### Block UI thread and wait for result
+
+```
+// Call only from UI thread
+String result = jsEvaluator.callFunctionBlockUIThread(1_000, "function myFunction(a, b, c, a) { return 'result'; }",
+  "myFunction", "parameter 1", "parameter 2", 912, 101.3);
+```
+
+The function will wait for result from JavaScript evaluation. It receives the following arguments.
+
+1. Wait time *in milliseconds*. The function will return `null` if it fails to evaluate JavaScript within the given time period.
+1. JavaScript code for evaluation.
+1. Name of the JavaScript function.
+1. Any number of string, integer or double arguments that will be passed to the JavaScript function.
+
+**Warning:** UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user. Moreover, if JavaScript evaluation takes more than a few seconds the "application not responding" dialog will be presented to the user.
+
 ## How it works
 
 Behind the scenes it creates a `WebView` and feeds it JavaScript code for evaluation:
@@ -199,19 +216,6 @@ Android versions tested:
 * 5.0, 5.1 (Lollipop)
 * 6.0 Android (Marshmallow)
 
-## Result is returned asynchronously
-
-The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
-
-```Java
-// somewhere in UI thread ...
-jsEvaluator.evaluate("2 * 17", new JsCallback() {
-  @Override
-  public void onResult(final String result) {
-    // Result is returned here asynchronously in UI thread
-  }
-});
-```
 
 ## JavaScript is evaluated in new context
 
