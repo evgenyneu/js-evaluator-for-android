@@ -80,7 +80,7 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 
 ## Evaluate JavaScript
 
-The following functions evaluate JavaScript and returns the result. Please note that all functions can only be called from UI thread.
+The following functions evaluate JavaScript and return the result. Please note that all functions can **only be called from UI thread**.
 
 #### Respond in UI thread
 
@@ -159,7 +159,7 @@ jsEvaluator.callFunctionAndRespondInBackgroundThread("function myFunction(a, b, 
 
 #### Block UI thread and wait for result
 
-```
+```Java
 // Call only from UI thread
 String result = jsEvaluator.callFunctionBlockUIThread(1_000, "function myFunction(a, b, c, a) { return 'result'; }",
   "myFunction", "parameter 1", "parameter 2", 912, 101.3);
