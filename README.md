@@ -86,7 +86,7 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
-    // Result of JavaScript evaluation is returned here.
+    // Result of JavaScript evaluation is returned here in UI thread.
     // It is safe to update your UI here.
   }
 });
@@ -95,28 +95,42 @@ jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
 #### Respond in background thread
 
 ```Java
-jsEvaluator.evaluateAndRespondInBackground("2 * 17", new JsCallback() {
+jsEvaluator.evaluateAndRespondInBackgroundThread("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
-    // Result of JavaScript evaluation is returned here.
-    // It is NOT safe to interact with UI here.
+    // Result of JavaScript evaluation is returned here in background thread.
+    // Avoid accessing the Android UI toolkit here.
   }
 });
 ```
 
+#### Block UI thread and wait for result
+
+The following function will wait for result from JavaScript evaluation. In receives two arguments.
+
+1. The first argument is the JavaScript code for evaluation.
+1. The second argument is wait time *in milliseconds*. The function will return `null` if it fails to evaluate JavaScript within the given time period.
+
+**Warning:** UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user. If JavaScript evaluation takes more than a few seconds the "application not responding" dialog will be presented to the user.
+
+```Java
+String result = jsEvaluator.evaluateBlockUIThread("2 * 17", 1_000);
+// UI thread will be blocked.
+```
+
 ## Call a JavaScript function
 
-The following methods can be used to call a JavaScript function and pass any number of string, int or double parameters.
+The following methods can be used to call a JavaScript function and pass any number of string, integer or double arguments.
 
 #### Respond in UI thread
 
 ```Java
-jsEvaluator.evaluateAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
+jsEvaluator.callFunctionAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
   new JsCallback() {
 
   @Override
   public void onResult(final String result) {
-    // Result of JavaScript function is returned here here.
+    // Result of JavaScript function is returned here in UI thread.
     // It is safe to update your UI here.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
@@ -125,13 +139,13 @@ jsEvaluator.evaluateAndRespondInUiThread("function myFunction(a, b, c, a) { retu
 #### Respond in background thread
 
 ```Java
-jsEvaluator.evaluateAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
+jsEvaluator.callFunctionAndRespondInBackgroundThread("function myFunction(a, b, c, a) { return 'result'; }",
   new JsCallback() {
 
   @Override
   public void onResult(final String result) {
-    // Result of JavaScript function is returned here here.
-    // It is NOT safe to interact with UI here.
+    // Result of JavaScript function is returned here in background thread.
+    // Avoid accessing the Android UI toolkit here.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```

@@ -36,7 +36,7 @@ public class CharacterEscape extends Activity {
 
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-
+        String sdfsd = null;
 		mJsEvaluator = new JsEvaluator(this);
 	}
 
