@@ -23,11 +23,31 @@ public class CallJsFunctionActivity extends Activity {
 		mJsEvaluator.callFunctionAndRespondOnUiThread(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
-				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionResult);
-				jsResultTextView.setText(String.format("Result: %s", resultValue));
+				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionUiThreadResult);
+				jsResultTextView.setText(String.format("UI thread result: %s", resultValue));
+
+                callFunctionOnBackgroundThread();
 			}
 		}, "greet", parameterText.getText().toString());
 	}
+
+	void callFunctionOnBackgroundThread() {
+        final EditText functionText = (EditText) findViewById(R.id.js_function_edit_text);
+        final String jsCode = functionText.getText().toString();
+
+        final EditText parameterText = (EditText) findViewById(R.id.editTextParameter);
+        mJsEvaluator.callFunctionAndRespondOnBackgroundThread(jsCode, new JsCallback() {
+            @Override
+            public void onResult(final String resultValue) {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionBackgroundThreadResult);
+                        jsResultTextView.setText(String.format("Background thread result: %s", resultValue));
+                    }
+                });
+            }
+        }, "greet", parameterText.getText().toString());
+    }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

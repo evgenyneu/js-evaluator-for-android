@@ -113,9 +113,37 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
      * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
      */
 	public void callFunctionAndRespondOnUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args) {
-		jsCode += "; " + JsFunctionCallFormatter.toString(functionName, args);
-        evaluateAndRespondOnUiThread(jsCode, resultCallback);
+        callFunction(
+                true, // execute callback on UI thread
+                jsCode,
+                resultCallback,
+                functionName,
+                args
+        );
 	}
+
+    /**
+     * Calls a JavaScript function and pass arguments to it. Result of evaluation is passed on background thread.
+     *
+     * @param  jsCode           JavaScript code to evaluate.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called on background thread.
+     * @param  functionName     name of the JavaScript function to be called.
+     * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
+     */
+    public void callFunctionAndRespondOnBackgroundThread(String jsCode, JsCallback resultCallback, String functionName, Object... args) {
+        callFunction(
+                false, // execute callback on background thread
+                jsCode,
+                resultCallback,
+                functionName,
+                args
+        );
+    }
+
+    private void callFunction(Boolean executeCallbackInUiThread, String jsCode, JsCallback resultCallback, String functionName, Object... args) {
+        jsCode += "; " + JsFunctionCallFormatter.toString(functionName, args);
+        evaluate(jsCode, resultCallback, executeCallbackInUiThread);
+    }
 
 	public ArrayList<JsCallbackData> getResultCallbacks() {
 		return mResultCallbacks;

@@ -30,4 +30,14 @@ public interface JsEvaluatorInterface {
      * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
      */
 	public void callFunctionAndRespondOnUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args);
+
+    /**
+     * Calls a JavaScript function and pass arguments to it. Result of evaluation is passed on background thread.
+     *
+     * @param  jsCode           JavaScript code to evaluate.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called on background thread.
+     * @param  functionName     name of the JavaScript function to be called.
+     * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
+     */
+    public void callFunctionAndRespondOnBackgroundThread(String jsCode, JsCallback resultCallback, String functionName, Object... args);
 }

@@ -60,11 +60,20 @@
         android:onClick="onCallFuncitonClicked" />
 
     <TextView
-        android:id="@+id/textViewCallFunctionResult"
+        android:id="@+id/textViewCallFunctionUiThreadResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/buttonCallFunction"
         android:layout_below="@+id/buttonCallFunction"
+        android:layout_marginTop="5dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textViewCallFunctionBackgroundThreadResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonCallFunction"
+        android:layout_below="@+id/textViewCallFunctionUiThreadResult"
         android:layout_marginTop="5dp"
         android:text="" />
 

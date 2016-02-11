@@ -26,21 +26,42 @@ public class CallJsFunctionActivityTests extends
 	public void testCallFunctionButton_clickButtonAndShowResult() throws InterruptedException {
 		final Button callFunctionButton = (Button) mActivity.findViewById(R.id.buttonCallFunction);
 
-		final TextView resultTextView = (TextView) mActivity
-				.findViewById(R.id.textViewCallFunctionResult);
-
 		TouchUtils.clickView(this, callFunctionButton);
-		assertTrue(View.VISIBLE == resultTextView.getVisibility());
 
-		final String expectedResult = "Result: Hello, World";
+		// Run on UI thread
+        // ---------------
+
+        final TextView resultTextViewUi = (TextView) mActivity
+                .findViewById(R.id.textViewCallFunctionUiThreadResult);
+
+		assertTrue(View.VISIBLE == resultTextViewUi.getVisibility());
+		final String expectedResult = "UI thread result: Hello, World";
 
 		for (int i = 0; i < 100; i++) {
-			Thread.sleep(100);
-			if (resultTextView.getText().toString().equals(expectedResult)) {
+			Thread.sleep(50);
+			if (resultTextViewUi.getText().toString().equals(expectedResult)) {
 				break;
 			}
 		}
-		assertEquals(expectedResult, resultTextView.getText().toString());
+		assertEquals(expectedResult, resultTextViewUi.getText().toString());
+
+        // Run on background thread
+        // ---------------
+
+        final TextView resultTextViewBackground = (TextView) mActivity
+                .findViewById(R.id.textViewCallFunctionBackgroundThreadResult);
+
+        assertTrue(View.VISIBLE == resultTextViewBackground.getVisibility());
+        final String expectedResultBackgroundThread = "Background thread result: Hello, World";
+
+        for (int i = 0; i < 100; i++) {
+            Thread.sleep(50);
+            if (resultTextViewBackground.getText().toString().equals(expectedResultBackgroundThread)) {
+                break;
+            }
+        }
+
+        assertEquals(expectedResultBackgroundThread, resultTextViewBackground.getText().toString());
 	}
 
 	@MediumTest

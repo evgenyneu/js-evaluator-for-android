@@ -77,7 +77,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
     // Call function on UI thread
     // ----------------------
 
-	public void testCallFunction_shouldEvaluateJs() {
+	public void testCallFunction_shouldEvaluateJsOnUiThread() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
 
 		mJsEvaluator.callFunctionAndRespondOnUiThread("1 + 2", callbackMock, "myFunction", "one", 2);
@@ -89,7 +89,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
 				actualJs);
 	}
 
-	public void testCallFunction_shouldRegisterResultCallback() {
+	public void testCallFunction_shouldRegisterResultCallbackOnUiThread() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
 
 		mJsEvaluator.callFunctionAndRespondOnUiThread("1 + 2", callbackMock, "myFunction");
@@ -100,6 +100,33 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		assertTrue(callback.callOnUiThread);
 		assertEquals(callbackMock, callback.callback);
 	}
+
+    // Call function on background thread
+    // ----------------------
+
+    public void testCallFunction_shouldEvaluateJsOnBackgroundThread() {
+        final JsCallbackMock callbackMock = new JsCallbackMock();
+
+        mJsEvaluator.callFunctionAndRespondOnBackgroundThread("1 + 2", callbackMock, "myFunction", "one", 2);
+
+        assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
+        final String actualJs = mWebViewWrapperMock.mLoadedJavaScript.get(0);
+        assertEquals(
+                "evgeniiJsEvaluator.returnResultToJava(eval('1 + 2; myFunction(\"one\", 2)'), 0);",
+                actualJs);
+    }
+
+    public void testCallFunction_shouldRegisterResultCallbackOnBackgroundThread() {
+        final JsCallbackMock callbackMock = new JsCallbackMock();
+
+        mJsEvaluator.callFunctionAndRespondOnBackgroundThread("1 + 2", callbackMock, "myFunction");
+
+        final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
+        assertEquals(1, callbacks.size());
+        JsCallbackData callback = callbacks.get(0);
+        assertFalse(callback.callOnUiThread);
+        assertEquals(callbackMock, callback.callback);
+    }
 
     // Escape JavaScript text
     // ----------------------
