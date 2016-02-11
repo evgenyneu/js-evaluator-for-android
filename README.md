@@ -80,7 +80,7 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 
 ## Evaluate JavaScript
 
-The following functions evaluate JavaScript and return the result. Please note that all functions can **only be called from UI thread**.
+The following functions evaluate JavaScript and return the result. Please note that all functions can only be called **from UI thread**.
 
 #### Respond in UI thread
 
