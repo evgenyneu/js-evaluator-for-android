@@ -80,7 +80,7 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 
 ## Evaluate JavaScript
 
-### Repond in UI thread
+#### Repond in UI thread
 
 ```Java
 jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
@@ -94,7 +94,7 @@ jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
 
 ## Call a JavaScript function
 
-### Repond in UI thread
+#### Repond in UI thread
 
 ```Java
 jsEvaluator.evaluateAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
