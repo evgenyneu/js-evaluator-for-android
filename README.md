@@ -115,7 +115,7 @@ The function will wait for result from JavaScript evaluation. It receives two ar
 1. JavaScript code for evaluation.
 1. Wait time *in milliseconds*. The function will return `null` if it fails to evaluate JavaScript within the given time period.
 
-**Warning:** UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user. If JavaScript evaluation takes more than a few seconds the "application not responding" dialog will be presented to the user.
+**Warning:** UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user. Moreover, if JavaScript evaluation takes more than a few seconds the "application not responding" dialog will be presented to the user.
 
 
 ## Call a JavaScript function
