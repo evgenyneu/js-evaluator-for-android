@@ -15,7 +15,5 @@ public interface JsEvaluatorInterface {
      */
 	public void callFunctionAndRespondInUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args);
 
-	public void evaluate(String jsCode);
-
 	public void evaluate(String jsCode, JsCallback resultCallback);
 }

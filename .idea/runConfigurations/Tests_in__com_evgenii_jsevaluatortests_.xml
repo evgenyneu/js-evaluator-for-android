@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Tests in 'com.evgenii.jsevaluatortests'" type="AndroidTestRunConfigurationType" factoryName="Android Tests" nameIsGenerated="true">
+    <module name="app" />
+    <option name="TESTING_TYPE" value="1" />
+    <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="CLASS_NAME" value="" />
+    <option name="PACKAGE_NAME" value="com.evgenii.jsevaluatortests" />
+    <option name="EXTRA_OPTIONS" value="" />
+    <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+    <option name="PREFERRED_AVD" value="" />
+    <option name="CLEAR_LOGCAT" value="false" />
+    <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+    <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+    <option name="FORCE_STOP_RUNNING_APP" value="true" />
+    <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+    <option name="PREFERRED_AVD" value="" />
+    <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+    <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+    <method />
+  </configuration>
+</component>

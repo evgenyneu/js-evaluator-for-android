@@ -76,11 +76,6 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	}
 
 	@Override
-	public void evaluate(String jsCode) {
-		evaluate(jsCode, null);
-	}
-
-	@Override
 	public void evaluate(String jsCode, JsCallback resultCallback) {
 		int callbackIndex = mResultCallbacks.size();
 		if (resultCallback == null) { callbackIndex = -1; }
