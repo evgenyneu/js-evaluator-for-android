@@ -197,6 +197,18 @@ public class JavaScriptInterface {
 mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
 ```
 
+## JavaScript is evaluated in new context
+
+Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation. It means, for example, that one can not evaluate a large JavaScript library and then use it in subsequent calls. Please concatenate all your JavaScript to one string and evaluate it in one go.
+
+For example, if you need to load jQuery libary and then use it:
+
+```Java
+String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
+jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
+```
+
+
 ## Tests
 
 Tests are located in `app` module of this project. The app can be run for manual testing as well.
@@ -215,19 +227,6 @@ Android versions tested:
 * 4.4.2 (KitKat)
 * 5.0, 5.1 (Lollipop)
 * 6.0 Android (Marshmallow)
-
-
-## JavaScript is evaluated in new context
-
-Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation.
-Please concatenate all your JavaScript to one string and evaluate it in one go.
-
-For example, if you need to load jQuery libary and then use it:
-
-```Java
-String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
-jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
-```
 
 
 ## Feedback is welcome
