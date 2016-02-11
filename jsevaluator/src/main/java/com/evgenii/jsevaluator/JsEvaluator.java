@@ -52,7 +52,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	private final Context mContext;
 
-	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
+	private final ArrayList<JsCallbackData> mResultCallbacks = new ArrayList<JsCallbackData>();
 
 	private HandlerWrapperInterface mHandler;
 
@@ -72,7 +72,8 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
         int callbackIndex = mResultCallbacks.size();
         if (resultCallback == null) { callbackIndex = -1; }
         final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
-        if (resultCallback != null) { mResultCallbacks.add(resultCallback); }
+        JsCallbackData callbackData = new JsCallbackData(resultCallback, true);
+        if (resultCallback != null) { mResultCallbacks.add(callbackData); }
         getWebViewWrapper().loadJavaScript(js);
     }
 
@@ -101,7 +102,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
         evaluateAndRespondInUiThread(jsCode, resultCallback);
 	}
 
-	public ArrayList<JsCallback> getResultCallbacks() {
+	public ArrayList<JsCallbackData> getResultCallbacks() {
 		return mResultCallbacks;
 	}
 
@@ -117,12 +118,12 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		if (callIndex == -1)
 			return;
 
-		final JsCallback callback = mResultCallbacks.get(callIndex);
+		final JsCallbackData callbackData = mResultCallbacks.get(callIndex);
 
 		mHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				callback.onResult(value);
+                callbackData.callback.onResult(value);
 			}
 		});
 	}

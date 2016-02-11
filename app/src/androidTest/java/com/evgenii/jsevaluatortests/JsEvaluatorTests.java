@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.test.AndroidTestCase;
 
+import com.evgenii.jsevaluator.JsCallbackData;
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluatortests.mocks.HandlerWrapperMock;
@@ -24,6 +25,34 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.setWebViewWrapper(mWebViewWrapperMock);
 	}
 
+    // Evaluate JS in UI thread
+    // ----------------------
+
+    public void testEvaluate_shouldEvaluateJs() {
+        final JsCallbackMock callbackMock = new JsCallbackMock();
+
+        mJsEvaluator.evaluateAndRespondInUiThread("2 * 3", callbackMock);
+
+        assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
+        assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
+                mWebViewWrapperMock.mLoadedJavaScript.get(0));
+    }
+
+    public void testEvaluate_shouldRegisterResultCallback() {
+        final JsCallbackMock callbackMock = new JsCallbackMock();
+
+        mJsEvaluator.evaluateAndRespondInUiThread("2 * 3", callbackMock);
+
+        final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
+        assertEquals(1, callbacks.size());
+		JsCallbackData callback = callbacks.get(0);
+		assertTrue(callback.callInUiThread);
+        assertEquals(callbackMock, callback.callback);
+    }
+
+    // Call function in UI thread
+    // ----------------------
+
 	public void testCallFunction_shouldEvaluateJs() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
 
@@ -41,10 +70,15 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 		mJsEvaluator.callFunctionAndRespondInUiThread("1 + 2", callbackMock, "myFunction");
 
-		final ArrayList<JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
+		final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
 		assertEquals(1, callbacks.size());
-		assertEquals(callbackMock, callbacks.get(0));
+		JsCallbackData callback = callbacks.get(0);
+		assertTrue(callback.callInUiThread);
+		assertEquals(callbackMock, callback.callback);
 	}
+
+    // Escape JavaScript text
+    // ----------------------
 
 	public void testEscapeCarriageReturn() {
 		assertEquals("one\\rtwo", JsEvaluator.escapeCarriageReturn("one\rtwo"));
@@ -59,30 +93,14 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		assertEquals("\\'a\\'", JsEvaluator.escapeSingleQuotes("'a'"));
 	}
 
-	public void testEvaluate_shouldEvaluateJs() {
-		final JsCallbackMock callbackMock = new JsCallbackMock();
-
-		mJsEvaluator.evaluateAndRespondInUiThread("2 * 3", callbackMock);
-
-        assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
-		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
-				mWebViewWrapperMock.mLoadedJavaScript.get(0));
-	}
-
-	public void testEvaluate_shouldRegisterResultCallback() {
-		final JsCallbackMock callbackMock = new JsCallbackMock();
-
-		mJsEvaluator.evaluateAndRespondInUiThread("2 * 3", callbackMock);
-
-		final ArrayList<JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
-		assertEquals(1, callbacks.size());
-		assertEquals(callbackMock, callbacks.get(0));
-	}
 
 	public void testGetJsForEval() {
 		final String result = JsEvaluator.getJsForEval("'hello'", 34);
 		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('\\'hello\\''), 34);", result);
 	}
+
+    // Finished evaluation
+    // ----------------------
 
 	public void testJsCallFinished_doesNotRunCallBackWhenIndexIsMinusOne() {
 		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
@@ -92,9 +110,10 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	}
 
 	public void testJsCallFinished_runsCallback() {
-		final ArrayList<JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
+		final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
 		final JsCallbackMock callback = new JsCallbackMock();
-		callbacks.add(callback);
+        JsCallbackData callbackData = new JsCallbackData(callback, true);
+		callbacks.add(callbackData);
 
 		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
 		mJsEvaluator.setHandler(handlerWrapperMock);
