@@ -63,7 +63,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
     @Override
     /**
-     * Evaluates JavaScript code. Result of evaluation is passed in the UI thread.
+     * Evaluates JavaScript code and passes result in the UI thread.
      *
      * @param  jsCode           JavaScript code to evaluate.
      * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the UI thread.
@@ -74,6 +74,17 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
         final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
         if (resultCallback != null) { mResultCallbacks.add(resultCallback); }
         getWebViewWrapper().loadJavaScript(js);
+    }
+
+    @Override
+    /**
+     * Evaluates JavaScript code and passes result in the background thread.
+     *
+     * @param  jsCode           JavaScript code to evaluate.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the background thread.
+     */
+    public void evaluateAndRespondInBackgroundThread(String jsCode, JsCallback resultCallback) {
+
     }
 
 	@Override
