@@ -20,13 +20,13 @@ public class CharacterEscape extends Activity {
 		final String jsCode = functionText.getText().toString();
 
 		final TextView parameterText = (TextView) findViewById(R.id.editTextCharacterEscapeParameter);
-		mJsEvaluator.callFunctionAndRespondInUiThread(jsCode, new JsCallback() {
-            @Override
-            public void onResult(final String resultValue) {
-                final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCharacterEscapeResult);
-                jsResultTextView.setText(String.format("Result: \n%s", resultValue));
-            }
-        }, "greet", parameterText.getText().toString());
+		mJsEvaluator.callFunctionAndRespondOnUiThread(jsCode, new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCharacterEscapeResult);
+				jsResultTextView.setText(String.format("Result: \n%s", resultValue));
+			}
+		}, "greet", parameterText.getText().toString());
 	}
 
 	@Override

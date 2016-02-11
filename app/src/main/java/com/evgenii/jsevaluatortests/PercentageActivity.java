@@ -35,7 +35,7 @@ public class PercentageActivity extends Activity {
 
 	public void onEvaluatePercentageClicked(View view) {
 		final EditText editText = (EditText) findViewById(R.id.percentageCodeLabel);
-		mJsEvaluator.evaluateAndRespondInUiThread(editText.getText().toString(), new JsCallback() {
+		mJsEvaluator.evaluateAndRespondOnUiThread(editText.getText().toString(), new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView resultTextView = (TextView) findViewById(R.id.percentageResultLabel);

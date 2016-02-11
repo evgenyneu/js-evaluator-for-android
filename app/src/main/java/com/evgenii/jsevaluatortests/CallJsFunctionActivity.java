@@ -20,7 +20,7 @@ public class CallJsFunctionActivity extends Activity {
 		final String jsCode = functionText.getText().toString();
 
 		final EditText parameterText = (EditText) findViewById(R.id.editTextParameter);
-		mJsEvaluator.callFunctionAndRespondInUiThread(jsCode, new JsCallback() {
+		mJsEvaluator.callFunctionAndRespondOnUiThread(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionResult);

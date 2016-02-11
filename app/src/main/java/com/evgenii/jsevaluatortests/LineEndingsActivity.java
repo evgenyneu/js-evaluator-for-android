@@ -12,7 +12,7 @@ public class LineEndingsActivity extends Activity {
 
 	protected void evaluate() {
 		// Use CR, LF characters and their combinations
-		mJsEvaluator.evaluateAndRespondInUiThread("1;\r\n2;\n3;\r4;\n\r5;", new JsCallback() {
+		mJsEvaluator.evaluateAndRespondOnUiThread("1;\r\n2;\n3;\r4;\n\r5;", new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.lineEndingsViewResult);

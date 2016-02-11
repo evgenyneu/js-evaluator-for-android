@@ -4,7 +4,7 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 
 /**
  * Data object that is used to store the callback for JavaScript evaluation result
- * and whether to call in the UI thread.
+ * and whether to call on UI thread or background thread.
  */
 
 public class JsCallbackData {
@@ -13,11 +13,11 @@ public class JsCallbackData {
      * Create new callback data
      *
      * @param aCallback             will be passed the result of JavaScript evaluation.
-     * @param shouldCallInUiThread  whether to execute the callback in the UI thread or background thread.
+     * @param shouldCallOnUiThread  whether to execute the callback on UI thread or background thread.
      */
-    public JsCallbackData(JsCallback aCallback, Boolean shouldCallInUiThread) {
+    public JsCallbackData(JsCallback aCallback, Boolean shouldCallOnUiThread) {
         callback = aCallback;
-        callInUiThread = shouldCallInUiThread;
+        callOnUiThread = shouldCallOnUiThread;
     }
 
     /**
@@ -26,8 +26,8 @@ public class JsCallbackData {
     public JsCallback callback;
 
     /**
-     * When true the callback is executed in the UI thread.
-     * When false the callback is executed in background thread.
+     * When true the callback is executed on UI thread.
+     * When false the callback is executed on background thread.
      */
-    public Boolean callInUiThread = true;
+    public Boolean callOnUiThread = true;
 }

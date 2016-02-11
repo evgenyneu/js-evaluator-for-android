@@ -82,27 +82,27 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 
 The following functions evaluate JavaScript and return the result. Please note that all functions can only be called **from UI thread**.
 
-#### Respond in UI thread
+#### Respond on UI thread
 
 ```Java
 // Call only from UI thread
-jsEvaluator.evaluateAndRespondInUiThread("2 * 17", new JsCallback() {
+jsEvaluator.evaluateAndRespondOnUiThread("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
-    // Result of JavaScript evaluation is returned here in UI thread.
+    // Result of JavaScript evaluation is returned here on UI thread.
     // It is safe to update your UI here.
   }
 });
 ```
 
-#### Respond in background thread
+#### Respond on background thread
 
 ```Java
 // Call only from UI thread
-jsEvaluator.evaluateAndRespondInBackgroundThread("2 * 17", new JsCallback() {
+jsEvaluator.evaluateAndRespondOnBackgroundThread("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
-    // Result of JavaScript evaluation is returned here in background thread.
+    // Result of JavaScript evaluation is returned here on background thread.
     // Avoid accessing UI here.
   }
 });
@@ -127,31 +127,31 @@ The function will wait for result from JavaScript evaluation. It receives two ar
 
 The following methods can be used to call a JavaScript function and pass any number of string, integer or double arguments.
 
-#### Respond in UI thread
+#### Respond on UI thread
 
 ```Java
 // Call only from UI thread
-jsEvaluator.callFunctionAndRespondInUiThread("function myFunction(a, b, c, a) { return 'result'; }",
+jsEvaluator.callFunctionAndRespondOnUiThread("function myFunction(a, b, c, a) { return 'result'; }",
   new JsCallback() {
 
   @Override
   public void onResult(final String result) {
-    // Result of JavaScript function is returned here in UI thread.
+    // Result of JavaScript function is returned here on UI thread.
     // It is safe to update your UI here.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```
 
-#### Respond in background thread
+#### Respond on background thread
 
 ```Java
 // Call only from UI thread
-jsEvaluator.callFunctionAndRespondInBackgroundThread("function myFunction(a, b, c, a) { return 'result'; }",
+jsEvaluator.callFunctionAndRespondOnBackgroundThread("function myFunction(a, b, c, a) { return 'result'; }",
   new JsCallback() {
 
   @Override
   public void onResult(final String result) {
-    // Result of JavaScript function is returned here in background thread.
+    // Result of JavaScript function is returned here on background thread.
     // Avoid accessing UI here.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);

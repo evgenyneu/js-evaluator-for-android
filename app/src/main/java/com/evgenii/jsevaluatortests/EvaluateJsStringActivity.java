@@ -38,8 +38,8 @@ public class EvaluateJsStringActivity extends Activity {
 	public void onEvaluateClicked(View view) {
 		final EditText editText = (EditText) findViewById(R.id.edit_java_script);
 
-		// Evaluate in UI thread
-		mJsEvaluator.evaluateAndRespondInUiThread(editText.getText().toString(), new JsCallback() {
+		// Evaluate on UI thread
+		mJsEvaluator.evaluateAndRespondOnUiThread(editText.getText().toString(), new JsCallback() {
             @Override
             public void onResult(final String resultValue) {
                 final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_ui_thread_text_view);
@@ -54,8 +54,8 @@ public class EvaluateJsStringActivity extends Activity {
     private void evaluateInBackgroundThread() {
         final EditText editText = (EditText) findViewById(R.id.edit_java_script);
 
-        // Evaluate in background thread
-        mJsEvaluator.evaluateAndRespondInBackgroundThread(editText.getText().toString(), new JsCallback() {
+        // Evaluate on background thread
+        mJsEvaluator.evaluateAndRespondOnBackgroundThread(editText.getText().toString(), new JsCallback() {
             @Override
             public void onResult(final String resultValue) {
                 runOnUiThread(new Runnable() {

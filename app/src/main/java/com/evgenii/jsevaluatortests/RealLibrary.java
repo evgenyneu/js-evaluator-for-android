@@ -21,7 +21,7 @@ public class RealLibrary extends Activity {
 	String jsCode;
 
 	protected void evaluateAndDisplay() {
-		mJsEvaluator.evaluateAndRespondInUiThread(jsCode, new JsCallback() {
+		mJsEvaluator.evaluateAndRespondOnUiThread(jsCode, new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResult);

@@ -66,31 +66,31 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
     @Override
     /**
-     * Evaluates JavaScript code and passes result in the UI thread.
+     * Evaluates JavaScript code and passes result on UI thread.
      *
      * @param  jsCode           JavaScript code to evaluate.
-     * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the UI thread.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called on UI thread.
      */
-    public void evaluateAndRespondInUiThread(String jsCode, JsCallback resultCallback) {
+    public void evaluateAndRespondOnUiThread(String jsCode, JsCallback resultCallback) {
         evaluate(
                 jsCode,
                 resultCallback,
-                true // execute callback in UI thread
+                true // execute callback on UI thread
         );
     }
 
     @Override
     /**
-     * Evaluates JavaScript code and passes result in the background thread.
+     * Evaluates JavaScript code and passes result on background thread.
      *
      * @param  jsCode           JavaScript code to evaluate.
-     * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the background thread.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called on background thread.
      */
-    public void evaluateAndRespondInBackgroundThread(String jsCode, JsCallback resultCallback) {
+    public void evaluateAndRespondOnBackgroundThread(String jsCode, JsCallback resultCallback) {
         evaluate(
                 jsCode,
                 resultCallback,
-                false // execute callback in background thread
+                false // execute callback on background thread
         );
     }
 
@@ -105,16 +105,16 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	@Override
     /**
-     * Calls a JavaScript function and pass arguments to it. Result of evaluation is passed in the UI thread.
+     * Calls a JavaScript function and pass arguments to it. Result of evaluation is passed on UI thread.
      *
      * @param  jsCode           JavaScript code to evaluate.
-     * @param  resultCallback   callback to receive the result form JavaScript function. It is called in the UI thread.
+     * @param  resultCallback   callback to receive the result form JavaScript function. It is called on UI thread.
      * @param  functionName     name of the JavaScript function to be called.
      * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
      */
-	public void callFunctionAndRespondInUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args) {
+	public void callFunctionAndRespondOnUiThread(String jsCode, JsCallback resultCallback, String functionName, Object... args) {
 		jsCode += "; " + JsFunctionCallFormatter.toString(functionName, args);
-        evaluateAndRespondInUiThread(jsCode, resultCallback);
+        evaluateAndRespondOnUiThread(jsCode, resultCallback);
 	}
 
 	public ArrayList<JsCallbackData> getResultCallbacks() {
@@ -135,8 +135,8 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 		final JsCallbackData callbackData = mResultCallbacks.get(callIndex);
 
-        if (callbackData.callInUiThread) {
-            // Execute in UI thread
+        if (callbackData.callOnUiThread) {
+            // Execute on UI thread
             mUiThreadHandler.post(new Runnable() {
                 @Override
                 public void run() {

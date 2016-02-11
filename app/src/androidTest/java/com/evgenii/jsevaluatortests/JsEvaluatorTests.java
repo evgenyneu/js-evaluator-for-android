@@ -24,13 +24,13 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.setWebViewWrapper(mWebViewWrapperMock);
 	}
 
-    // Evaluate JS in UI thread
+    // Evaluate JS on UI thread
     // ----------------------
 
     public void testEvaluate_shouldEvaluateJsInUiThread() {
         final JsCallbackMock callbackMock = new JsCallbackMock();
 
-        mJsEvaluator.evaluateAndRespondInUiThread("2 * 3", callbackMock);
+        mJsEvaluator.evaluateAndRespondOnUiThread("2 * 3", callbackMock);
 
         assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
         assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
@@ -40,22 +40,22 @@ public class JsEvaluatorTests extends AndroidTestCase {
     public void testEvaluate_shouldRegisterResultCallbackInUiThread() {
         final JsCallbackMock callbackMock = new JsCallbackMock();
 
-        mJsEvaluator.evaluateAndRespondInUiThread("2 * 3", callbackMock);
+        mJsEvaluator.evaluateAndRespondOnUiThread("2 * 3", callbackMock);
 
         final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
         assertEquals(1, callbacks.size());
 		JsCallbackData callback = callbacks.get(0);
-		assertTrue(callback.callInUiThread);
+		assertTrue(callback.callOnUiThread);
         assertEquals(callbackMock, callback.callback);
     }
 
-    // Evaluate JS in background thread
+    // Evaluate JS on background thread
     // ----------------------
 
     public void testEvaluate_shouldEvaluateJsInBackgroundThread() {
         final JsCallbackMock callbackMock = new JsCallbackMock();
 
-        mJsEvaluator.evaluateAndRespondInBackgroundThread("2 * 3", callbackMock);
+        mJsEvaluator.evaluateAndRespondOnBackgroundThread("2 * 3", callbackMock);
 
         assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
         assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
@@ -65,22 +65,22 @@ public class JsEvaluatorTests extends AndroidTestCase {
     public void testEvaluate_shouldRegisterResultCallbackForBackgroundThread() {
         final JsCallbackMock callbackMock = new JsCallbackMock();
 
-        mJsEvaluator.evaluateAndRespondInBackgroundThread("2 * 3", callbackMock);
+        mJsEvaluator.evaluateAndRespondOnBackgroundThread("2 * 3", callbackMock);
 
         final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
         assertEquals(1, callbacks.size());
         JsCallbackData callback = callbacks.get(0);
-        assertFalse(callback.callInUiThread);
+        assertFalse(callback.callOnUiThread);
         assertEquals(callbackMock, callback.callback);
     }
 
-    // Call function in UI thread
+    // Call function on UI thread
     // ----------------------
 
 	public void testCallFunction_shouldEvaluateJs() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
 
-		mJsEvaluator.callFunctionAndRespondInUiThread("1 + 2", callbackMock, "myFunction", "one", 2);
+		mJsEvaluator.callFunctionAndRespondOnUiThread("1 + 2", callbackMock, "myFunction", "one", 2);
 
 		assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
 		final String actualJs = mWebViewWrapperMock.mLoadedJavaScript.get(0);
@@ -92,12 +92,12 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	public void testCallFunction_shouldRegisterResultCallback() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
 
-		mJsEvaluator.callFunctionAndRespondInUiThread("1 + 2", callbackMock, "myFunction");
+		mJsEvaluator.callFunctionAndRespondOnUiThread("1 + 2", callbackMock, "myFunction");
 
 		final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
 		assertEquals(1, callbacks.size());
 		JsCallbackData callback = callbacks.get(0);
-		assertTrue(callback.callInUiThread);
+		assertTrue(callback.callOnUiThread);
 		assertEquals(callbackMock, callback.callback);
 	}
 
@@ -139,7 +139,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
         JsCallbackData callbackData = new JsCallbackData(
                 callback,
-                true // in UI thread
+                true // on UI thread
         );
 
 		callbacks.add(callbackData);
@@ -158,7 +158,7 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
         JsCallbackData callbackData = new JsCallbackData(
             callback,
-            false // in background thread
+            false // on background thread
         );
 
         callbacks.add(callbackData);
