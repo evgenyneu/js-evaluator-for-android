@@ -2,6 +2,7 @@ package com.evgenii.jsevaluatortests;
 
 import java.util.ArrayList;
 
+import android.os.AsyncTask;
 import android.test.AndroidTestCase;
 
 import com.evgenii.jsevaluator.JsCallbackData;
@@ -77,16 +78,47 @@ public class JsEvaluatorTests extends AndroidTestCase {
     // Block UI thread and evaluate
     // ----------------------
 
-    public void testBlockUiThreadAndEvaluate() {
-        final JsCallbackMock callbackMock = new JsCallbackMock();
+    public void testBlockUiThreadAndEvaluate_returnsResult() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                mJsEvaluator.jsCallFinished("my result", 0);
+            }
+        });
 
-        String result = mJsEvaluator.blockUIThreadAndEvaluate(5_000, "2 * 3");
+        String result = mJsEvaluator.blockUIThreadAndEvaluate(1_000, "2 * 3");
 
-        check result of evaluation here
+        assertEquals("my result", result);
+    }
+
+    public void testBlockUiThreadAndEvaluate_sendJavaScriptToWebViewForEvaluation() {
+        mJsEvaluator.blockUIThreadAndEvaluate(1, "2 * 3");
 
         assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
         assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('2 * 3'), 0);",
                 mWebViewWrapperMock.mLoadedJavaScript.get(0));
+    }
+
+    public void testBlockUiThreadAndEvaluate_returnsNullWhenOnTimeout() {
+        String result = mJsEvaluator.blockUIThreadAndEvaluate(1, "2 * 3");
+
+        assertTrue(result == null);
+    }
+
+    public void testBlockUiThreadAndEvaluate_shouldRegisterResultCallbackOnBackgroundThread() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                mJsEvaluator.jsCallFinished("my result", 0);
+            }
+        });
+
+        mJsEvaluator.blockUIThreadAndEvaluate(50, "2 * 3");
+
+        final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
+        assertEquals(1, callbacks.size());
+        JsCallbackData callback = callbacks.get(0);
+        assertFalse(callback.callOnUiThread);
     }
 
     // Call function on UI thread
@@ -171,7 +203,6 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	public void testJsCallFinished_doesNotRunCallBackWhenIndexIsMinusOne() {
 		final UiThreadHandlerWrapperMock uiThreadHandlerWrapperMock = new UiThreadHandlerWrapperMock();
 		mJsEvaluator.setUiThreadHandler(uiThreadHandlerWrapperMock);
-
 		mJsEvaluator.jsCallFinished("my result", -1);
 	}
 
