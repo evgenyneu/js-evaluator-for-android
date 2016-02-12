@@ -36,10 +36,19 @@ public class EvaluateJsStringActivity extends Activity {
 	}
 
 	public void onEvaluateClicked(View view) {
-		final EditText editText = (EditText) findViewById(R.id.edit_java_script);
+        blockUiActivityAndEvaluate();
+        evaluateOnUiThread();
+	}
 
-		// Evaluate on UI thread
-		mJsEvaluator.evaluateAndRespondOnUiThread(editText.getText().toString(), new JsCallback() {
+    private void blockUiActivityAndEvaluate() {
+        String resultValue = mJsEvaluator.blockUIThreadAndEvaluate(1_000, getEditText().getText().toString());
+        final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_block_ui_thread_text_view);
+        jsResultTextView.setText(String.format("Block UI thread result: %s",
+                resultValue));
+    }
+
+    private void evaluateOnUiThread() {
+        mJsEvaluator.evaluateAndRespondOnUiThread(getEditText().getText().toString(), new JsCallback() {
             @Override
             public void onResult(final String resultValue) {
                 final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_ui_thread_text_view);
@@ -49,13 +58,11 @@ public class EvaluateJsStringActivity extends Activity {
                 evaluateInBackgroundThread();
             }
         });
-	}
+    }
 
     private void evaluateInBackgroundThread() {
-        final EditText editText = (EditText) findViewById(R.id.edit_java_script);
-
         // Evaluate on background thread
-        mJsEvaluator.evaluateAndRespondOnBackgroundThread(editText.getText().toString(), new JsCallback() {
+        mJsEvaluator.evaluateAndRespondOnBackgroundThread(getEditText().getText().toString(), new JsCallback() {
             @Override
             public void onResult(final String resultValue) {
                 runOnUiThread(new Runnable() {
@@ -69,7 +76,11 @@ public class EvaluateJsStringActivity extends Activity {
         });
     }
 
-	@Override
+    private EditText getEditText() {
+        return (EditText) findViewById(R.id.edit_java_script);
+    }
+
+    @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:

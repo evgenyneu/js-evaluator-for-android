@@ -51,4 +51,13 @@
         android:layout_marginTop="5dp"
         android:text="" />
 
+    <TextView
+        android:id="@+id/js_result_block_ui_thread_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_evaluate"
+        android:layout_below="@+id/js_result_background_thread_text_view"
+        android:layout_marginTop="5dp"
+        android:text="" />
+
 </RelativeLayout>

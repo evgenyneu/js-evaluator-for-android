@@ -41,6 +41,13 @@ public class EvaluateJsActivityTests extends
         final TextView resultBackgroundThreadTextView = (TextView) mActivity.findViewById(R.id.js_result_background_thread_text_view);
         assertTrue(View.VISIBLE == resultBackgroundThreadTextView.getVisibility());
 		assertEquals("Background thread result: 4", resultBackgroundThreadTextView.getText().toString());
+
+		// Block UI thread and evaluate
+		// --------------
+
+		final TextView resultBlockUiThreadTextView = (TextView) mActivity.findViewById(R.id.js_result_block_ui_thread_text_view);
+		assertTrue(View.VISIBLE == resultBlockUiThreadTextView.getVisibility());
+		assertEquals("Block UI thread result: 4", resultBlockUiThreadTextView.getText().toString());
 	}
 
 	@MediumTest
