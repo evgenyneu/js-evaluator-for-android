@@ -178,6 +178,50 @@ public class JsEvaluatorTests extends AndroidTestCase {
         assertEquals(callbackMock, callback.callback);
     }
 
+    // Block UI thread and call function
+    // ----------------------
+
+    public void testBlockUiThreadAndCallFunction_returnResults() {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) { }
+                mJsEvaluator.jsCallFinished("my result from function", 0);
+            }
+        });
+
+        String result = mJsEvaluator.blockUIThreadAndCallFunction(1_000, "1 + 2", "myFunction", "one", 2);
+
+        assertEquals("my result from function", result);
+    }
+
+    public void testBlockUiThreadAndCallFunction_sendJavaScriptToWebViewForEvaluation() {
+        mJsEvaluator.blockUIThreadAndCallFunction(1, "1 + 2", "myFunction", "one", 2);
+
+        assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
+        final String actualJs = mWebViewWrapperMock.mLoadedJavaScript.get(0);
+        assertEquals(
+                "evgeniiJsEvaluator.returnResultToJava(eval('1 + 2; myFunction(\"one\", 2)'), 0);",
+                actualJs);
+    }
+
+    public void testBlockUiThreadAndCallFunction_returnsNullWhenOnTimeout() {
+        String result =  mJsEvaluator.blockUIThreadAndCallFunction(1, "1 + 2", "myFunction", "one", 2);
+
+        assertTrue(result == null);
+    }
+
+    public void testBlockUiThreadAndCallFunction_shouldRegisterResultCallbackOnBackgroundThread() {
+        mJsEvaluator.blockUIThreadAndCallFunction(1, "1 + 2", "myFunction", "one", 2);
+
+        final ArrayList<JsCallbackData> callbacks = mJsEvaluator.getResultCallbacks();
+        assertEquals(1, callbacks.size());
+        JsCallbackData callback = callbacks.get(0);
+        assertFalse(callback.callOnUiThread);
+    }
+
     // Escape JavaScript text
     // ----------------------
 

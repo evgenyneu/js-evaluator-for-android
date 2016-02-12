@@ -96,14 +96,19 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
         );
     }
 
+    @Override
     /**
      * Evaluates JavaScript code and returns the result. UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user.
      *
-     * @param  waitTimeoutMilliseconds Wait time in milliseconds. The function will return null if it fails to evaluate JavaScript within the given time period.
-     * @param  jsCode           JavaScript code to evaluate.
-     * @return result of JavaScript evaluation. The function will return null if it fails to evaluate JavaScript within the given time period.
+     * @param  waitTimeoutMilliseconds  wait time in milliseconds. The function will return null if it fails to evaluate JavaScript within the given time period.
+     * @param  jsCode                   JavaScript code to evaluate.
+     * @return                          result of JavaScript evaluation. The function will return null if it fails to evaluate JavaScript within the given time period.
      */
     public String blockUIThreadAndEvaluate(long waitTimeoutMilliseconds, String jsCode) {
+        return blockUiThreadAndEvaluateShared(waitTimeoutMilliseconds, jsCode);
+    }
+
+    private String blockUiThreadAndEvaluateShared(long waitTimeoutMilliseconds, String jsCode) {
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         final JsResultContainer jsResultContainer = new JsResultContainer();
 
@@ -150,6 +155,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
         );
 	}
 
+    @Override
     /**
      * Calls a JavaScript function and pass arguments to it. Result of evaluation is passed on background thread.
      *
@@ -166,6 +172,20 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
                 functionName,
                 args
         );
+    }
+
+    @Override
+    /**
+     * Calls a JavaScript function and returns the result. UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user.
+     *
+     * @param  waitTimeoutMilliseconds  wait time in milliseconds. The function will return null if it fails to evaluate JavaScript within the given time period.
+     * @param  jsCode                   JavaScript code to evaluate.
+     * @param  functionName             name of the JavaScript function to be called.
+     * @param  args                     any number of string, integer or double arguments that will be passed to the JavaScript function.
+     */
+    public String blockUIThreadAndCallFunction(long waitTimeoutMilliseconds, String jsCode, String functionName, Object... args) {
+        jsCode += "; " + JsFunctionCallFormatter.toString(functionName, args);
+        return blockUiThreadAndEvaluateShared(waitTimeoutMilliseconds, jsCode);
     }
 
     private void callFunction(Boolean executeCallbackInUiThread, String jsCode, JsCallback resultCallback, String functionName, Object... args) {

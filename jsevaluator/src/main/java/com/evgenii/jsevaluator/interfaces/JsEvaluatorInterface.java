@@ -24,9 +24,9 @@ public interface JsEvaluatorInterface {
     /**
      * Evaluates JavaScript code and returns the result. UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user.
      *
-     * @param  waitTimeoutMilliseconds Wait time in milliseconds. The function will return null if it fails to evaluate JavaScript within the given time period.
-     * @param  jsCode           JavaScript code to evaluate.
-     * @return result of JavaScript evaluation. The function will return null if it fails to evaluate JavaScript within the given time period.
+     * @param  waitTimeoutMilliseconds  wait time in milliseconds. The function will return null if it fails to evaluate JavaScript within the given time period.
+     * @param  jsCode                   JavaScript code to evaluate.
+     * @return                          result of JavaScript evaluation. The function will return null if it fails to evaluate JavaScript within the given time period.
      */
     public String blockUIThreadAndEvaluate(long waitTimeoutMilliseconds, String jsCode);
 
@@ -49,4 +49,14 @@ public interface JsEvaluatorInterface {
      * @param  args             any number of string, integer or double arguments that will be passed to the JavaScript function.
      */
     public void callFunctionAndRespondOnBackgroundThread(String jsCode, JsCallback resultCallback, String functionName, Object... args);
+
+    /**
+     * Calls a JavaScript function and returns the result. UI thread will be blocked during JavaScript evaluation and the app will appear frozen to the user.
+     *
+     * @param  waitTimeoutMilliseconds  wait time in milliseconds. The function will return null if it fails to evaluate JavaScript within the given time period.
+     * @param  jsCode                   JavaScript code to evaluate.
+     * @param  functionName             name of the JavaScript function to be called.
+     * @param  args                     any number of string, integer or double arguments that will be passed to the JavaScript function.
+     */
+    public String blockUIThreadAndCallFunction(long waitTimeoutMilliseconds, String jsCode, String functionName, Object... args);
 }
