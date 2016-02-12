@@ -36,12 +36,13 @@ public class EvaluateJsStringActivity extends Activity {
 	}
 
 	public void onEvaluateClicked(View view) {
-        blockUiActivityAndEvaluate();
         evaluateOnUiThread();
+        blockUiActivityAndEvaluate();
 	}
 
     private void blockUiActivityAndEvaluate() {
-        String resultValue = mJsEvaluator.blockUIThreadAndEvaluate(1_000, getEditText().getText().toString());
+        JsEvaluator jsEvaluator = new JsEvaluator(this);
+        String resultValue = jsEvaluator.blockUIThreadAndEvaluate(1_000, getEditText().getText().toString());
         final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_block_ui_thread_text_view);
         jsResultTextView.setText(String.format("Block UI thread result: %s",
                 resultValue));

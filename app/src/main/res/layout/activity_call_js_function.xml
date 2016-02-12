@@ -57,7 +57,7 @@
         android:layout_below="@+id/editTextParameter"
         android:layout_marginTop="5dp"
         android:text="@string/call_function_evaluate_button_text"
-        android:onClick="onCallFuncitonClicked" />
+        android:onClick="onCallFunctionClicked" />
 
     <TextView
         android:id="@+id/textViewCallFunctionUiThreadResult"
@@ -76,5 +76,16 @@
         android:layout_below="@+id/textViewCallFunctionUiThreadResult"
         android:layout_marginTop="5dp"
         android:text="" />
+
+    <TextView
+        android:id="@+id/textViewCallFunctionBlockUiThreadResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonCallFunction"
+        android:layout_below="@+id/textViewCallFunctionBackgroundThreadResult"
+        android:layout_marginTop="5dp"
+        android:text="" />
+
+
 
 </RelativeLayout>

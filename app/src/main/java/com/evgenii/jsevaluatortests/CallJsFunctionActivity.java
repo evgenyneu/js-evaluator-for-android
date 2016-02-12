@@ -15,39 +15,51 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 public class CallJsFunctionActivity extends Activity {
 	JsEvaluator mJsEvaluator;
 
-	public void onCallFuncitonClicked(View view) {
-		final EditText functionText = (EditText) findViewById(R.id.js_function_edit_text);
-		final String jsCode = functionText.getText().toString();
+	public void onCallFunctionClicked(View view) {
+        callFunctionOnUiThread();
+        blockUiThreadAndCallFunction();
+    }
 
-		final EditText parameterText = (EditText) findViewById(R.id.editTextParameter);
-		mJsEvaluator.callFunctionAndRespondOnUiThread(jsCode, new JsCallback() {
+    void blockUiThreadAndCallFunction() {
+        JsEvaluator jsEvaluator = new JsEvaluator(this);
+        String resultValue = jsEvaluator.blockUIThreadAndCallFunction(1_000, getFunctionJsCode(), "greet", getFunctionParameterJsCode());
+        final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionBlockUiThreadResult);
+        jsResultTextView.setText(String.format("Block UI thread result: %s", resultValue));
+    }
+
+	void callFunctionOnUiThread() {
+		mJsEvaluator.callFunctionAndRespondOnUiThread(getFunctionJsCode(), new JsCallback() {
 			@Override
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionUiThreadResult);
 				jsResultTextView.setText(String.format("UI thread result: %s", resultValue));
 
-                callFunctionOnBackgroundThread();
+				callFunctionOnBackgroundThread();
 			}
-		}, "greet", parameterText.getText().toString());
+		}, "greet", getFunctionParameterJsCode());
 	}
 
 	void callFunctionOnBackgroundThread() {
-        final EditText functionText = (EditText) findViewById(R.id.js_function_edit_text);
-        final String jsCode = functionText.getText().toString();
+        mJsEvaluator.callFunctionAndRespondOnBackgroundThread(getFunctionJsCode(), new JsCallback() {
+			@Override
+			public void onResult(final String resultValue) {
+				runOnUiThread(new Runnable() {
+					public void run() {
+						final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionBackgroundThreadResult);
+						jsResultTextView.setText(String.format("Background thread result: %s", resultValue));
+					}
+				});
+			}
+		}, "greet", getFunctionParameterJsCode());
+	}
 
-        final EditText parameterText = (EditText) findViewById(R.id.editTextParameter);
-        mJsEvaluator.callFunctionAndRespondOnBackgroundThread(jsCode, new JsCallback() {
-            @Override
-            public void onResult(final String resultValue) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionBackgroundThreadResult);
-                        jsResultTextView.setText(String.format("Background thread result: %s", resultValue));
-                    }
-                });
-            }
-        }, "greet", parameterText.getText().toString());
-    }
+	private String getFunctionJsCode() {
+		return ((EditText) findViewById(R.id.js_function_edit_text)).getText().toString();
+	}
+
+	private String getFunctionParameterJsCode() {
+		return ((EditText) findViewById(R.id.editTextParameter)).getText().toString();
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
