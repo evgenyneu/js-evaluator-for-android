@@ -84,7 +84,8 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 jsEvaluator.evaluate("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
-    // Process result here. Called in UI thread.
+    // Process result here.
+    // This method is called in the UI thread.
   }
 });
 ```
@@ -99,7 +100,8 @@ jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
 
   @Override
   public void onResult(final String result) {
-    // Process result here. Called in UI thread.
+    // Process result here.
+    // This method is called in the UI thread.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```
@@ -107,6 +109,22 @@ jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
 Any number of string, int or double parameters can be supplied.
 
 Note: make sure to call `callFunction` method in UI thread.
+
+## JavaScript is evaluated asynchronously
+
+JavaScript is evaluated asynchronously without blocking UI thread. Result is returned in the UI thread. It is required to call `evaluate` and `callFunction` in UI thread.
+
+## JavaScript is evaluated in new context
+
+Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation.
+Please concatenate all your JavaScript to one string and evaluate it in one go.
+
+For example, if you need to load jQuery libary and then use it:
+
+```Java
+String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
+jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
+```
 
 ## How it works
 
@@ -131,6 +149,7 @@ public class JavaScriptInterface {
 mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
 ```
 
+
 ## Tests
 
 Tests are located in `app` module of this project. The app can be run for manual testing as well.
@@ -150,31 +169,6 @@ Android versions tested:
 * 5.0, 5.1 (Lollipop)
 * 6.0 Android (Marshmallow)
 
-## Result is returned asynchronously
-
-The result from JavaScript is returned asynchronously in the UI thread. It is recommended to evaluate in the UI thread as well.
-
-```Java
-// somewhere in UI thread ...
-jsEvaluator.evaluate("2 * 17", new JsCallback() {
-  @Override
-  public void onResult(final String result) {
-    // Result is returned here asynchronously in UI thread
-  }
-});
-```
-
-## JavaScript is evaluated in new context
-
-Each time the JavaScript is evaluated in the new context. It can not access the result of a previous evaluation.
-Please concatenate all your JavaScript to one string and evaluate it in one go.
-
-For example, if you need to load jQuery libary and then use it:
-
-```Java
-String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
-jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
-```
 
 
 ## Feedback is welcome
