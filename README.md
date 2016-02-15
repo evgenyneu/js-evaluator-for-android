@@ -84,10 +84,12 @@ JsEvaluator jsEvaluator = new JsEvaluator(this);
 jsEvaluator.evaluate("2 * 17", new JsCallback() {
   @Override
   public void onResult(final String result) {
-    // get result here
+    // Process result here. Called in UI thread.
   }
 });
 ```
+
+Note: make sure to call `evaluate` method in UI thread.
 
 ## Call a JavaScript function
 
@@ -97,12 +99,14 @@ jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
 
   @Override
   public void onResult(final String result) {
-    // get result here
+    // Process result here. Called in UI thread.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
 ```
 
 Any number of string, int or double parameters can be supplied.
+
+Note: make sure to call `callFunction` method in UI thread.
 
 ## How it works
 
