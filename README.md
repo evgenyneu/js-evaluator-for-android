@@ -127,7 +127,7 @@ jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
 
 ## Known limitations
 
-This library is suitable for evaluating only small amounts of JavaScript within hundreds of KB. [It has been reported](https://github.com/evgenyneu/js-evaluator-for-android/issues/24) that the library can not evaluate a megabyte of JavaScript.
+This library is suitable for evaluating only small amounts of JavaScript within hundreds of KB. [It has been reported](https://github.com/evgenyneu/js-evaluator-for-android/issues/24) that the library can not evaluate a megabyte of JavaScript. If you run into similar problems you can try [ericwlange/AndroidJSCore](https://github.com/ericwlange/AndroidJSCore) library instead.
 
 ## How it works
 
