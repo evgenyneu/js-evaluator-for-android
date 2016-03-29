@@ -4,7 +4,6 @@
 
 JsEvaluator may help you run JavaScript in an Android app and get the results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 4.0 (Ice Cream Sandwich) and newer.
 
-
 ## Setup
 
 There are two ways your can add JsEvaluator to your project:
@@ -125,6 +124,10 @@ For example, if you need to load jQuery libary and then use it:
 String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
 jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
 ```
+
+## Known limitations
+
+This library is suitable for evaluating only small amounts of JavaScript within hundreds of KB. [It has been reported](https://github.com/evgenyneu/js-evaluator-for-android/issues/24) that the library can not evaluate a megabyte of JavaScript.
 
 ## How it works
 
