@@ -152,6 +152,18 @@ public class JavaScriptInterface {
 mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
 ```
 
+## Using with ProGuard
+
+If you are using ProGuard (`minifyEnabled true`) please these rules to your *proguard-rules.pro* file.
+
+```
+# js-evaluator-for-android
+-keepattributes JavascriptInterface
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+```
+
 
 ## Tests
 
