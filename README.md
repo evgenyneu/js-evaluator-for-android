@@ -136,6 +136,7 @@ Behind the scenes it creates a `WebView` and feeds it JavaScript code for evalua
 ```Java
 mWebView = new WebView(context);
 String javascript = "<script>myObj.returnResult('Hello World')</script>";
+byte[] data = javascript.getBytes("UTF-8");
 String base64 = Base64.encodeToString(data, Base64.DEFAULT);
 mWebView.loadUrl("data:text/html;charset=utf-8;base64," + base64);
 ```
