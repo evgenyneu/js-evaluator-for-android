@@ -24,17 +24,17 @@ allprojects {
 }
 ```
 
-2) Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.4'` into **dependencies** section of your **module** build.gradle file. For example:
+2) Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.5'` into **dependencies** section of your **module** build.gradle file. For example:
 
 ```gradle
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // Keep you existing dependencies here
-    compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.4'
+    compile 'com.github.evgenyneu:js-evaluator-for-android:v1.0.5'
 }
 ```
 
-For less information, see Gradle/Maven [setup instructions](https://jitpack.io/#evgenyneu/js-evaluator-for-android/v1.0.4) on JsEvaluator jitpack.io page.
+For less information, see Gradle/Maven [setup instructions](https://jitpack.io/#evgenyneu/js-evaluator-for-android/v1.0.5) on JsEvaluator jitpack.io page.
 
 ### 2. Setup from local .aar file
 
