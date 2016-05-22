@@ -116,4 +116,8 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		mJsEvaluator.jsCallFinished("my result", 0);
 		assertEquals("my result", callback.resultValue);
 	}
+
+	public void testDestroy() {
+		mJsEvaluator.destroy();
+	}
 }

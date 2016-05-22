@@ -40,4 +40,16 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 			e.printStackTrace();
 		}
 	}
+
+	// Destroys the web view in order to free the memory
+	// The web view can not be accessed after is has been destroyed
+	public void destroy() {
+		if(mWebView != null) {
+			mWebView.clearHistory();
+			mWebView.clearCache(true);
+			mWebView.loadUrl("about:blank");
+			mWebView.pauseTimers();
+			mWebView = null;
+		}
+	}
 }

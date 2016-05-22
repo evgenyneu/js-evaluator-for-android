@@ -11,4 +11,7 @@ public class WebViewWrapperMock implements WebViewWrapperInterface {
 	public void loadJavaScript(String javascript) {
 		mLoadedJavaScript.add(javascript);
 	}
+
+	@Override
+	public void destroy() { }
 }

@@ -83,6 +83,10 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		getWebViewWrapper().loadJavaScript(js);
 	}
 
+	public void destroy() {
+		getWebViewWrapper().destroy();
+	}
+
 	public ArrayList<JsCallback> getResultCallbacks() {
 		return mResultCallbacks;
 	}
