@@ -125,6 +125,22 @@ String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
 jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
 ```
 
+## Destroying the evaluator and getting the WebView
+
+Calling the `destroy()` method will destroy the Web View and clear the memory. JsEvaluator can not be used after it is destroyed.
+
+```Java
+jsEvaluator.destroy();
+```
+
+One can also get the instance to the web view used by the JsEvaluator.
+
+```Java
+WebView webView = jsEvaluator.getWebView();
+```
+
+
+
 ## Known limitations
 
 This library is suitable for evaluating only small amounts of JavaScript within hundreds of KB. [It has been reported](https://github.com/evgenyneu/js-evaluator-for-android/issues/24) that the library can not evaluate a megabyte of JavaScript. If you run into similar problems you can try [ericwlange/AndroidJSCore](https://github.com/ericwlange/AndroidJSCore) library instead.
