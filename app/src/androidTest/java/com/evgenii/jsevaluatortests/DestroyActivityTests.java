@@ -35,6 +35,7 @@ public class DestroyActivityTests extends
 
         final Button destroyButton = (Button) mActivity.findViewById(R.id.button_destroy);
         TouchUtils.clickView(this, destroyButton);
+        assertEquals("Web view destroyed", resultTextView.getText().toString());
     }
 
     public void testPreconditions() {

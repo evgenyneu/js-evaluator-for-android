@@ -42,6 +42,8 @@ public class WebViewWrapperTest extends ActivityInstrumentationTestCase2<MainAct
 			public void run() {
 				final WebViewWrapper wrapper = new WebViewWrapper(mActivity, null);
 				wrapper.loadJavaScript("2 + 3");
+
+				assertNotNull(wrapper.getWebView());
 				wrapper.destroy();
 				Boolean exceptionRaised = false;
 
@@ -53,6 +55,7 @@ public class WebViewWrapperTest extends ActivityInstrumentationTestCase2<MainAct
 				}
 
 				assertTrue(exceptionRaised);
+				assertNull(wrapper.getWebView());
 			}
 		});
 

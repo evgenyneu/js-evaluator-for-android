@@ -52,4 +52,9 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 			mWebView = null;
 		}
 	}
+
+	// Returns the WebView object
+	public WebView getWebView() {
+		return mWebView;
+	}
 }
