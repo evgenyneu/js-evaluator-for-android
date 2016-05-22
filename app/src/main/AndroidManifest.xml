@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.evgenii.jsevaluatortests" >
+    package="com.evgenii.jsevaluatortests">
 
     <application
         android:allowBackup="true"
@@ -9,18 +9,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".EvaluateJsStringActivity"
             android:label="@string/title_activity_evaluate_js_string"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
@@ -28,7 +27,7 @@
         <activity
             android:name=".CallJsFunctionActivity"
             android:label="@string/title_activity_call_js_function"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
@@ -36,7 +35,7 @@
         <activity
             android:name=".StressTestActivity"
             android:label="@string/title_activity_stress_test"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
@@ -44,7 +43,7 @@
         <activity
             android:name=".RealLibrary"
             android:label="@string/title_activity_real_library"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
@@ -52,7 +51,7 @@
         <activity
             android:name=".CharacterEscape"
             android:label="@string/title_activity_character_escape"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
@@ -60,7 +59,7 @@
         <activity
             android:name=".PercentageActivity"
             android:label="@string/title_activity_percentage"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
@@ -68,11 +67,12 @@
         <activity
             android:name=".LineEndingsActivity"
             android:label="@string/title_activity_line_endings"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evgenii.jsevaluatortests.MainActivity" />
         </activity>
+        <activity android:name=".DestroyActivity"></activity>
     </application>
 
 </manifest>

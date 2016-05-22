@@ -6,6 +6,7 @@
     <string name="evaluate_js_test">Evaluate js test</string>
     <string name="edit_js_text">Math.sqrt(2 * 8);</string>
     <string name="evaluate_button_text">Evaluate</string>
+    <string name="destroy_button_text">Destroy</string>
     <string name="title_activity_call_js_function">Call JS function</string>
     <string name="call_function_button">Call js function test</string>
     <string name="js_function_edit_text">function greet(name) { return \"Hello, \" + name; }</string>
@@ -24,7 +25,9 @@
     <string name="open_cahracter_escape_button">Character escape test</string>
     <string name="open_percent_character_button" formatted="false">% character test</string>
     <string name="open_line_endings" formatted="false">Line endings test</string>
+    <string name="open_destroy_endings" formatted="false">Destroy test</string>
     <string name="character_escape_overview">Test usage of characters like quotes, new lines. Don\'t worry if it looks overwhelming. This gobbledigook is verified by a unit test.</string>
+    <string name="destroy_test_overview">Test of the destroy method which destroys the web view and clears the memory. Evaluating JavaScript after destroying should result in a crash.</string>
     <string name="character_escape_js_code">function greet(name) { return \&quot;multiline: \\\n newline: \\n apostrophe: \' quote: \\\&quot; slashes: \\/\\\\/ closing tag: &lt;/script&gt; unicode: 日本 \&quot; + \'characters: !@#$%^&amp;*()-=_+`~&lt;&gt;? \\n#####\\n\' + name; }</string>
     <string name="character_escape_parameter">multiline: \n newline: \\n apostrophe: \' quote: \&quot; slashes: \\/\\\\/ closing tag: &lt;/script&gt; unicode: 日本 characters: !@#$%^&amp;*()-=_+`~&lt;&gt;?</string>
     <string name="character_escape_call_function_evaluate_button_text">Run</string>

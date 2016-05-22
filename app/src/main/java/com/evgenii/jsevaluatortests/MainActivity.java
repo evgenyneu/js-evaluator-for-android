@@ -42,6 +42,11 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void onShowDestroyClicked(View view) {
+        final Intent intent = new Intent(this, DestroyActivity.class);
+        startActivity(intent);
+    }
+
     public void onShowPercentCharacterClicked(View view) {
         final Intent intent = new Intent(this, PercentageActivity.class);
         startActivity(intent);

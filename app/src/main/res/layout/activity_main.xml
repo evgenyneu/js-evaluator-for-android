@@ -87,6 +87,16 @@
             android:text="@string/open_line_endings"
             android:onClick="onShowLineEndingsClicked" />
 
+        <Button
+            android:id="@+id/open_destroy"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/open_line_endings"
+            android:layout_below="@+id/open_line_endings"
+            android:layout_marginTop="10dp"
+            android:text="@string/open_destroy_endings"
+            android:onClick="onShowDestroyClicked" />
+
     </RelativeLayout>
 </ScrollView>
 
