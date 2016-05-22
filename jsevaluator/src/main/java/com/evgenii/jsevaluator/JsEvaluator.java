@@ -3,6 +3,7 @@ package com.evgenii.jsevaluator;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.webkit.WebView;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
@@ -83,8 +84,15 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		getWebViewWrapper().loadJavaScript(js);
 	}
 
+	// Destroys the web view in order to free the memory.
+	// The web view can not be accessed after is has been destroyed.
 	public void destroy() {
 		getWebViewWrapper().destroy();
+	}
+
+	// Returns the WebView object
+	public WebView getWebView() {
+		return getWebViewWrapper().getWebView();
 	}
 
 	public ArrayList<JsCallback> getResultCallbacks() {

@@ -34,7 +34,7 @@ public class DestroyActivity extends Activity {
     public void onDestroyClicked(View view) {
         mJsEvaluator.destroy();
 
-        if (mJsEvaluator.getWebViewWrapper().getWebView() == null) {
+        if (mJsEvaluator.getWebView() == null) {
             final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_destroy_text_view);
             jsResultTextView.setText("Web view destroyed");
         }
