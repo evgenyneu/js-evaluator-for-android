@@ -125,7 +125,9 @@ String jQuery = "/*! jQuery JavaScript Library v2.1.1 ...";
 jsEvaluator.evaluate(jQuery + "; $.isNumeric(123)", new JsCallback() { ...
 ```
 
-## Destroying the evaluator and
+## Advanced functionality
+
+### Destroying the evaluator
 
 Calling the `destroy()` method will destroy the Web View and clear the memory. JsEvaluator can not be used after it is destroyed.
 
@@ -133,8 +135,7 @@ Calling the `destroy()` method will destroy the Web View and clear the memory. J
 jsEvaluator.destroy();
 ```
 
-
-## Accessing the WebView
+### Accessing the WebView
 
 Here is how to get the instance to the web view used by the JsEvaluator.
 
