@@ -30,6 +30,5 @@ public class WebViewWrapperTest extends ActivityInstrumentationTestCase2<MainAct
 		});
 
 		mInstrumentation.waitForIdleSync();
-
 	}
 }
