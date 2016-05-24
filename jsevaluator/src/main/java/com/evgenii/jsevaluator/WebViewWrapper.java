@@ -44,6 +44,7 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 
 	// Destroys the web view in order to free the memory
 	// The web view can not be accessed after is has been destroyed
+    // To check open the page in Chrome: chrome://inspect/#devices
 	public void destroy() {
 		if(mWebView != null) {
 			mWebView.removeJavascriptInterface(JsEvaluator.JS_NAMESPACE);
@@ -53,7 +54,7 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
 				mWebView.freeMemory();
 			}
-            
+
 			mWebView.clearHistory();
 			mWebView.removeAllViews();
 			mWebView.destroyDrawingCache();

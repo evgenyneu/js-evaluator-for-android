@@ -86,6 +86,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	// Destroys the web view in order to free the memory.
 	// The web view can not be accessed after is has been destroyed.
+	// To check open the page in Chrome: chrome://inspect/#devices
 	public void destroy() {
 		getWebViewWrapper().destroy();
 	}
