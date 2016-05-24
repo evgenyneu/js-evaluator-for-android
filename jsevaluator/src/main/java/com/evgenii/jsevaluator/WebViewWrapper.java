@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.util.Base64;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -45,10 +46,19 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 	// The web view can not be accessed after is has been destroyed
 	public void destroy() {
 		if(mWebView != null) {
-			mWebView.clearHistory();
-			mWebView.clearCache(true);
+			mWebView.removeJavascriptInterface(JsEvaluator.JS_NAMESPACE);
 			mWebView.loadUrl("about:blank");
-			mWebView.pauseTimers();
+			mWebView.stopLoading();
+
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+				mWebView.freeMemory();
+			}
+            
+			mWebView.clearHistory();
+			mWebView.removeAllViews();
+			mWebView.destroyDrawingCache();
+			mWebView.destroy();
+
 			mWebView = null;
 		}
 	}
