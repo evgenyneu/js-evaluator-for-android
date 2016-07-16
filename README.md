@@ -58,7 +58,7 @@ dependencies {
 }
 ```
 
-1. Add the following code to the **allprojects** -> **repositories** block of your **project** build.gradle file.
+1. Add the following code to the **allprojects/repositories** block of your **project** build.gradle file.
 
 ```Gradle
 allprojects {
