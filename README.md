@@ -8,7 +8,7 @@ JsEvaluator may help you run JavaScript in an Android app and get the results. T
 
 There are two ways your can add JsEvaluator to your project:
 
-1. From a remote Maven repositorty.
+1. From a remote Maven repository.
 1. From a local .aar or .jar file.
 
 ### 1. Setup from Maven repository in Android Studio
@@ -197,7 +197,7 @@ If you are using ProGuard (`minifyEnabled true`) you can add these rules to your
 }
 ```
 
-You will most likely not need to modify your proguard file because JSEvaluator library uses [consumer proguard rules](https://github.com/evgenyneu/js-evaluator-for-android/issues/30).
+You will most likely not need to modify your proguard file because JSEvaluator uses [consumer proguard rules](https://github.com/evgenyneu/js-evaluator-for-android/issues/30).
 
 
 ## Tests
