@@ -50,11 +50,24 @@ To add JsEvaluator to your app in Android Studio:
 
 1. Copy the `jsevaluator-1.0.aar` to your **app/libs** folder.
 1. Add `compile(name:'jsevaluator-1.0', ext:'aar')` to **dependencies** block of your **module** build.gradle file.
-1. Add the following code to the **repositories** block of your **project** build.gradle file.
 
+
+```Gradle
+dependencies {
+    compile(name:'jsevaluator-1.0', ext:'aar')
+}
 ```
-flatDir{
-    dirs 'libs'
+
+1. Add the following code to the **allprojects** -> **repositories** block of your **project** build.gradle file.
+
+```Gradle
+allprojects {
+    repositories {
+        jcenter()
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 ```
 
