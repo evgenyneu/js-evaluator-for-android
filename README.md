@@ -4,7 +4,7 @@
 
 JsEvaluator may help you run JavaScript in an Android app and get the results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 4.0 (Ice Cream Sandwich) and newer.
 
-You may be also interested in another library that runs JavaScript without using a web view: [github.com/ericwlange/AndroidJSCore](https://github.com/ericwlange/AndroidJSCore).
+You may be also interested in another library that runs JavaScript without using a WebView: [github.com/ericwlange/AndroidJSCore](https://github.com/ericwlange/AndroidJSCore).
 
 ## Setup
 
