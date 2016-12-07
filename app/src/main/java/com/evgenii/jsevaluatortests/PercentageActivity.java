@@ -41,6 +41,12 @@ public class PercentageActivity extends Activity {
 				final TextView resultTextView = (TextView) findViewById(R.id.percentageResultLabel);
 				resultTextView.setText(String.format("Result: %s", resultValue));
 			}
+
+			@Override
+			public void onError(String errorMessage) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.percentageResultLabel);
+				jsResultTextView.setText(JSUtils.getErrorSpan(errorMessage));
+			}
 		});
 	}
 

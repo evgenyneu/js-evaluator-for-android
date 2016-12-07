@@ -1,9 +1,5 @@
 package com.evgenii.jsevaluatortests;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
-
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -14,6 +10,10 @@ import android.widget.TextView;
 
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class RealLibrary extends Activity {
 	JsEvaluator mJsEvaluator;
@@ -26,6 +26,12 @@ public class RealLibrary extends Activity {
 			public void onResult(final String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResult);
 				jsResultTextView.setText(String.format("Result:%s", resultValue));
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.realLibraryResult);
+				jsResultTextView.setText(JSUtils.getErrorSpan(errorMessage));
 			}
 		});
 	}

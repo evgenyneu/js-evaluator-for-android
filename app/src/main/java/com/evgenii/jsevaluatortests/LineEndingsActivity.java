@@ -23,6 +23,12 @@ public class LineEndingsActivity extends Activity {
 
 				jsResultTextView.setText(String.format("Result: %s", resultStr));
 			}
+
+			@Override
+			public void onError(String errorMessage) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.lineEndingsViewResult);
+				jsResultTextView.setText(JSUtils.getErrorSpan(errorMessage));
+			}
 		});
 	}
 

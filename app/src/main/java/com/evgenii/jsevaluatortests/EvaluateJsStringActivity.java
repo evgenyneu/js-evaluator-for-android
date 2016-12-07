@@ -44,6 +44,12 @@ public class EvaluateJsStringActivity extends Activity {
 				jsResultTextView.setText(String.format("Result: %s",
 						resultValue));
 			}
+
+			@Override
+			public void onError(String errorMessage) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_text_view);
+				jsResultTextView.setText(JSUtils.getErrorSpan(errorMessage));
+			}
 		});
 	}
 
