@@ -26,6 +26,12 @@ public class CallJsFunctionActivity extends Activity {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionResult);
 				jsResultTextView.setText(String.format("Result: %s", resultValue));
 			}
+
+			@Override
+			public void onError(String errorMessage) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.textViewCallFunctionResult);
+				jsResultTextView.setText(JSUtils.getErrorSpan(errorMessage));
+			}
 		}, "greet", parameterText.getText().toString());
 	}
 

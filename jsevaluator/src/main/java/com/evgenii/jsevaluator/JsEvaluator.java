@@ -1,7 +1,5 @@
 package com.evgenii.jsevaluator;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.webkit.WebView;
 
@@ -11,8 +9,11 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
+import java.util.ArrayList;
+
 public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
+	private final static String JS_ERROR_PREFIX = "evgeniiJsEvaluatorException";
 
 	public static String escapeCarriageReturn(String str) {
 		return str.replace("\r", "\\r");
@@ -41,8 +42,8 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		jsCode = escapeNewLines(jsCode);
 		jsCode = escapeCarriageReturn(jsCode);
 
-		return String.format("%s.returnResultToJava(eval('%s'), %s);", JS_NAMESPACE, jsCode,
-				callbackIndex);
+		return String.format("%s.returnResultToJava(eval('try{%s}catch(e){\"%s\"+e}'), %s);",
+						JS_NAMESPACE, jsCode, JS_ERROR_PREFIX, callbackIndex);
 	}
 
 	protected WebViewWrapperInterface mWebViewWrapper;
@@ -117,7 +118,11 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		mHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				callback.onResult(value);
+				if(value!=null && value.startsWith(JS_ERROR_PREFIX)) {
+					callback.onError(value.substring(JS_ERROR_PREFIX.length()));
+				} else {
+					callback.onResult(value);
+				}
 			}
 		});
 	}
