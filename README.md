@@ -84,10 +84,11 @@ allprojects {
 
 ## Usage
 
-Create evaluator instance:
+Create evaluator instance variable in your activity:
 
 ```Java
-JsEvaluator jsEvaluator = new JsEvaluator(this);
+public class MainActivity extends AppCompatActivity {
+    JsEvaluator jsEvaluator = new JsEvaluator(this);
 ```
 
 `this` is a reference to your activity.
@@ -191,9 +192,9 @@ The result of evaluation is sent back into Android activity:
 
 ```Java
 public class JavaScriptInterface {
-	public void returnResult(String result) {
-		// result from JavaScript
-	}
+   public void returnResult(String result) {
+      // result from JavaScript
+   }
 }
 
 mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
@@ -201,7 +202,21 @@ mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
 
 ## Catching JavaScript errors
 
-This library catches errors by wrapping the whole JavaScript code in a try-catch block. The errors are then returned to Java in the `onError` method of the callback object. Please note that this method only catches runtime JavaScript errors, like undefined variables or properties. It will not, however, catch errors resulted from malformed JavaScript code, like missing a `}` bracket.
+This library catches errors by wrapping the whole JavaScript code in a try-catch block. The errors are then returned to Java in the `onError` method of the callback object.
+
+```Java
+jsEvaluator.evaluate("4 * octapod", new JsCallback() {
+   @Override
+   public void onResult(final String result) { }
+
+   @Override
+   public void onError(final String errorMessage) {
+      // ReferenceError: octapod is not defined
+   }
+});
+```
+
+Please note that this method only catches runtime JavaScript errors, like undefined variables or properties. It will not, however, catch errors resulted from malformed JavaScript code, like missing a `}` bracket.
 
 
 ## Using with ProGuard
