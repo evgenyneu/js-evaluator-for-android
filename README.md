@@ -98,13 +98,13 @@ public class MainActivity extends AppCompatActivity {
 ```Java
 jsEvaluator.evaluate("2 * 17", new JsCallback() {
   @Override
-  public void onResult(final String result) {
+  public void onResult(String result) {
     // Process result here.
     // This method is called in the UI thread.
   }
 
   @Override
-  public void onError(final String errorMessage) {
+  public void onError(String errorMessage) {
     // Process JavaScript error here.
     // This method is called in the UI thread.
   }
@@ -207,11 +207,11 @@ This library catches errors by wrapping the whole JavaScript code in a try-catch
 ```Java
 jsEvaluator.evaluate("4 * octapod", new JsCallback() {
    @Override
-   public void onResult(final String result) { }
+   public void onResult(String result) { }
 
    @Override
-   public void onError(final String errorMessage) {
-      // ReferenceError: octapod is not defined
+   public void onError(String errorMessage) {
+      // errorMessage => "ReferenceError: octapod is not defined"
    }
 });
 ```
