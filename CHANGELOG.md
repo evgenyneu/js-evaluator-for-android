@@ -2,7 +2,7 @@
 
 ## v2.0.0 (2016-12-17)
 
-Added ability to catch JavaScript runtime errors [codebymikey](https://github.com/codebymikey).
+Added ability to catch JavaScript runtime errors ([codebymikey](https://github.com/codebymikey)).
 
 ## v1.0.5 (2016-05-22)
 
