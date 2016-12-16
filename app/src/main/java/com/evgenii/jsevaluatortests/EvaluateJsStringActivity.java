@@ -39,7 +39,7 @@ public class EvaluateJsStringActivity extends Activity {
 		final EditText editText = (EditText) findViewById(R.id.edit_java_script);
 		mJsEvaluator.evaluate(editText.getText().toString(), new JsCallback() {
 			@Override
-			public void onResult(final String resultValue) {
+			public void onResult(String resultValue) {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_text_view);
 				jsResultTextView.setText(String.format("Result: %s",
 						resultValue));
