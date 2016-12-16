@@ -3,7 +3,6 @@ package com.evgenii.jsevaluatortests;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.evgenii.jsevaluator.JsEvaluator;
@@ -27,6 +26,12 @@ public class DestroyActivity extends Activity {
                 final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_destroy_text_view);
                 jsResultTextView.setText(String.format("Result: %s",
                         resultValue));
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                final TextView jsResultTextView = (TextView) findViewById(R.id.js_result_destroy_text_view);
+                jsResultTextView.setText(JSUtils.getErrorSpan(errorMessage));
             }
         });
     }

@@ -58,6 +58,12 @@ public class StressTestActivity extends Activity {
 				final TextView jsResultTextView = (TextView) findViewById(R.id.js_stress_result_text_view);
 				jsResultTextView.setText(String.format("Result: %s", resultValue));
 			}
+
+			@Override
+			public void onError(String errorMessage) {
+				final TextView jsResultTextView = (TextView) findViewById(R.id.js_stress_result_text_view);
+				jsResultTextView.setText(JSUtils.getErrorSpan(errorMessage));
+			}
 		}, "addTwo", 10);
 	}
 

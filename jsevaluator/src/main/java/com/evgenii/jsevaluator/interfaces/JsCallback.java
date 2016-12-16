@@ -6,4 +6,5 @@ package com.evgenii.jsevaluator.interfaces;
 
 public interface JsCallback {
 	public abstract void onResult(String value);
+	public abstract void onError(String errorMessage);
 }

@@ -101,6 +101,12 @@ jsEvaluator.evaluate("2 * 17", new JsCallback() {
     // Process result here.
     // This method is called in the UI thread.
   }
+
+  @Override
+  public void onError(final String errorMessage) {
+    // Process JavaScript error here.
+    // This method is called in the UI thread.
+  }
 });
 ```
 
@@ -113,8 +119,14 @@ jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
   new JsCallback() {
 
   @Override
-  public void onResult(final String result) {
+  public void onResult(String result) {
     // Process result here.
+    // This method is called in the UI thread.
+  }
+
+  @Override
+  public void onError(String errorMessage) {
+    // Process JavaScript error here.
     // This method is called in the UI thread.
   }
 }, "myFunction", "parameter 1", "parameter 2", 912, 101.3);
@@ -187,6 +199,11 @@ public class JavaScriptInterface {
 mWebView.addJavascriptInterface(new JavaScriptInterface(), "myObj");
 ```
 
+## Catching JavaScript errors
+
+This library catches errors by wrapping the whole JavaScript code in a try-catch block. The errors are then returned to Java in the `onError` method of the callback object. Please note that this method only catches runtime JavaScript errors, like undefined variables or properties. It will not, however, catch errors resulted from malformed JavaScript code, like missing a `}` bracket.
+
+
 ## Using with ProGuard
 
 If you are using ProGuard (`minifyEnabled true`) you can add these rules to your *proguard-rules.pro* file.
@@ -221,6 +238,10 @@ Android versions tested:
 * 5.0, 5.1 (Lollipop)
 * 6.0 (Marshmallow)
 
+## Thanks 👍
+
+* [codebymikey](https://github.com/codebymikey) for adding error handling.
+* [xbao](https://github.com/xbao) for adding a Gradle file.
 
 
 ## Feedback is welcome
