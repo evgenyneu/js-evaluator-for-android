@@ -1,6 +1,7 @@
 package com.evgenii.jsevaluator;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.webkit.WebView;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
@@ -10,6 +11,9 @@ import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
@@ -50,13 +54,14 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	private final Context mContext;
 
-	private final ArrayList<JsCallback> mResultCallbacks = new ArrayList<JsCallback>();
+	private final Map<Integer, JsCallback> mResultCallbacks = new HashMap<>();
 
-	private HandlerWrapperInterface mHandler;
+	private HandlerWrapperInterface mHandler = new HandlerWrapper();
+
+	private RequestIdGenerator requestIdGenerator = new RequestIdGenerator();
 
 	public JsEvaluator(Context context) {
 		mContext = context;
-		mHandler = new HandlerWrapper();
 	}
 
 	@Override
@@ -72,15 +77,10 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	@Override
 	public void evaluate(String jsCode, JsCallback resultCallback) {
-		int callbackIndex = mResultCallbacks.size();
-		if (resultCallback == null) {
-			callbackIndex = -1;
-		}
-
+		int callbackIndex = requestIdGenerator.generate();
 		final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
-
-		if (resultCallback != null) {
-			mResultCallbacks.add(resultCallback);
+		if(resultCallback != null) {
+			mResultCallbacks.put(callbackIndex, resultCallback);
 		}
 		getWebViewWrapper().loadJavaScript(js);
 	}
@@ -97,7 +97,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		return getWebViewWrapper().getWebView();
 	}
 
-	public ArrayList<JsCallback> getResultCallbacks() {
+	public Map<Integer, JsCallback> getResultCallbacks() {
 		return mResultCallbacks;
 	}
 
@@ -110,10 +110,10 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	@Override
 	public void jsCallFinished(final String value, Integer callIndex) {
-		if (callIndex == -1)
+		final JsCallback callback = mResultCallbacks.remove(callIndex);
+		if (callback == null) {
 			return;
-
-		final JsCallback callback = mResultCallbacks.get(callIndex);
+		}
 
 		mHandler.post(new Runnable() {
 			@Override
@@ -127,13 +127,18 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		});
 	}
 
-	// Used in test only to replace mHandler with a mock
+	@VisibleForTesting
 	public void setHandler(HandlerWrapperInterface handlerWrapperInterface) {
 		mHandler = handlerWrapperInterface;
 	}
 
-	// Used in test only to replace webViewWrapper with a mock
+	@VisibleForTesting
 	public void setWebViewWrapper(WebViewWrapperInterface webViewWrapper) {
 		mWebViewWrapper = webViewWrapper;
+	}
+
+	@VisibleForTesting
+	public void setRequestIdGenerator(RequestIdGenerator requestIdGenerator){
+		this.requestIdGenerator = requestIdGenerator;
 	}
 }
