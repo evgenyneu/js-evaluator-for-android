@@ -11,6 +11,7 @@ import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -54,7 +55,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	private final Context mContext;
 
-	private final Map<Integer, JsCallback> mResultCallbacks = new HashMap<>();
+	private final Map<Integer, JsCallback> mResultCallbacks = Collections.synchronizedMap(new HashMap<Integer, JsCallback>());
 
 	private HandlerWrapperInterface mHandler = new HandlerWrapper();
 
@@ -138,7 +139,7 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	}
 
 	@VisibleForTesting
-	public void setRequestIdGenerator(RequestIdGenerator requestIdGenerator){
+	public void setRequestIdGenerator(RequestIdGenerator requestIdGenerator) {
 		this.requestIdGenerator = requestIdGenerator;
 	}
 }
