@@ -255,6 +255,7 @@ Android versions tested:
 
 * [codebymikey](https://github.com/codebymikey) for adding error handling.
 * [xbao](https://github.com/xbao) for adding a Gradle file.
+* [clydzik](https://github.com/clydzik) for fixing a [memory leak](https://github.com/evgenyneu/js-evaluator-for-android/pull/40).
 
 
 ## Feedback is welcome
