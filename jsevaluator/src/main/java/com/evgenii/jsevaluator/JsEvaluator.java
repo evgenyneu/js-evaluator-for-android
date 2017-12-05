@@ -10,11 +10,7 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluator.interfaces.JsEvaluatorInterface;
 import com.evgenii.jsevaluator.interfaces.WebViewWrapperInterface;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterface {
 	public final static String JS_NAMESPACE = "evgeniiJsEvaluator";
@@ -40,26 +36,24 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		return str.replace("\\", "\\\\");
 	}
 
-	public static String getJsForEval(String jsCode, int callbackIndex) {
+	public static String getJsForEval(String jsCode) {
 		jsCode = escapeSlash(jsCode);
 		jsCode = escapeSingleQuotes(jsCode);
 		jsCode = escapeClosingScript(jsCode);
 		jsCode = escapeNewLines(jsCode);
 		jsCode = escapeCarriageReturn(jsCode);
 
-		return String.format("%s.returnResultToJava(eval('try{%s}catch(e){\"%s\"+e}'), %s);",
-						JS_NAMESPACE, jsCode, JS_ERROR_PREFIX, callbackIndex);
+		return String.format("%s.returnResultToJava(eval('try{%s}catch(e){\"%s\"+e}'));",
+						JS_NAMESPACE, jsCode, JS_ERROR_PREFIX);
 	}
 
 	protected WebViewWrapperInterface mWebViewWrapper;
 
 	private final Context mContext;
 
-	private final Map<Integer, JsCallback> mResultCallbacks = Collections.synchronizedMap(new HashMap<Integer, JsCallback>());
+	private AtomicReference<JsCallback> callback = new AtomicReference<>(null);
 
 	private HandlerWrapperInterface mHandler = new HandlerWrapper();
-
-	private RequestIdGenerator requestIdGenerator = new RequestIdGenerator();
 
 	public JsEvaluator(Context context) {
 		mContext = context;
@@ -78,11 +72,8 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 
 	@Override
 	public void evaluate(String jsCode, JsCallback resultCallback) {
-		int callbackIndex = requestIdGenerator.generate();
-		final String js = JsEvaluator.getJsForEval(jsCode, callbackIndex);
-		if(resultCallback != null) {
-			mResultCallbacks.put(callbackIndex, resultCallback);
-		}
+		final String js = JsEvaluator.getJsForEval(jsCode);
+        this.callback.set(resultCallback);
 		getWebViewWrapper().loadJavaScript(js);
 	}
 
@@ -98,10 +89,6 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		return getWebViewWrapper().getWebView();
 	}
 
-	public Map<Integer, JsCallback> getResultCallbacks() {
-		return mResultCallbacks;
-	}
-
 	public WebViewWrapperInterface getWebViewWrapper() {
 		if (mWebViewWrapper == null) {
 			mWebViewWrapper = new WebViewWrapper(mContext, this);
@@ -110,9 +97,9 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	}
 
 	@Override
-	public void jsCallFinished(final String value, Integer callIndex) {
-		final JsCallback callback = mResultCallbacks.remove(callIndex);
-		if (callback == null) {
+	public void jsCallFinished(final String value) {
+		final JsCallback callbackLocal = callback.getAndSet(null);
+		if (callbackLocal == null) {
 			return;
 		}
 
@@ -120,9 +107,9 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 			@Override
 			public void run() {
 				if(value!=null && value.startsWith(JS_ERROR_PREFIX)) {
-					callback.onError(value.substring(JS_ERROR_PREFIX.length()));
+					callbackLocal.onError(value.substring(JS_ERROR_PREFIX.length()));
 				} else {
-					callback.onResult(value);
+					callbackLocal.onResult(value);
 				}
 			}
 		});
@@ -139,7 +126,8 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 	}
 
 	@VisibleForTesting
-	public void setRequestIdGenerator(RequestIdGenerator requestIdGenerator) {
-		this.requestIdGenerator = requestIdGenerator;
+	public JsCallback getCallback() {
+		return callback.get();
 	}
+
 }

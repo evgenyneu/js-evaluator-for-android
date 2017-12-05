@@ -14,10 +14,8 @@ public class JavaScriptInterfaceTest extends AndroidTestCase {
 		mJavaScriptInterface = new JavaScriptInterface(
 				mCallJavaResultInterfaceMock);
 
-		mJavaScriptInterface.returnResultToJava("test value", 12);
+		mJavaScriptInterface.returnResultToJava("test value");
 		assertEquals("test value",
 				mCallJavaResultInterfaceMock.jsCallFinished_paramValue);
-		assertEquals(Integer.valueOf(12),
-				mCallJavaResultInterfaceMock.jsCallFinished_paramCallIndex);
 	}
 }

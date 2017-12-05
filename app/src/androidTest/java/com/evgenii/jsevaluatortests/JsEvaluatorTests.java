@@ -5,20 +5,15 @@ import android.os.Looper;
 import android.test.AndroidTestCase;
 
 import com.evgenii.jsevaluator.JsEvaluator;
-import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.evgenii.jsevaluatortests.mocks.HandlerWrapperMock;
 import com.evgenii.jsevaluatortests.mocks.JsCallbackMock;
-import com.evgenii.jsevaluatortests.mocks.RequestIdGeneratorMock;
 import com.evgenii.jsevaluatortests.mocks.WebViewWrapperMock;
 
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 public class JsEvaluatorTests extends AndroidTestCase {
 	protected JsEvaluator mJsEvaluator, mRealJsEvaluator;
 	protected WebViewWrapperMock mWebViewWrapperMock;
-	protected RequestIdGeneratorMock requestIdGeneratorMock = new RequestIdGeneratorMock();
 
 	@Override
 	protected void setUp() {
@@ -28,7 +23,6 @@ public class JsEvaluatorTests extends AndroidTestCase {
 		// Because it must be done on the UI thread
 		mWebViewWrapperMock = new WebViewWrapperMock();
 		mJsEvaluator.setWebViewWrapper(mWebViewWrapperMock);
-		mJsEvaluator.setRequestIdGenerator(requestIdGeneratorMock);
 	}
 
 	/**
@@ -43,24 +37,20 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 	public void testCallFunction_shouldEvaluateJs() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
-		requestIdGeneratorMock.setNextGenerated(0);
 		mJsEvaluator.callFunction("1 + 2", callbackMock, "myFunction", "one", 2);
 
 		assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
 		final String actualJs = mWebViewWrapperMock.mLoadedJavaScript.get(0);
 		assertEquals(
-				"evgeniiJsEvaluator.returnResultToJava(eval('try{1 + 2; myFunction(\"one\", 2)}catch(e){\"evgeniiJsEvaluatorException\"+e}'), 0);",
+				"evgeniiJsEvaluator.returnResultToJava(eval('try{1 + 2; myFunction(\"one\", 2)}catch(e){\"evgeniiJsEvaluatorException\"+e}'));",
 				actualJs);
 	}
 
 	public void testCallFunction_shouldRegisterResultCallback() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
+        mJsEvaluator.callFunction("1 + 2", callbackMock, "myFunction");
 
-		mJsEvaluator.callFunction("1 + 2", callbackMock, "myFunction");
-
-		final Map<Integer, JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
-		assertEquals(1, callbacks.size());
-		assertEquals(callbackMock, callbacks.entrySet().iterator().next().getValue());
+		assertEquals(callbackMock, mJsEvaluator.getCallback());
 	}
 
 	public void testEscapeCarriageReturn() {
@@ -78,27 +68,25 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 	public void testEvaluate_shouldEvaluateJs() {
 		final JsCallbackMock callbackMock = new JsCallbackMock();
-		requestIdGeneratorMock.setNextGenerated(0);
 		mJsEvaluator.evaluate("2 * 3", callbackMock);
 
 		assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
-		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('try{2 * 3}catch(e){\"evgeniiJsEvaluatorException\"+e}'), 0);",
+		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('try{2 * 3}catch(e){\"evgeniiJsEvaluatorException\"+e}'));",
 				mWebViewWrapperMock.mLoadedJavaScript.get(0));
 	}
 
 	public void testEvaluate_shouldEvaluateWithoutCallback() {
-		requestIdGeneratorMock.setNextGenerated(-1);
 		mJsEvaluator.evaluate("2 * 3");
 
 		assertEquals(1, mWebViewWrapperMock.mLoadedJavaScript.size());
-		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('try{2 * 3}catch(e){\"evgeniiJsEvaluatorException\"+e}'), -1);",
+		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('try{2 * 3}catch(e){\"evgeniiJsEvaluatorException\"+e}'));",
 				mWebViewWrapperMock.mLoadedJavaScript.get(0));
 	}
 
 	public void testEvaluate_shouldNotRegisterResultCallbackWhenCallbackIsNotSupplied() {
 		mJsEvaluator.evaluate("2 * 3");
 
-		assertEquals(0, mJsEvaluator.getResultCallbacks().size());
+		assertNull(mJsEvaluator.getCallback());
 	}
 
 	public void testEvaluate_shouldRegisterResultCallback() {
@@ -106,10 +94,18 @@ public class JsEvaluatorTests extends AndroidTestCase {
 
 		mJsEvaluator.evaluate("2 * 3", callbackMock);
 
-		final Map<Integer, JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
-		assertEquals(1, callbacks.size());
-		assertEquals(callbackMock, callbacks.entrySet().iterator().next().getValue());
+		assertEquals(callbackMock, mJsEvaluator.getCallback());
 	}
+
+    public void testEvaluate_shouldHoldOnlyLastCallback() {
+        final JsCallbackMock callbackMock = new JsCallbackMock();
+        final JsCallbackMock callbackMockSecond = new JsCallbackMock();
+
+        mJsEvaluator.evaluate("2 * 3", callbackMock);
+        mJsEvaluator.evaluate("2 * 3", callbackMockSecond);
+
+        assertEquals(callbackMockSecond, mJsEvaluator.getCallback());
+    }
 
 	public void testEvaluate_shouldError() {
 		final CountDownLatch latch = new CountDownLatch(1);
@@ -136,28 +132,22 @@ public class JsEvaluatorTests extends AndroidTestCase {
 	}
 
 	public void testGetJsForEval() {
-		final String result = JsEvaluator.getJsForEval("'hello'", 34);
-		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('try{\\'hello\\'}catch(e){\"evgeniiJsEvaluatorException\"+e}'), 34);", result);
+		final String result = JsEvaluator.getJsForEval("'hello'");
+		assertEquals("evgeniiJsEvaluator.returnResultToJava(eval('try{\\'hello\\'}catch(e){\"evgeniiJsEvaluatorException\"+e}'));", result);
 	}
 
-	public void testJsCallFinished_doesNotRunCallBackWhenIndexIsMinusOne() {
-		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
-		mJsEvaluator.setHandler(handlerWrapperMock);
 
-		mJsEvaluator.jsCallFinished("my result", -1);
-	}
+	public void testJsCallFinished_runsCallbackAndDereference() {
 
-	public void testJsCallFinished_runsCallbackAndRemove() {
-		final Map<Integer, JsCallback> callbacks = mJsEvaluator.getResultCallbacks();
 		final JsCallbackMock callback = new JsCallbackMock();
-		callbacks.put(0, callback);
+		mJsEvaluator.evaluate("any", callback);
 
 		final HandlerWrapperMock handlerWrapperMock = new HandlerWrapperMock();
 		mJsEvaluator.setHandler(handlerWrapperMock);
 
-		mJsEvaluator.jsCallFinished("my result", 0);
+		mJsEvaluator.jsCallFinished("my result");
 		assertEquals("my result", callback.resultValue);
-		assertTrue(callbacks.isEmpty());
+		assertNull(mJsEvaluator.getCallback());
 	}
 
 	public void testDestroy() {

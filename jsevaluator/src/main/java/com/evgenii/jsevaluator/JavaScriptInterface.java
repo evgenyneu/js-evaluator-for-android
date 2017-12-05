@@ -16,7 +16,7 @@ public class JavaScriptInterface {
 	}
 
 	@JavascriptInterface
-	public void returnResultToJava(String value, int callIndex) {
-		mCallJavaResultInterface.jsCallFinished(value, callIndex);
+	public void returnResultToJava(String value) {
+		mCallJavaResultInterface.jsCallFinished(value);
 	}
 }
