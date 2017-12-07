@@ -24,17 +24,17 @@ allprojects {
 }
 ```
 
-2) Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v3.0.0'` into **dependencies** section of your **module** build.gradle file. For example:
+2) Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v4.0.0'` into **dependencies** section of your **module** build.gradle file. For example:
 
 ```gradle
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // Keep you existing dependencies here
-    compile 'com.github.evgenyneu:js-evaluator-for-android:v3.0.0'
+    compile 'com.github.evgenyneu:js-evaluator-for-android:v4.0.0'
 }
 ```
 
-For less information, see Gradle/Maven [setup instructions](https://jitpack.io/#evgenyneu/js-evaluator-for-android/v3.0.0) on JsEvaluator jitpack.io page.
+For less information, see Gradle/Maven [setup instructions](https://jitpack.io/#evgenyneu/js-evaluator-for-android/v4.0.0) on JsEvaluator jitpack.io page.
 
 ### 2. Setup from local .aar file
 
@@ -250,12 +250,13 @@ Android versions tested:
 * 4.4.2 (KitKat)
 * 5.0, 5.1 (Lollipop)
 * 6.0 (Marshmallow)
+* 8.0 (Oreo)
 
 ## Thanks 👍
 
 * [codebymikey](https://github.com/codebymikey) for adding error handling.
 * [xbao](https://github.com/xbao) for adding a Gradle file.
-* [clydzik](https://github.com/clydzik) for fixing a [memory leak](https://github.com/evgenyneu/js-evaluator-for-android/pull/40).
+* [clydzik](https://github.com/clydzik) for fixing a [memory leak](https://github.com/evgenyneu/js-evaluator-for-android/pull/40) and simplifying the code.
 
 
 ## Feedback is welcome
