@@ -28,9 +28,9 @@ allprojects {
 
 ```gradle
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Keep you existing dependencies here
-    compile 'com.github.evgenyneu:js-evaluator-for-android:v5.0.0'
+    implementation 'com.github.evgenyneu:js-evaluator-for-android:v5.0.0'
 }
 ```
 
