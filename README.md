@@ -114,7 +114,7 @@ Note: make sure to call `evaluate` method in UI thread.
 ## Call a JavaScript function
 
 ```Java
-jsEvaluator.callFunction("function myFunction(a, b, c, a) { return 'result'; }",
+jsEvaluator.callFunction("function myFunction(a, b, c, d) { return 'result'; }",
   new JsCallback() {
 
   @Override
