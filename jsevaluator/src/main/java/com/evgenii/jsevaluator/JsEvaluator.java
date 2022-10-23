@@ -1,7 +1,7 @@
 package com.evgenii.jsevaluator;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 import android.webkit.WebView;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
