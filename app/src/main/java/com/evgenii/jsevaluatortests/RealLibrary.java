@@ -3,10 +3,11 @@ package com.evgenii.jsevaluatortests;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import androidx.core.app.NavUtils;
 
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
