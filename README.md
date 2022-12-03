@@ -1,8 +1,7 @@
 # JsEvaluator library for running JavaScript in Android apps
 
-Fork that supports android 13 / and no more jetifier [![](https://jitpack.io/v/kibotu/js-evaluator-for-android.svg)](https://jitpack.io/#kibotu/js-evaluator-for-android)
- 
-[![JitPack](https://img.shields.io/github/tag/evgenyneu/js-evaluator-for-android.svg?label=JitPack)](https://jitpack.io/#evgenyneu/js-evaluator-for-android)
+[![](https://jitpack.io/v/evgenyneu/js-evaluator-for-android.svg)](https://jitpack.io/#evgenyneu/js-evaluator-for-android)
+
 
 JsEvaluator may help you run JavaScript in an Android app and get the results. This is an alternative to `evaluateJavascript` method of the WebView. Supports Android version 4.0 (Ice Cream Sandwich) and newer.
 
@@ -15,28 +14,29 @@ There are two ways your can add JsEvaluator to your project:
 
 ### 1. Setup from Maven repository in Android Studio
 
-1) Add `maven { url "https://jitpack.io" }` into **allprojects/repositories** section of your **project** build.gradle file. For example:
+1) Add `maven { url "https://jitpack.io" }` into `settings.gradle`, in dependencyResolutionManagement -> repositories section. For example:
 
 ```gradle
-allprojects {
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        jcenter()
-        maven { url "https://jitpack.io" }
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" } // <----- Add this
     }
 }
 ```
 
-2) Add `compile 'com.github.evgenyneu:js-evaluator-for-android:v5.0.0'` into **dependencies** section of your **module** build.gradle file. For example:
+2) Add `implementation 'com.github.evgenyneu:js-evaluator-for-android:v6.0.0'` into **dependencies** section of your **module** build.gradle file. For example:
 
 ```gradle
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    // Keep you existing dependencies here
-    implementation 'com.github.evgenyneu:js-evaluator-for-android:v5.0.0'
+    // ...
+    implementation 'com.github.evgenyneu:js-evaluator-for-android:v6.0.0'
 }
 ```
 
-For less information, see Gradle/Maven [setup instructions](https://jitpack.io/#evgenyneu/js-evaluator-for-android/v5.0.0) on JsEvaluator jitpack.io page.
+See [Legacy setup instructions](https://github.com/evgenyneu/js-evaluator-for-android/wiki/Legacy-setup) if you are using Gradle older than version 7.
 
 ### 2. Setup from local .aar file
 
