@@ -14,7 +14,7 @@ There are two ways your can add JsEvaluator to your project:
 
 ### 1. Setup from Maven repository in Android Studio
 
-1) Add `maven { url "https://jitpack.io" }` into `settings.gradle`, in `dependencyResolutionManagement` / `repositories` section. For example:
+1) Add `maven { url "https://jitpack.io" }` into `settings.gradle`, in **dependencyResolutionManagement** / **repositories** section. For example:
 
 ```gradle
 dependencyResolutionManagement {
