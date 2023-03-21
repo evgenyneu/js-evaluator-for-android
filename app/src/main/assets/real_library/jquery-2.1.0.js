@@ -317,10 +317,7 @@ jQuery.extend({
     code = jQuery.trim( code );
 
     if ( code ) {
-      // If the code includes a valid, prologue position
-      // strict mode pragma, execute code by injecting a
-      // script tag into the document.
-      if ( code.indexOf("use strict") === 1 ) {
+      if ( code.indexOf("use strict") == 1 ) {
         script = document.createElement("script");
         script.text = code;
         document.head.appendChild( script ).parentNode.removeChild( script );
@@ -354,7 +351,7 @@ jQuery.extend({
         for ( ; i < length; i++ ) {
           value = callback.apply( obj[ i ], args );
 
-          if ( value === false ) {
+          if ( value == false ) {
             break;
           }
         }
@@ -362,7 +359,7 @@ jQuery.extend({
         for ( i in obj ) {
           value = callback.apply( obj[ i ], args );
 
-          if ( value === false ) {
+          if ( value == false ) {
             break;
           }
         }
@@ -374,7 +371,7 @@ jQuery.extend({
         for ( ; i < length; i++ ) {
           value = callback.call( obj[ i ], i, obj[ i ] );
 
-          if ( value === false ) {
+          if ( value == false ) {
             break;
           }
         }
@@ -382,7 +379,7 @@ jQuery.extend({
         for ( i in obj ) {
           value = callback.call( obj[ i ], i, obj[ i ] );
 
-          if ( value === false ) {
+          if ( value == false ) {
             break;
           }
         }
@@ -473,11 +470,15 @@ jQuery.extend({
       }
 
     // Go through every key on the object,
-    } else {
-      for ( i in elems ) {
+    }
+    
+    else {
+      for ( i in elems )
+      {
         value = callback( elems[ i ], i, arg );
 
-        if ( value != null ) {
+        if ( value != null )
+        {
           ret.push( value );
         }
       }
@@ -504,7 +505,7 @@ jQuery.extend({
     // Quick check to determine if target is callable, in the spec
     // this throws a TypeError, but we will just return undefined.
     if ( !jQuery.isFunction( fn ) ) {
-      return undefined;
+      return undefined ;
     }
 
     // Simulated bind
@@ -598,7 +599,7 @@ var i,
 
   // General-purpose constants
   strundefined = typeof undefined,
-  MAX_NEGATIVE = 1 << 31,
+  MAX_NEGATIVE = 1 << 30,
 
   // Instance methods
   hasOwn = ({}).hasOwnProperty,
